@@ -1,0 +1,40 @@
+---
+title: "Impact Evaluation"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    number_sections: true
+---
+
+
+# Course Description
+
+This workshop will discuss techniques for impact evaluation using secondary data. After a description of the randomised controlled trials, the workshop will give an overview of regression discontinuity designs, instrumental variables, and difference-in-difference methods. Particular attention will be paid to the recent developments in difference-in-difference methods that account for heterogeneous effects of policies that roll-out at different times.
+
+# Course Outline
+
+Measuring Impact
+
+- 	Definition and objectives of impact evaluation
+- 	Why impact evaluation is crucial in policy assessment
+
+Defining the program theory
+
+- 	Causal chain of impact
+- 	Directed Acyclical Graphs (DAGs)
+
+Causal Treatment Effect
+
+-  Counterfactual Framework
+-  The problem of confounding
+-  Randomised Control Trials
+
+Impact evaluation using secondary data
+
+-  Instrumental Variables (IV)
+-  Regression Discontinuity Designs (RDD)
+-  Difference-in-Difference (DiD) Methods
+-  Accounting for Heterogeneous Effects 
+

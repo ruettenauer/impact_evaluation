@@ -1,0 +1,21 @@
+project:
+  title: "Impact Evaluation"
+  type: website
+  output-dir: docs
+
+website:
+  title: "Impact Evaluation"
+  navbar:
+    left:
+      - href: index.qmd
+        text: "Home"
+      - href: Impact.qmd
+        text: "Slides"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+bibliography: references.bib
