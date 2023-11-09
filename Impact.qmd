@@ -6,7 +6,10 @@ format:
   revealjs: 
     theme: default
     slide-number: true
+    chalkboard: 
+      buttons: false
     smaller: false
+    footer: <[Impact Evaluation](/index.html)>
 date: "2023-11-15"
 ---
 

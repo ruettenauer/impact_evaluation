@@ -11,6 +11,21 @@ website:
         text: "Home"
       - href: Impact.qmd
         text: "Slides"
+    tools:
+      - icon: github
+        menu:
+          - text: Source Code
+            url:  https://github.com/ruettenauer/impact_evaluation 
+  site-url: "https://ruettenauer.github.io/impact_evaluation/"          
+        
+  # page-footer:
+  #   left: |
+  #     Content by [Tobias Rüttenauer](https://ruettenauer.github.io/) <br>
+  #     {{< fa brands creative-commons >}}
+  #     {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-nc >}}
+  #     [Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)
+  #   right: |
+  #     [View the source at {{< fa brands github >}} GitHub](https://github.com/ruettenauer/impact_evaluation)      
 
 format:
   html:
@@ -19,3 +34,4 @@ format:
     toc: true
 
 bibliography: references.bib
+
