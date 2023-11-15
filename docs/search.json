@@ -1,0 +1,534 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Impact Evaluation",
+    "section": "",
+    "text": "Course Description\nThis workshop will discuss techniques for impact evaluation using secondary data. After a description of the randomised controlled trials, the workshop will give an overview of regression discontinuity designs, instrumental variables, and difference-in-difference methods. Particular attention will be paid to the recent developments in difference-in-difference methods that account for heterogeneous effects of policies that roll-out at different times.\n\n\nCourse Outline\nMeasuring Impact\n\nDefinition and objectives of impact evaluation\nWhy impact evaluation is crucial in policy assessment\n\nDefining the program theory\n\nCausal chain of impact\nDirected Acyclical Graphs (DAGs)\n\nCausal Treatment Effect\n\nCounterfactual Framework\nThe problem of confounding\nRandomised Control Trials\n\nImpact evaluation using secondary data\n\nInstrumental Variables (IV)\nRegression Discontinuity Designs (RDD)\nDifference-in-Difference (DiD) Methods\nAccounting for Heterogeneous Effects"
+  },
+  {
+    "objectID": "Impact.html#some-recommendations",
+    "href": "Impact.html#some-recommendations",
+    "title": "Impact evaluation using secondary data",
+    "section": "Some recommendations",
+    "text": "Some recommendations\n\nEconometrics by Ryan Safner\nProgram Evaluation by Andrew Heiss\nMastering Metrics by Angrist and Pischke (2015)\nThe Effect by Huntington-Klein (2021)\n\nTHis course frofitted a lot from the course materials by Safner and Heiss."
+  },
+  {
+    "objectID": "Impact.html#objectives-of-impact-evaluation",
+    "href": "Impact.html#objectives-of-impact-evaluation",
+    "title": "Impact evaluation using secondary data",
+    "section": "Objectives of Impact Evaluation",
+    "text": "Objectives of Impact Evaluation\nImpact Evaluation is a systematic process that assesses the outcomes and impacts of a program, project, or policy intervention.\n\n\nTypical questions\n\n\n\nDid the intervention make a difference?\nTo what extent can a specific impact be attributed to the intervention?\nHow has the intervention made a difference?\nWill the intervention work elsewhere?"
+  },
+  {
+    "objectID": "Impact.html#types-of-impact-evaluation",
+    "href": "Impact.html#types-of-impact-evaluation",
+    "title": "Impact evaluation using secondary data",
+    "section": "Types of Impact Evaluation",
+    "text": "Types of Impact Evaluation\nImpact evaluation can take various forms, depending on the context and objectives.\n\n\n\nQualitative\n\nInterviews\nFocus Groups\nCase Studies\n\n\nQuantitative\n\n\nCausal model of impact using DAGS\nRandomized Controlled Trials (RCTs)\nInstrumental Variable (IV)\nRegression Discontinuity Design (RDD)\nDifference-in-Differences (DiD)"
+  },
+  {
+    "objectID": "Impact.html#what-is-causation",
+    "href": "Impact.html#what-is-causation",
+    "title": "Impact evaluation using secondary data",
+    "section": "What IS Causation?",
+    "text": "What IS Causation?\n\n\n\n\\(X\\) causes \\(Y\\) if we can intervene and change \\(X\\) without changing anything else, and \\(Y\\) changes\n\\(Y\\) “listens to” \\(X\\)\n\n\\(X\\) may not be the only thing that causes \\(Y\\)!"
+  },
+  {
+    "objectID": "Impact.html#what-is-causation-1",
+    "href": "Impact.html#what-is-causation-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "What IS Causation?",
+    "text": "What IS Causation?\n\n\n\n\\(X\\) causes \\(Y\\) if we can intervene and change \\(X\\) without changing anything else, and \\(Y\\) changes\n\\(Y\\) “listens to” \\(X\\)\n\n\\(X\\) may not be the only thing that causes \\(Y\\)!\n\n\n\n\n\nExample\n\n\nIf \\(X\\) is a light switch, and \\(Y\\) is a light:\n\nFlipping the switch \\((X)\\) causes the light to go on \\((Y)\\)\nBut NOT if the light is burnt out (No \\(Y\\) despite \\(X\\))\nOR if the light was already on \\((Y\\) without \\(X\\))"
+  },
+  {
+    "objectID": "Impact.html#directed-acyclical-graphs-dags",
+    "href": "Impact.html#directed-acyclical-graphs-dags",
+    "title": "Impact evaluation using secondary data",
+    "section": "Directed Acyclical Graphs (DAGs)",
+    "text": "Directed Acyclical Graphs (DAGs)\n\nDirected Acyclic Graphs (DAGs) are a graphical representation of causal relationships in impact evaluation.\nNodes are factors/variables.\nDirected arrows describe cause-effect relationships.\nNo feedback loops allowed.\n\n\nUsing DAGs in Impact Evaluation\n\n\nClarify causal assumptions.\nIdentify potential sources of bias.\nGuide the selection of variables for analysis.\nVisualize complex causal relationships."
+  },
+  {
+    "objectID": "Impact.html#causal-diagramsdags",
+    "href": "Impact.html#causal-diagramsdags",
+    "title": "Impact evaluation using secondary data",
+    "section": "Causal Diagrams/DAGs",
+    "text": "Causal Diagrams/DAGs\n\n\n\nDirected: Each node has arrows that points only one direction\nAcyclic: Arrows only have one direction, and cannot loop back\nGraph\n\n\n\nA visual model of the data-generating process, encodes our understanding of the causal relationships\nRequires some common sense/economic intuition\n\n\n\n\n\n\n\n\n\n\nRemember, all models are wrong, we just need them to be useful!"
+  },
+  {
+    "objectID": "Impact.html#drawing-a-dag",
+    "href": "Impact.html#drawing-a-dag",
+    "title": "Impact evaluation using secondary data",
+    "section": "Drawing a DAG",
+    "text": "Drawing a DAG\n\n\n\nConsider all the variables likely to be important to the data-generating process (including variables we can’t observe!)\nFor simplicity, combine some similar ones together or prune those that aren’t very important\nConsider which variables are likely to affect others, and draw arrows connecting them\nTest some testable implications of the model (to see if we have a correct one!)"
+  },
+  {
+    "objectID": "Impact.html#drawing-a-dag-1",
+    "href": "Impact.html#drawing-a-dag-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "Drawing a DAG",
+    "text": "Drawing a DAG\n\n\n\nDrawing an arrow requires a direction - making a statement about causality!\nOmitting an arrow makes an equally important statement too!\n\nIn fact, we will need omitted arrows to show causality!\n\nIf two variables are correlated, but neither causes the other, likely they are both caused by another (perhaps unobserved) variable - add it!\nThere should be no cycles or loops (if so, there’s probably another missing variable, such as time)"
+  },
+  {
+    "objectID": "Impact.html#dag-example-i",
+    "href": "Impact.html#dag-example-i",
+    "title": "Impact evaluation using secondary data",
+    "section": "DAG Example I",
+    "text": "DAG Example I\n\n\n\n\n\nExample\n\n\nwhat is the effect of education on wages?\n\nEducation \\(X\\), “treatment” or “exposure”\nWages \\(Y\\), “outcome” or “response”"
+  },
+  {
+    "objectID": "Impact.html#dag-example-i-1",
+    "href": "Impact.html#dag-example-i-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "DAG Example I",
+    "text": "DAG Example I\n\n\n\nWhat other variables are important?\n\nAbility\nSocioeconomic status\nDemographics\nGravity\nYear of birth\nLocation\nSchooling laws\nJob network"
+  },
+  {
+    "objectID": "Impact.html#dag-example-i-2",
+    "href": "Impact.html#dag-example-i-2",
+    "title": "Impact evaluation using secondary data",
+    "section": "DAG Example I",
+    "text": "DAG Example I\n\n\n\nIn social science and complex systems, 1000s of variables could plausibly be in the DAG!\nSo simplify:\n\nIgnore trivial things (like gravity)\nCombine similar variables (Socioeconomic status, Demographics, Location) if not interesting per se \\(\\rightarrow\\) Background"
+  },
+  {
+    "objectID": "Impact.html#dag-example-ii",
+    "href": "Impact.html#dag-example-ii",
+    "title": "Impact evaluation using secondary data",
+    "section": "DAG Example II",
+    "text": "DAG Example II\n\n\n\nBackground, Year of birth, Location, Compulsory schooling, all cause education\nBackground, year of birth, location, job networks probably cause wages"
+  },
+  {
+    "objectID": "Impact.html#dag-example-ii-1",
+    "href": "Impact.html#dag-example-ii-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "DAG Example II",
+    "text": "DAG Example II\n\n\n\nBackground, Year of birth, Location, Compulsory schooling, all cause education\nBackground, year of birth, location, job networks probably cause wages\nJob networks in fact is probably caused by education!\nLocation and background probably both caused by unobserved factor (u1)"
+  },
+  {
+    "objectID": "Impact.html#dag-example-ii-2",
+    "href": "Impact.html#dag-example-ii-2",
+    "title": "Impact evaluation using secondary data",
+    "section": "DAG Example II",
+    "text": "DAG Example II\n\n\n\nThis is messy, but we have a causal model!\nMakes our assumptions explicit, and many of them are testable\nDAG suggests certain relationships that will not exist:\n\nall relationships between laws and netw go through educ\nso if we controlled for educ, then cor(laws,netw) should be zero!"
+  },
+  {
+    "objectID": "Impact.html#more-on-dags",
+    "href": "Impact.html#more-on-dags",
+    "title": "Impact evaluation using secondary data",
+    "section": "More on DAGS",
+    "text": "More on DAGS\nAbove exmaples came from: Econometrics by Ryan Safner\nDo it yourself: Dagitty\nA very nice read by the “father of DAGs”: Pearl and Mackenzie (2019).\nSee also: The Effect by Huntington-Klein (2021)"
+  },
+  {
+    "objectID": "Impact.html#potential-outcomes-counterfactuals-and-the-road-not-taken",
+    "href": "Impact.html#potential-outcomes-counterfactuals-and-the-road-not-taken",
+    "title": "Impact evaluation using secondary data",
+    "section": "Potential outcomes, counterfactuals, and the road not taken",
+    "text": "Potential outcomes, counterfactuals, and the road not taken"
+  },
+  {
+    "objectID": "Impact.html#the-potential-outcome-framework",
+    "href": "Impact.html#the-potential-outcome-framework",
+    "title": "Impact evaluation using secondary data",
+    "section": "The potential outcome framework",
+    "text": "The potential outcome framework\n\n\n\n\nTable 1\n\n\nUnit\nControl\nTreatment\nEffect\n\n\n\n\n\\(i\\)\n\\(Y_i^C\\)\n\\(Y_i^T\\)\n\\(\\delta_i\\)\n\n\n1\n8\n9\n1\n\n\n2\n5\n3\n-2\n\n\n3\n6\n4\n-2\n\n\n4\n6\n2\n-4\n\n\n5\n15\n18\n3\n\n\n6\n13\n16\n3\n\n\n7\n8\n9\n1\n\n\n8\n2\n0\n-2\n\n\n9\n4\n3\n-1\n\n\n10\n2\n0\n-2\n\n\nAverage\n6.9\n6.4\n-0.5\n\n\n\n\n\n\\(D = T\\): Treatment\n\\(D = C\\): Control\n\\(Y = Y^T\\) if \\(D = T\\)\n\\(Y = Y^C\\) if \\(D = C\\)\nAverage causal effect:\n\\(\\bar{\\delta} = 6.4 - 6.9 = -0.5\\)"
+  },
+  {
+    "objectID": "Impact.html#potential-vs.-observed-outcomes",
+    "href": "Impact.html#potential-vs.-observed-outcomes",
+    "title": "Impact evaluation using secondary data",
+    "section": "Potential vs. observed outcomes",
+    "text": "Potential vs. observed outcomes\n\n\n\n\nTable 2\n\n\nUnit\nControl\nTreatment\nD\nObserved\n\n\n\n\n\\(i\\)\n\\(Y_i^C\\)\n\\(Y_i^T\\)\n\n\\(Y_{obs}\\)\n\n\n1\n?\n9\nT\n9\n\n\n2\n5\n?\nC\n5\n\n\n3\n6\n?\nC\n6\n\n\n4\n6\n?\nC\n6\n\n\n5\n?\n18\nT\n18\n\n\n6\n?\n16\nT\n16\n\n\n7\n?\n9\nT\n9\n\n\n8\n2\n?\nC\n2\n\n\n9\n4\n?\nC\n4\n\n\n10\n2\n?\nC\n2\n\n\nAverage\n4.2\n13\n\n\n\n\n\n\n\nObserved effect:\n13 - 4.2 = 8.8 !!\nWrong conclusions:\n\nComparing the observed outcomes, we would assume a treatment effect of nearly 9…\nProblem: even in the absence of treatment, those in the treatment group are different from those in the control group."
+  },
+  {
+    "objectID": "Impact.html#fundamental-problem-of-causal-inference",
+    "href": "Impact.html#fundamental-problem-of-causal-inference",
+    "title": "Impact evaluation using secondary data",
+    "section": "Fundamental Problem of Causal Inference",
+    "text": "Fundamental Problem of Causal Inference\nFor subject \\(i\\), the causal effect of the treatment is the difference between two potential outcomes:\n\n\\(\\delta_i = Y_i^T - Y_i^C\\)\n\\(Y_i^T\\): \\(i\\)’s potential outcome in treatment\n\\(Y_i^C\\): \\(i\\)’s potential outcome in control\n\nBut only one of the two potential outcomes is realized/observed!\n\n\n\n\n\n\n\n\nGroup\n\\(Y_i^T\\)\n\\(Y_i^C\\)\n\n\n\n\nTreatment (\\(D=T\\))\nObservable\nCounterfactual\n\n\nControl (\\(D=C\\))\nCounterfactual\nObservable"
+  },
+  {
+    "objectID": "Impact.html#the-problem-of-confounding",
+    "href": "Impact.html#the-problem-of-confounding",
+    "title": "Impact evaluation using secondary data",
+    "section": "The problem of confounding",
+    "text": "The problem of confounding\nNaive comparison of treated vs untreated is often biased\n\n\nIndividuals select themselves into a treatment group, causing a bias.\nSome unobserved characteristics causes treatment and outcome, making the observed relationship spurious."
+  },
+  {
+    "objectID": "Impact.html#the-problem-of-confounding-1",
+    "href": "Impact.html#the-problem-of-confounding-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "The problem of confounding",
+    "text": "The problem of confounding\n\nJohn Snow and Cholera: Youtube"
+  },
+  {
+    "objectID": "Impact.html#randomised-control-trials",
+    "href": "Impact.html#randomised-control-trials",
+    "title": "Impact evaluation using secondary data",
+    "section": "Randomised Control Trials",
+    "text": "Randomised Control Trials\nA randomized control trial (RCT) / experimental design randomly assigns individuals to different levels of treatment.\nExample: a drug trial with individuals randomly assigned to either receiving the drug (treatment) or a placebo (control or untreated).\n\n\na simple assignment mechanism is to toss a coin.\nideally the trial is a double-blind trial where neither the patient nor doctors know who received the drug and who received the placebo.\nThe estimated treatment effect is simply the difference in means: \\(E(Y^T) - E(Y^C)\\).\n\n\n\nGiven that “a coin-toss” determines treatment, we completely rule out\n\nself-selection into treatment,\nconfounding due to unobserved factors."
+  },
+  {
+    "objectID": "Impact.html#the-beauty-of-randomisation",
+    "href": "Impact.html#the-beauty-of-randomisation",
+    "title": "Impact evaluation using secondary data",
+    "section": "The beauty of randomisation",
+    "text": "The beauty of randomisation\n\n\n\n\nLaw of large numbers\n\nif we randomly assign treatment\nand \\(N\\) is sufficiently large\ntreatment and control group should be identical on average\neach group should have the same mean as the population\nthat applies to all their characteristics (e.g. gender, age, motivation, political views…)"
+  },
+  {
+    "objectID": "Impact.html#randomised-control-trials-1",
+    "href": "Impact.html#randomised-control-trials-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "Randomised Control Trials",
+    "text": "Randomised Control Trials"
+  },
+  {
+    "objectID": "Impact.html#pros-and-cons-of-rcts",
+    "href": "Impact.html#pros-and-cons-of-rcts",
+    "title": "Impact evaluation using secondary data",
+    "section": "Pros and Cons of RCTs",
+    "text": "Pros and Cons of RCTs\n\n\nPros\n\nMinimising bias\nComplete control\nRobust impact estimate\n“Gold standard”\n\n\nCons\n\nOften small sample size\nSometimes low external validity\nSpillovers / Hawthorn effect\nFeasibility?"
+  },
+  {
+    "objectID": "Impact.html#example-peer-group-intervention",
+    "href": "Impact.html#example-peer-group-intervention",
+    "title": "Impact evaluation using secondary data",
+    "section": "Example: Peer-group intervention",
+    "text": "Example: Peer-group intervention\nCarrell, Sacerdote, and West (2013)\n\n\n\n\nUnited States Air Force Academy\nStudents randomly assigned to peer groups\nPositive peer effect on academic performance\n\nNew experiment of policy instrument\n\n\n\nAssignment to “optimally” designed peer groups\n\n\n\n\n“Optimal” policy has negative effect on performance\n\n\n\n\n\n\n\n\n\n“These results illustrate how policies that manipulate peer groups for a desired social outcome can be confounded by changes in the endogenous patterns of social interactions within the group.”"
+  },
+  {
+    "objectID": "Impact.html#impact-evaluation-using-secondary-data-1",
+    "href": "Impact.html#impact-evaluation-using-secondary-data-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "Impact evaluation using secondary data",
+    "text": "Impact evaluation using secondary data\n\nIn impact evaluation (as in social sciences), we are interested in the causal research questions\n\nwe want to investigate questions of cause and effect.\nRCTs provide a way to circumvent the problems of causal inference.\n\n\n\n\nHowever, randomly exposing some individuals to treatment and withholding treatment from others can be tricky (e.g. education, marriage).\n\n\n\nA potential compromise: Compare alike with alike\nThe Effect (Huntington-Klein 2021) is a great online resource ."
+  },
+  {
+    "objectID": "Impact.html#iv-the-problem",
+    "href": "Impact.html#iv-the-problem",
+    "title": "Impact evaluation using secondary data",
+    "section": "IV: The problem",
+    "text": "IV: The problem\n\n\\[\\color{#FF851B}{\\text{Earnings}_i} = \\beta_0 + \\beta_1 \\color{#0074D9}{\\text{Education}_i} + \\varepsilon_i\\]\n\nIf we ran this regression, would \\(\\beta_1\\) give us the causal effect of education?\n\n\nNo!\n\nOmitted variable bias!\nEndogeneity!"
+  },
+  {
+    "objectID": "Impact.html#iv-the-problem-1",
+    "href": "Impact.html#iv-the-problem-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "IV: The problem",
+    "text": "IV: The problem\n\n\nExogenous variables\n\nValue is not determined by anything else in the model\nIn a DAG, a node that doesn’t have arrows coming into it\n\nEndogenous variables\n\nValue is determined by something else in the model\nIn a DAG, a node that has arrows coming into it\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nParts of education is endogenous, parts of it is exogenous.\nCan we isolate the exogenous part?"
+  },
+  {
+    "objectID": "Impact.html#what-is-an-instrument",
+    "href": "Impact.html#what-is-an-instrument",
+    "title": "Impact evaluation using secondary data",
+    "section": "What is an instrument?",
+    "text": "What is an instrument?\n“Instead of randomizing the variable ourselves, we hope that something has already randomized it for us. We look in the real world for a source of randomization of our treatment” (Huntington-Klein 2021)\n\n\nRelevance: Something that is correlated with the policy variable.\nExclusion: Something that does not directly cause the outcome.\nExogeneity: Something that is not correlated with the omitted variables."
+  },
+  {
+    "objectID": "Impact.html#what-is-an-instrument-1",
+    "href": "Impact.html#what-is-an-instrument-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "What is an instrument?",
+    "text": "What is an instrument?"
+  },
+  {
+    "objectID": "Impact.html#example-of-instrument",
+    "href": "Impact.html#example-of-instrument",
+    "title": "Impact evaluation using secondary data",
+    "section": "Example of instrument",
+    "text": "Example of instrument"
+  },
+  {
+    "objectID": "Impact.html#intuitions-from-instruments-2sls",
+    "href": "Impact.html#intuitions-from-instruments-2sls",
+    "title": "Impact evaluation using secondary data",
+    "section": "Intuitions from Instruments & 2SLS",
+    "text": "Intuitions from Instruments & 2SLS\n\nThe 2 stage least squares (2SLS) estimators for IVs:\n\n\\[\n\\begin{align}\n  {\\color{#c5c5c5}{\\text{Endogenous model}}}& &\\color{green}{\\text{Outcome}_i} &= \\beta_0 + \\beta_1 \\color{red}{\\left( \\text{Endog. var.} \\right)_i} + u_i\\\\[0.5em]\n  {\\text{First stage}}& &\\color{red}{\\left( \\text{Endog. var.} \\right)_i} &= \\pi_0 + \\pi_1 \\color{blue}{\\text{Instrument}_i} + v_i\\\\[0.25em]\n  {\\text{Second stage}}& &\\color{green}{\\text{Outcome}_i} &= \\delta_0 + \\delta_1 \\color{red}{\\widehat{\\left( \\text{Endog. var.} \\right)}_i} + \\varepsilon_i\\\\[0.5em]\n  {\\color{#c5c5c5}{\\text{Reduced form}}}& &\\color{green}{\\text{Outcome}_i} &= \\pi_0 + \\pi_1 \\color{blue}{\\text{Instrument}_i} + w_i\\\\[0.25em]\n\\end{align}\n\\]\nwhere \\(\\color{red}{\\widehat{\\left( \\text{Endog. var.} \\right)}_i}\\) are the predicted values (fitted values) from the first-stage regression. They only contain the variance in \\(\\color{red}{\\left( \\text{Endog. var.} \\right)_i}\\) that comes from \\(\\color{blue}{\\text{Instrument}_i}\\)."
+  },
+  {
+    "objectID": "Impact.html#intuitions-from-instruments-2sls-1",
+    "href": "Impact.html#intuitions-from-instruments-2sls-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "Intuitions from Instruments & 2SLS",
+    "text": "Intuitions from Instruments & 2SLS\n\nThe 2 stage least squares (2SLS) estimators for IVs:\n\n\\[\n\\begin{align}\n  {\\color{#c5c5c5}{\\text{Endogenous model}}}& &\\color{green}{\\text{Wage}_i} &= \\beta_0 + \\beta_1 \\color{red}{\\left( \\text{Education} \\right)_i} + u_i\\\\[0.5em]\n  {\\text{First stage}}& &\\color{red}{\\left( \\text{Education} \\right)_i} &= \\pi_0 + \\pi_1 \\color{blue}{\\text{Fathers Educ}_i} + v_i\\\\[0.25em]\n  {\\text{Second stage}}& &\\color{green}{\\text{Wage}_i} &= \\delta_0 + \\delta_1 \\color{red}{\\widehat{\\left( \\text{Education} \\right)}_i} + \\varepsilon_i\\\\[0.5em]\n  {\\color{#c5c5c5}{\\text{Reduced form}}}& &\\color{green}{\\text{Wage}_i} &= \\pi_0 + \\pi_1 \\color{blue}{\\text{Fathers Educ}_i} + w_i\\\\[0.25em]\n\\end{align}\n\\]\nwhere \\(\\color{red}{\\widehat{\\left( \\text{Education} \\right)}_i}\\) are the predicted values (fitted values) from the first-stage regression. They only contain the variance in \\(\\color{red}{\\left( \\text{Education} \\right)_i}\\) that comes from \\(\\color{blue}{\\text{Fathers Educ}_i}\\)."
+  },
+  {
+    "objectID": "Impact.html#iv-example-family-size-and-education",
+    "href": "Impact.html#iv-example-family-size-and-education",
+    "title": "Impact evaluation using secondary data",
+    "section": "IV example: Family size and education",
+    "text": "IV example: Family size and education\nChild-quantity/child-qualitytrade-off (Angrist, Lavy, and Schlosser 2010)\n\nHow does family size affect education and economic situation of children?\n\nAssumption A: Increase in family size reduces parental investment in each child\nAssumption B: Parents may compensate by additional “investments”\n\nProblem: Family size depends on many other characteristics of the family\n\n\nTwo possible instruments:\n\nTwins: After first-born, family receives twins\nSame-sex: First children having same sex increases preferences for additional\n\nSee also Angrist and Pischke (2015)."
+  },
+  {
+    "objectID": "Impact.html#iv-example-family-size-and-education-1",
+    "href": "Impact.html#iv-example-family-size-and-education-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "IV example: Family size and education",
+    "text": "IV example: Family size and education\nFirst stage: Instrument \\(\\rightarrow\\) Family size"
+  },
+  {
+    "objectID": "Impact.html#iv-example-family-size-and-education-2",
+    "href": "Impact.html#iv-example-family-size-and-education-2",
+    "title": "Impact evaluation using secondary data",
+    "section": "IV example: Family size and education",
+    "text": "IV example: Family size and education\nSecond stage: Predicted Family size \\(\\rightarrow\\) Educ"
+  },
+  {
+    "objectID": "Impact.html#examples-of-instruments",
+    "href": "Impact.html#examples-of-instruments",
+    "title": "Impact evaluation using secondary data",
+    "section": "Examples of instruments",
+    "text": "Examples of instruments\n\n\n\n\n\nOutcome\nPolicy\nUnobserved stuff\nInstrument\n\n\n\n\nIncome\nEducation\nAbility\nFather's education\n\n\nIncome\nEducation\nAbility\nDistance to college\n\n\nIncome\nEducation\nAbility\nMilitary draft\n\n\nHealth\nSmoking cigarettes\nOther negative health behaviors\nTobacco taxes\n\n\nCrime rate\nPatrol hours\n# of criminals\nElection cycles\n\n\nCrime\nIncarceration rate\nSimultaneous causality\nOvercrowding litigations\n\n\nLabor market success\nAmericanization\nAbility\nScrabble score of name\n\n\nConflicts\nEconomic growth\nSimultaneous causality\nRainfall"
+  },
+  {
+    "objectID": "Impact.html#instruments-are-hard-to-find",
+    "href": "Impact.html#instruments-are-hard-to-find",
+    "title": "Impact evaluation using secondary data",
+    "section": "Instruments are hard to find!",
+    "text": "Instruments are hard to find!\n\\(\\color{red}{\\text{Exlusion restriction}}\\)\n\nInstrument causes the outcome only through the policy\nFor instance, rainfall is not a good instrument instrument (Mellon 2020)"
+  },
+  {
+    "objectID": "Impact.html#rdd-the-idea",
+    "href": "Impact.html#rdd-the-idea",
+    "title": "Impact evaluation using secondary data",
+    "section": "RDD: The idea",
+    "text": "RDD: The idea\n“Whenever some treatment is assigned discontinuously - people just on one side of a line get it, and people just on the other side of the line don’t, might be a little different, but not that different.” (Huntington-Klein 2021)\nQuasi-experimental design\n\n\nLots of policies and programs are based on arbitrary rules and thresholds.\nIf you’re above the cutoff/threshold, you’re in the program; if you’re below, you’re not (or vice versa).\nWether you are closely above or below the cutoff/threshold is as good as random.\n\n\nThe following graphs come from Andrew Heiss (Program Evaluation)."
+  },
+  {
+    "objectID": "Impact.html#rdd-the-idea-1",
+    "href": "Impact.html#rdd-the-idea-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "RDD: The idea",
+    "text": "RDD: The idea\nRandom variation around cutoff\n\n\nRunning variable: continuous variable that determines whether you’re treated or not (e.g. score, time, distance).\nCutoff: The cutoff is the value of the running variable that determines whether you get treatment.\nBandwidth: It’s reasonable to think that people just barely to either side of the cutoff are basically the same other than for the cutoff."
+  },
+  {
+    "objectID": "Impact.html#rdd-hypothetical-example",
+    "href": "Impact.html#rdd-hypothetical-example",
+    "title": "Impact evaluation using secondary data",
+    "section": "RDD: Hypothetical example",
+    "text": "RDD: Hypothetical example\nImagine: An entrance exam and those who score 70 or lower get additional training."
+  },
+  {
+    "objectID": "Impact.html#rdd-hypothetical-example-1",
+    "href": "Impact.html#rdd-hypothetical-example-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "RDD: Hypothetical example",
+    "text": "RDD: Hypothetical example\nImagine: A entrance exam and those who score 70 or lower get additional training."
+  },
+  {
+    "objectID": "Impact.html#rdd-hypothetical-example-2",
+    "href": "Impact.html#rdd-hypothetical-example-2",
+    "title": "Impact evaluation using secondary data",
+    "section": "RDD: Hypothetical example",
+    "text": "RDD: Hypothetical example\nTo asses the effect of the additional training\n\nwe compare those above and below the treatment cutoff\nwithin the specified bandwidth\nand assume that they are nearly identical otherwise (as good as random)\n\nCalculate the difference between treatment and control."
+  },
+  {
+    "objectID": "Impact.html#rdd-hypothetical-example-3",
+    "href": "Impact.html#rdd-hypothetical-example-3",
+    "title": "Impact evaluation using secondary data",
+    "section": "RDD: Hypothetical example",
+    "text": "RDD: Hypothetical example\nIn a regression framework:\n\\[\ny_{i} = \\alpha + \\delta D_{i} + \\beta_1 [\\text{Running - Cutoff}]_{i} + \\beta_2 (D_{i} \\times [\\text{Running - Cutoff}]_{i}) + \\varepsilon{i},\n\\]\n\n\\(D_{i}\\): Whether an observation is in treatment group (above cutoff)\n\\([\\text{Running - Cutoff}]_{t}\\): running variable centered around the cutoff (positive after)\n\\(\\alpha + \\beta_1\\) are intercept and slope for untreated (before cutoff)\n\\((\\alpha + \\delta) + (\\beta_1 + \\beta_2)\\) are intercept and slope for treated (after cutoff)\n\\(\\delta\\) is the RDD treatment effect\n\n\\([\\text{Running - Cutoff}]_{t}\\) can be replace by any flexile function \\(f[\\text{Running - Cutoff}]_{t}\\).\nSee Huntington-Klein (2021)."
+  },
+  {
+    "objectID": "Impact.html#rdd-hypothetical-estimate",
+    "href": "Impact.html#rdd-hypothetical-estimate",
+    "title": "Impact evaluation using secondary data",
+    "section": "RDD: Hypothetical estimate",
+    "text": "RDD: Hypothetical estimate"
+  },
+  {
+    "objectID": "Impact.html#rdd-hypothetical-estimate-1",
+    "href": "Impact.html#rdd-hypothetical-estimate-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "RDD: Hypothetical estimate",
+    "text": "RDD: Hypothetical estimate"
+  },
+  {
+    "objectID": "Impact.html#rdd-hypothetical-estimate-2",
+    "href": "Impact.html#rdd-hypothetical-estimate-2",
+    "title": "Impact evaluation using secondary data",
+    "section": "RDD: Hypothetical estimate",
+    "text": "RDD: Hypothetical estimate"
+  },
+  {
+    "objectID": "Impact.html#rdd-hypothetical-estimate-3",
+    "href": "Impact.html#rdd-hypothetical-estimate-3",
+    "title": "Impact evaluation using secondary data",
+    "section": "RDD: Hypothetical estimate",
+    "text": "RDD: Hypothetical estimate"
+  },
+  {
+    "objectID": "Impact.html#rdd-theres-no-one-right-way",
+    "href": "Impact.html#rdd-theres-no-one-right-way",
+    "title": "Impact evaluation using secondary data",
+    "section": "RDD: There’s no one right way",
+    "text": "RDD: There’s no one right way\n\nThe size of the gap depends on how you draw the lines on each side of the cutoff\nThe type of lines you choose can change the estimate of \\(\\delta\\) - sometimes by a lot!\n\n\nThe researcher’s degree of freedom\n\n\n\nParametric vs. non-parametric lines\nBandwidths (common sense or algorithms?)\nKernels (weights by distance to cutoff?)\n\n\n\nIt’s important: Lines should fit the data well!"
+  },
+  {
+    "objectID": "Impact.html#rdd-drawing-lines",
+    "href": "Impact.html#rdd-drawing-lines",
+    "title": "Impact evaluation using secondary data",
+    "section": "RDD: Drawing lines",
+    "text": "RDD: Drawing lines\nCheck higher order polynomials!"
+  },
+  {
+    "objectID": "Impact.html#rdd-drawing-lines-1",
+    "href": "Impact.html#rdd-drawing-lines-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "RDD: Drawing lines",
+    "text": "RDD: Drawing lines\nNon-parametric methods like LOESS (Locally estimated scatterplot smoothing)"
+  },
+  {
+    "objectID": "Impact.html#rdd-naturalisation-political-integration",
+    "href": "Impact.html#rdd-naturalisation-political-integration",
+    "title": "Impact evaluation using secondary data",
+    "section": "RDD: Naturalisation & Political integration",
+    "text": "RDD: Naturalisation & Political integration\nHainmueller, Hangartner, and Pietrantuono (2015):\n\nSwitzerland, where some municipalities used referendums as the mechanism to decide naturalization requests"
+  },
+  {
+    "objectID": "Impact.html#heatwave-exposure-pro-environmental-behaviour",
+    "href": "Impact.html#heatwave-exposure-pro-environmental-behaviour",
+    "title": "Impact evaluation using secondary data",
+    "section": "Heatwave exposure & pro-environmental behaviour",
+    "text": "Heatwave exposure & pro-environmental behaviour\nRüttenauer (2023)"
+  },
+  {
+    "objectID": "Impact.html#heatwave-exposure-pro-environmental-behaviour-1",
+    "href": "Impact.html#heatwave-exposure-pro-environmental-behaviour-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "Heatwave exposure & pro-environmental behaviour",
+    "text": "Heatwave exposure & pro-environmental behaviour\nRüttenauer (2023)"
+  },
+  {
+    "objectID": "Impact.html#paris-terror-attack-and-discrimination-on-airbnb",
+    "href": "Impact.html#paris-terror-attack-and-discrimination-on-airbnb",
+    "title": "Impact evaluation using secondary data",
+    "section": "Paris terror attack and discrimination on AirBnB",
+    "text": "Paris terror attack and discrimination on AirBnB\nWagner and Petev (2019)"
+  },
+  {
+    "objectID": "Impact.html#did-problems",
+    "href": "Impact.html#did-problems",
+    "title": "Impact evaluation using secondary data",
+    "section": "DiD: Problems",
+    "text": "DiD: Problems\n\n\n\nComparing only treatment/control\n\nYou’re only looking at post-treatment values\nImpossible to know if change happened because of natural growth\n\n\n\nComparing only before/after\n\nYou’re only looking at the treatment group!\nImpossible to know if change happened because of treatment or just naturally"
+  },
+  {
+    "objectID": "Impact.html#simple-did-setup-diff-1",
+    "href": "Impact.html#simple-did-setup-diff-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "Simple DiD setup: Diff 1",
+    "text": "Simple DiD setup: Diff 1\n\n\n\n\n\n\n\n\n\n\n\n\nPre mean\nPost mean\n∆ (post − pre)\n\n\n\n\nControl\nA\n(never treated) \nB\n(never treated) \nB − A\n\n\nTreatment\nC\n(not yet treated) \nD\n(treated) \nD − C\n\n\n∆\n(treatment − control)\nA − C\nB − D\n(B − A) − (D − C) or\n(B − D) − (A − C)\n\n\n\n\n\n\n\n\\(\\Delta\\) (post − pre) = within-unit difference"
+  },
+  {
+    "objectID": "Impact.html#simple-did-setup-diff-2",
+    "href": "Impact.html#simple-did-setup-diff-2",
+    "title": "Impact evaluation using secondary data",
+    "section": "Simple DiD setup: Diff 2",
+    "text": "Simple DiD setup: Diff 2\n\n\n\n\n\n\n\n\n\n\n\n\nPre mean\nPost mean\n∆ (post − pre)\n\n\n\n\nControl\nA\n(never treated) \nB\n(never treated) \nB − A\n\n\nTreatment\nC\n(not yet treated) \nD\n(treated) \nD − C\n\n\n∆\n(treatment − control)\nC − A\nD − B\n(B − A) − (D − C) or\n(B − D) − (A − C)\n\n\n\n\n\n\n\n\\(\\Delta\\) (treatment − control) = across-group difference"
+  },
+  {
+    "objectID": "Impact.html#simple-did-setup-diff-in-diff",
+    "href": "Impact.html#simple-did-setup-diff-in-diff",
+    "title": "Impact evaluation using secondary data",
+    "section": "Simple DiD setup: Diff in Diff",
+    "text": "Simple DiD setup: Diff in Diff\n\n\n\n\n\n\n\n\n\n\n\n\nPre mean\nPost mean\n∆ (post − pre)\n\n\n\n\nControl\nA\n(never treated) \nB\n(never treated) \nB − A\n\n\nTreatment\nC\n(not yet treated) \nD\n(treated) \nD − C\n\n\n∆\n(treatment − control)\nC − A\nD − B\n(D − C) − (B − A) or\n(D − B) − (C − A)\n\n\n\n\n\n\n\n\\(\\Delta\\) within units − \\(\\Delta\\) within groups = Difference-in-differences = causal effect!"
+  },
+  {
+    "objectID": "Impact.html#simple-did-setup",
+    "href": "Impact.html#simple-did-setup",
+    "title": "Impact evaluation using secondary data",
+    "section": "Simple DiD setup",
+    "text": "Simple DiD setup\n\n\n\n\nImportant:\n\n\n\n\nParallel trends assumption\n\n\n“In the absence of treatment, the treatment group would have had the same trend over time than the control group”\n\n\n\n\n\n\n\n\nNo anticipation\n\n\n“The treatment only affects the treatment group from the treatment period onwards”"
+  },
+  {
+    "objectID": "Impact.html#simple-did-as-regression",
+    "href": "Impact.html#simple-did-as-regression",
+    "title": "Impact evaluation using secondary data",
+    "section": "Simple DiD as regression",
+    "text": "Simple DiD as regression\nThe 2 \\(\\times\\) 2 Diff-in-Diff as an interaction term:\n\\[\ny_{it} = \\alpha + \\gamma D_{i} + \\lambda Post_{t} + \\delta_{DD} (D_{i} \\times Post_{t}) + \\upsilon_{it},\n\\]\n\n\\(D_{i}\\): Whether an observation is in treatment group\n\\(Post_{t}\\): Whether an observation is after treatment\n\\(D_{i} \\times Post_{t}\\): Treatment group after treatment\n\n\n\\(\\delta_{DD}\\) gives the Diff-in-Diff estimator:\n\\[\n\\hat{\\delta}_{DD} = \\mathrm{E}(\\Delta y_{T}) - \\mathrm{E}(\\Delta y_{C}) = [\\mathrm{E}(y_{T}^{post}) - \\mathrm{E}(y_{T}^{pre})] - [\\mathrm{E}(y_{C}^{post}) - \\mathrm{E}(y_{C}^{pre})].\n\\]"
+  },
+  {
+    "objectID": "Impact.html#two-ways-fixed-effects",
+    "href": "Impact.html#two-ways-fixed-effects",
+    "title": "Impact evaluation using secondary data",
+    "section": "Two-ways Fixed Effects",
+    "text": "Two-ways Fixed Effects\nIn settings with multiple periods, we rely on the two-ways FE estimator:\n\\[\ny_{it} = \\beta_{TWFE} D_{it} + \\alpha_i + \\zeta_t + \\epsilon_{it}.\n\\]\n\nWith only two periods, a binary treatment, and all observations untreated in \\(t=1\\),\n\n\\(\\hat{\\delta}_{DD} = \\hat{\\beta}_{TWFE}\\),\nintuitively interpretable.\n\nWith multiple treatment groups and periods, it is a little bit more complicated. However, in an ideal setting, the FE estimator is a weighted average of many \\(2 \\times 2\\) DiD estimators (Goodman-Bacon 2021; Roth et al. 2023)"
+  },
+  {
+    "objectID": "Impact.html#monetary-intervention-banking-panics",
+    "href": "Impact.html#monetary-intervention-banking-panics",
+    "title": "Impact evaluation using secondary data",
+    "section": "Monetary Intervention & Banking Panics",
+    "text": "Monetary Intervention & Banking Panics\nRichardson and Troost (2009)"
+  },
+  {
+    "objectID": "Impact.html#monetary-intervention-banking-panics-1",
+    "href": "Impact.html#monetary-intervention-banking-panics-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "Monetary Intervention & Banking Panics",
+    "text": "Monetary Intervention & Banking Panics\nParallel trends?"
+  },
+  {
+    "objectID": "Impact.html#two-ways-fe-with-multiple-treatment-periods",
+    "href": "Impact.html#two-ways-fe-with-multiple-treatment-periods",
+    "title": "Impact evaluation using secondary data",
+    "section": "Two-ways FE with multiple treatment periods",
+    "text": "Two-ways FE with multiple treatment periods\n\nFigure from Goodman-Bacon (2021)"
+  },
+  {
+    "objectID": "Impact.html#dynamic-treatment-effects",
+    "href": "Impact.html#dynamic-treatment-effects",
+    "title": "Impact evaluation using secondary data",
+    "section": "Dynamic Treatment Effects",
+    "text": "Dynamic Treatment Effects\n\nTreatment timing\n\nUnits often receive treatment at different times.\n\n\n\nTreatment dynamic\n\nTreatment effects unfold over time.\n\n\n\nTreatment heterogeneity\n\nSome (treatment) groups may have different treatment effects than others.\n\n\n\nThis can (in some cases) be an issue for your estimate (Goodman-Bacon and Marcus 2020).\nSeveral new “dynamic” DiD estimators explicitly address the issue (Roth et al. 2023)."
+  },
+  {
+    "objectID": "Impact.html#event-study-design",
+    "href": "Impact.html#event-study-design",
+    "title": "Impact evaluation using secondary data",
+    "section": "Event Study Design",
+    "text": "Event Study Design"
+  },
+  {
+    "objectID": "Impact.html#dynamic-diff-in-diff",
+    "href": "Impact.html#dynamic-diff-in-diff",
+    "title": "Impact evaluation using secondary data",
+    "section": "Dynamic Diff-in-Diff",
+    "text": "Dynamic Diff-in-Diff\n\ngeneralizes this \\(2 \\times 2\\) Diff-in-Diff to a multi-group and multi-timing setting by computing group-time average treatment effects\nfor each treatment-group \\(g\\) and time period \\(t\\)\n\n\\[\n\\delta_{g,t} = \\mathrm{E}(\\Delta y_{g}) - \\mathrm{E}(\\Delta y_{C}) = [\\mathrm{E}(y_{g}^{t}) - \\mathrm{E}(y_{g}^{g-1})] - [\\mathrm{E}(y_{C}^{t}) - \\mathrm{E}(y_{C}^{g-1})],\n\\]\nwhere the control group can either be the never-treated or the not-yet-treated.\n\nSummary measure / average (Callaway and Sant’Anna 2020):\n\\[\n  \\theta_D(e) := \\sum_{g=1}^G \\mathbf{1} \\{ g + e \\leq T \\} \\delta(g,g+e) P(G=g | G+e \\leq T),\n\\]\nwhere \\(e\\) specifies for how long a unit has been exposed to the treatment."
+  },
+  {
+    "objectID": "Impact.html#dynamic-diff-in-diff-1",
+    "href": "Impact.html#dynamic-diff-in-diff-1",
+    "title": "Impact evaluation using secondary data",
+    "section": "Dynamic Diff-in-Diff",
+    "text": "Dynamic Diff-in-Diff"
+  },
+  {
+    "objectID": "Impact.html#industrial-plant-openings-residents-income",
+    "href": "Impact.html#industrial-plant-openings-residents-income",
+    "title": "Impact evaluation using secondary data",
+    "section": "Industrial plant openings & resident’s income",
+    "text": "Industrial plant openings & resident’s income\nRüttenauer and Best (2021)"
+  },
+  {
+    "objectID": "Impact.html#life-course-events-happiness",
+    "href": "Impact.html#life-course-events-happiness",
+    "title": "Impact evaluation using secondary data",
+    "section": "Life course events & Happiness",
+    "text": "Life course events & Happiness\nClark and Georgellis (2013)"
+  },
+  {
+    "objectID": "Impact.html#synthetic-control",
+    "href": "Impact.html#synthetic-control",
+    "title": "Impact evaluation using secondary data",
+    "section": "Synthetic Control",
+    "text": "Synthetic Control\nMills and Rüttenauer (2022)"
+  },
+  {
+    "objectID": "Impact.html#references",
+    "href": "Impact.html#references",
+    "title": "Impact evaluation using secondary data",
+    "section": "References",
+    "text": "References\n\n\n&lt;Impact Evaluation&gt;\n\n\n\nAngrist, Joshua David, Victor Lavy, and Analia Schlosser. 2010. “Multiple Experiments for the Causal Link Between the Quantity and Quality of Children.” Journal of Labor Economics 28 (4): 773–824. https://doi.org/10.1086/653830.\n\n\nAngrist, Joshua David, and Jörn-Steffen Pischke. 2015. Mastering ’Metrics: The Path from Cause to Effect. Princeton: Princeton Univ. Press.\n\n\nCallaway, Brantly, and Pedro H. C. Sant’Anna. 2020. “Difference-in-Differences with Multiple Time Periods.” Journal of Econometrics 72 (5): 1. https://doi.org/10.1016/j.jeconom.2020.12.001.\n\n\nCarrell, Scott E., Bruce I. Sacerdote, and James I. West. 2013. “From Natural Variation to Optimal Policy? The Importance of Endogenous Peer Group Formation.” Econometrica 81 (3): 855–82. https://doi.org/10.3982/ECTA10168.\n\n\nClark, Andrew E., and Yannis Georgellis. 2013. “Back to Baseline in Britain: Adaptation in the British Household Panel Survey.” Economica 80 (319): 496–512. https://doi.org/10.1111/ecca.12007.\n\n\nGoodman-Bacon, Andrew. 2021. “Difference-in-Differences with Variation in Treatment Timing.” Journal of Econometrics 225 (2): 254–77. https://doi.org/10.1016/j.jeconom.2021.03.014.\n\n\nGoodman-Bacon, Andrew, and Jan Marcus. 2020. “Using Difference-in-Differences to Identify Causal Effects of COVID-19 Policies.” Survey Research Methods 14 (2): 153–58. https://doi.org/10.18148/SRM/2020.V14I2.7723.\n\n\nHainmueller, Jens, Dominik Hangartner, and Giuseppe Pietrantuono. 2015. “Naturalization Fosters the Long-Term Political Integration of Immigrants.” Proceedings of the National Academy of Sciences of the United States of America 112 (41): 12651–56. https://doi.org/10.1073/pnas.1418794112.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. Boca Raton: Chapman & Hall/CRC.\n\n\nMellon, Jonathan. 2020. “Rain, Rain, Go Away: 137 Potential Exclusion-Restriction Violations for Studies Using Weather as an Instrumental Variable.” SSRN Electronic Journal. https://doi.org/10.2139/ssrn.3715610.\n\n\nMills, Melinda C., and Tobias Rüttenauer. 2022. “The Effect of Mandatory COVID-19 Certificates on Vaccine Uptake: Synthetic-Control Modelling of Six Countries.” The Lancet Public Health 7 (1): e15–22. https://doi.org/10.1016/S2468-2667(21)00273-5.\n\n\nPearl, Judea, and Dana Mackenzie. 2019. The Book of Why: The New Science of Cause and Effect. UK: Penguin Books.\n\n\nRichardson, Gary, and William Troost. 2009. “Monetary Intervention Mitigated Banking Panics During the Great Depression: Quasi-Experimental Evidence from a Federal Reserve District Border, 1929.” Journal of Political Economy 117 (6): 1031–73. https://doi.org/10.1086/649603.\n\n\nRoth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. “What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.” Journal of Econometrics 235 (2): 2218–44. https://doi.org/10.1016/j.jeconom.2023.03.008.\n\n\nRüttenauer, Tobias. 2023. “More Talk, No Action? The Link Between Exposure to Extreme Weather Events, Climate Change Belief and Pro-Environmental Behaviour.” European Societies, November, 1–25. https://doi.org/10.1080/14616696.2023.2277281.\n\n\nRüttenauer, Tobias, and Henning Best. 2021. “Environmental Inequality and Residential Sorting in Germany: A Spatial Time-Series Analysis of the Demographic Consequences of Industrial Sites.” Demography 58 (6): 2243–63. https://doi.org/10.1215/00703370-9563077.\n\n\nWagner, Sander, and Ivaylo Petev. 2019. “The Economic Penalty of Terrorism: Increase in Discrimination Against Arabs and Muslims After Paris Attacks.” CREST Série des Documents de Travail."
+  }
+]

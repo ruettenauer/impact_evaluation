@@ -1695,6 +1695,7 @@ Parallel trends?
 ![Figure from @Goodman-Bacon.2021](figs/goodman.jpg)
 
 
+
 ## Dynamic Treatment Effects {.smaller}
 
 ::: {.fragment fragment-index=1}

@@ -1,0 +1,2027 @@
+---
+title: "Impact evaluation using secondary data"
+author:   
+  - Tobias Rüttenauer   
+format:
+  revealjs: 
+    theme: default
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    smaller: false
+    footer: <[Impact Evaluation](/index.html)>
+date: "2023-11-15"
+---
+
+
+
+# Measuring Impact
+
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\plim}{\operatornamewithlimits{plim}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Prob}{\mathrm{Prob}}
+\newcommand{\bm}[1]{\boldsymbol{\mathbf{#1}}}
+
+
+
+```{r, echo=FALSE}
+alert <- function(text) {
+  paste0("<span style='color:red;'>", text, "</span>")
+}
+```
+
+
+
+
+## Some recommendations
+
+ - [Econometrics](https://metricsf22.classes.ryansafner.com/) by Ryan Safner
+ - [Program Evaluation](https://evalf22.classes.andrewheiss.com/) by Andrew Heiss
+ - [Mastering Metrics](https://mru.org/mastering-econometrics-joshua-angrist) by @Angrist.2015
+ - [The Effect](https://theeffectbook.net/) by @Huntington-Klein.2021
+ 
+THis course frofitted a lot from the course materials by Safner and Heiss.
+
+<!-- ## Definition of Impact Evaluation -->
+
+<!-- -  **Impact Evaluation** is a systematic process that assesses the outcomes and impacts of a program, project, or policy intervention. -->
+<!-- -  It links **cause** and **effect** -->
+<!-- -  It aims to answer the question: "What would have happened without the intervention?" -->
+<!-- -  Provides evidence-based insights to improve decision-making and accountability. -->
+
+
+<!-- ## Objectives of Impact Evaluation -->
+
+<!-- ::: {.incremental} -->
+<!-- -  **Causality Assessment**: Determine the causal relationship between an intervention and observed outcomes. -->
+<!-- -  **Accountability**: Hold governments and organizations accountable for their programs and policies. -->
+<!-- -  **Learning and Improvement**: Identify what works and what doesn't, leading to program improvement. -->
+<!-- -  **Informed Decision-Making**: Provide policymakers with evidence to make informed decisions. -->
+<!-- ::: -->
+
+
+
+##	Objectives of Impact Evaluation {.smaller}
+
+**Impact Evaluation** is a systematic process that assesses the outcomes and impacts of a program, project, or policy intervention.
+
+::: {.fragment fragment-index=1}
+### Typical questions
+:::
+
+::: {.incremental}
+-  Did the intervention make a difference?
+-  To what extent can a specific impact be attributed to the intervention?
+-  How has the intervention made a difference?
+-  Will the intervention work elsewhere?
+:::
+
+
+
+## Types of Impact Evaluation {.smaller}
+
+Impact evaluation can take various forms, depending on the context and objectives.
+
+. . .
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+### Qualitative
+
+-  Interviews
+-  Focus Groups
+-  Case Studies
+
+:::
+
+::: {.column width="50%"}
+
+### Quantitative
+::: {.fragment .highlight-red}
+-  Causal model of impact using DAGS
+-  Randomized Controlled Trials (RCTs)
+-  Instrumental Variable (IV)
+-  Regression Discontinuity Design (RDD)
+-  Difference-in-Differences (DiD)
+:::
+:::
+
+
+::::
+
+
+# Defining a causal model
+
+<!-- ## Causal Chain of Impact {.smaller} -->
+
+<!-- - A causal chain outlines the sequence of events leading from a program or intervention to its desired impact. -->
+
+<!-- . . . -->
+
+<!-- ### Components of a Causal Chain -->
+
+<!-- ::: {.fragment fragment-index=1} -->
+<!-- 1. Inputs: Resources allocated to the program. -->
+<!-- 2. Activities: Actions taken as part of the program. -->
+<!-- 3. Outputs: Immediate products of program activities. -->
+<!-- 4. Outcomes: Short and medium-term changes in participants' knowledge, behavior, or conditions. -->
+<!-- 5. Impact: The long-term, intended effects on the target population or society. -->
+<!-- ::: -->
+
+<!-- ::: {.fragment fragment-index=2} -->
+<!-- Important for your design (measures, time, mechanisms) -->
+<!-- ::: -->
+
+
+
+
+
+<!-- ## Causal Chain of Impact {.smaller} -->
+
+<!-- - A causal chain outlines the sequence of events leading from a program or intervention to its desired impact. -->
+
+<!-- ### Example Causal Chain -->
+
+<!-- ::: {.incremental} -->
+<!-- 1.  Inputs: Funding, trainers, materials. -->
+<!-- 2.  Activities: Training sessions. -->
+<!-- 3.  Outputs: Number of participants trained. -->
+<!-- 4.  Outcomes: Improved skills and job search success. -->
+<!-- 5.  Impact: Increased employment and income. -->
+<!-- ::: -->
+
+
+
+
+
+## What IS Causation? {.smaller}
+
+::: columns
+::: {.column width="50%"}
+- $X$ causes $Y$ if we can intervene and change $X$ without changing anything else, and $Y$ changes
+- $Y$ “listens to” $X$
+  - $X$ may not be the only thing that causes $Y$!
+
+:::
+::: {.column width="50%"}
+![](figs/lightswitch.jpg)
+:::
+:::
+
+
+## What IS Causation? {.smaller}
+
+::: columns
+::: {.column width="50%"}
+- $X$ causes $Y$ if we can intervene and change $X$ without changing anything else, and $Y$ changes
+- $Y$ “listens to” $X$
+  - $X$ may not be the only thing that causes $Y$!
+
+
+::: {.callout-tip appearance="simple" icon=false}
+## Example
+If $X$ is a light switch, and $Y$ is a light:
+
+- Flipping the switch $(X)$ causes the light to go on $(Y)$
+- But NOT if the light is burnt out (No $Y$ despite $X$)
+- OR if the light was already on $(Y$ without $X$)
+
+:::
+:::
+::: {.column width="50%"}
+![](figs/lightswitch.jpg)
+:::
+:::
+
+
+
+
+
+
+
+## Directed Acyclical Graphs (DAGs) {.smaller}
+
+-  Directed Acyclic Graphs (DAGs) are a graphical representation of causal relationships in impact evaluation.
+-  Nodes are factors/variables.
+-  Directed arrows describe cause-effect relationships.
+-  No feedback loops allowed.
+
+. . .
+
+### Using DAGs in Impact Evaluation
+
+::: {.incremental}
+-  Clarify causal assumptions.
+-  Identify potential sources of bias.
+-  Guide the selection of variables for analysis.
+-  Visualize complex causal relationships.
+:::
+
+
+<!-- ## Directed Acyclical Graphs (DAGs) {.smaller} -->
+
+<!-- ![](figs/causalpaths-basiclook-1.png) -->
+
+<!-- See @Huntington-Klein.2021 and @Pearl.2019 for more. -->
+
+<!-- Online tool: [Dagitty](https://www.dagitty.net/) -->
+
+
+
+## Causal Diagrams/DAGs  {.smaller}
+::: columns
+::: {.column width="50%"}
+- [Directed]{.hi}: Each node has arrows that points only one direction
+- [Acyclic]{.hi}: Arrows only have one direction, and cannot loop back
+- [Graph]{.hi}
+
+::: {.fragment fragment-index=1}
+- A visual model of the data-generating process, encodes our understanding of the causal relationships
+- Requires some common sense/economic intuition
+:::
+
+:::
+::: {.column width="50%"}
+
+
+```{r}
+library("ggdag")
+library("ggplot2")
+
+dag<-dagify(y ~ x,
+       y ~ z,
+       x ~ z,
+       labels = c("x" = "X",
+                  "y" = "Y",
+                  "z" = "Z"),
+       coords = list(x = c(x = 1, z = 2, y = 3),
+                     y = c(x = 1, z = 2, y = 1))) %>%
+  tidy_dagitty(seed = 2) %>%
+  ggplot(data = .)+
+  aes(x = x,
+      y = y,
+      xend = xend,
+      yend = yend)+
+  geom_dag_edges(seed = 2)+
+  geom_dag_point(aes(color = label))+
+  geom_dag_text(aes(label = label), # geom_dag_label_repel, with seed, direction = "y", fontface = "bold"
+                     #fill = label),
+                fontface = "bold")+
+  #scale_fill_manual(values = c("#39CCCC", "#2ECC40", "#0074D9"))+
+  scale_color_manual(values = c("X" = "#39CCCC", "Y" = "#2ECC40", "Z" = "#0074D9"))+
+  guides(color = F,
+         fill = F)+
+  theme_dag()
+dag
+```
+
+
+
+::: {.fragment fragment-index=2}
+- Remember, all models are wrong, we just need them to be *useful*!
+:::
+
+:::
+:::
+
+
+
+<!-- ## Causal Diagrams/DAGs  {.smaller} -->
+
+<!-- ::: columns -->
+<!-- ::: {.column width="50%"} -->
+<!-- - A visual model of the data-generating process, encodes our understanding of the causal relationships -->
+
+<!-- - Requires some common sense/economic intuition -->
+
+<!-- - Remember, all models are wrong, we just need them to be *useful*! -->
+
+<!-- ::: -->
+<!-- ::: {.column width="50%"} -->
+<!-- ```{r} -->
+<!-- dag -->
+<!-- ``` -->
+<!-- ::: -->
+<!-- ::: -->
+
+
+
+
+
+## Drawing a DAG  {.smaller}
+::: columns
+::: {.column width="50%"}
+1. Consider all the variables likely to be important to the data-generating process (including variables we can't observe!)
+
+2. For simplicity, combine some similar ones together or prune those that aren't very important
+
+3. Consider which variables are likely to affect others, and draw arrows connecting them
+
+4. Test some testable implications of the model (to see if we have a correct one!)
+
+:::
+::: {.column width="50%"}
+![](figs/causality.jpg){fig-align="center" width=600}
+:::
+:::
+
+## Drawing a DAG  {.smaller}
+::: columns
+::: {.column width="50%"}
+- Drawing an arrow requires a direction - making a statement about causality!
+
+- *Omitting* an arrow makes an equally important statement too!
+  - In fact, we will *need* omitted arrows to show causality!
+
+- If two variables are correlated, but neither causes the other, likely they are both caused by another (perhaps **unobserved**) variable - add it!
+
+- There should be no *cycles* or *loops* (if so, there’s probably another missing variable, such as time)
+
+:::
+::: {.column width="50%"}
+![](figs/causality.jpg){fig-align="center" width=600}
+:::
+:::
+
+
+## DAG Example I  {.smaller}
+
+::: columns
+::: {.column width="50%"}
+
+::: {.callout-tip appearance="simple" icon=false}
+## Example
+what is the effect of education on wages?
+
+- Education $X$, “treatment” or “exposure”
+
+- Wages $Y$, “outcome” or “response”
+:::
+:::
+::: {.column width="50%"}
+
+
+```{r}
+edu_earn_coords <- list(x = c(educ = 2, wage = 4, year = 2, bckg = 4, 
+                              loc = 3, netw = 3, laws = 1, u1 = 3),
+                        y = c(educ = 2, wage = 2, year = 3, bckg = 3, 
+                              loc = 3, netw = 1, laws = 2, u1 = 4))
+dagify(wage~educ,
+       coords = edu_earn_coords) %>% 
+  tidy_dagitty(seed = 2) %>%
+  ggdag_parents("wage", stylized = FALSE, seed=256, node_size = 20)+theme_dag_blank()+theme(legend.position = "none")
+
+```
+
+
+:::
+:::
+
+## DAG Example I {.smaller}
+
+::: columns
+::: {.column width="50%"}
+
+- What other variables are important?
+  - Ability
+  - Socioeconomic status
+  - Demographics
+  - Gravity
+  - Year of birth
+  - Location
+  - Schooling laws
+  - Job network
+:::
+::: {.column width="50%"}
+
+
+```{r}
+dagify(wage~educ,
+       coords = edu_earn_coords) %>% 
+  tidy_dagitty(seed = 2) %>%
+  ggdag_parents("wage", stylized = FALSE, seed=256, node_size = 20)+theme_dag_blank()+theme(legend.position = "none")
+```
+
+
+:::
+:::
+
+## DAG Example I {.smaller}
+
+::: columns
+::: {.column width="50%"}
+
+- In social science and complex systems, 1000s of variables could plausibly be in the DAG!
+
+- So simplify:
+  - Ignore trivial things (like gravity)
+  - Combine similar variables (Socioeconomic status, Demographics, Location) if not interesting per se $\rightarrow$ Background
+:::
+::: {.column width="50%"}
+
+
+```{r}
+dagify(wage~educ,
+       coords = edu_earn_coords) %>% 
+  tidy_dagitty(seed = 2) %>%
+  ggdag_parents("wage", stylized = FALSE, seed=256, node_size = 20)+theme_dag_blank()+theme(legend.position = "none")
+```
+
+
+:::
+:::
+
+
+
+## DAG Example II {.smaller}
+
+::: columns
+::: {.column width="50%"}
+
+- Background, Year of birth, Location, Compulsory schooling, all cause education
+
+- Background, year of birth, location, job networks probably cause wages
+:::
+::: {.column width="50%"}
+
+
+```{r}
+dagify(wage~educ+netw+year+bckg+loc,
+       educ~bckg+year+loc+laws,
+       coords = edu_earn_coords,
+       outcome = "wage",
+       exposure = "educ") %>%
+  tidy_dagitty(seed = 2) %>%
+  ggdag_status(stylized = FALSE, node_size = 20)+theme_dag_blank()+theme(legend.position = "none")
+```
+
+
+:::
+:::
+
+## DAG Example II {.smaller}
+
+::: columns
+::: {.column width="50%"}
+
+- Background, Year of birth, Location, Compulsory schooling, all cause education
+
+- Background, year of birth, location, job networks probably cause wages
+
+- Job networks in fact is probably caused by education!
+
+- Location and background probably both caused by unobserved factor (`u1`)
+:::
+::: {.column width="50%"}
+
+
+```{r}
+dagify(wage~educ+netw+year+bckg+loc,
+       educ~bckg+year+loc+laws,
+       netw~educ,
+       bckg~u1,
+       loc~u1,
+       coords = edu_earn_coords,
+       outcome = "wage",
+       exposure = "educ") %>%
+  tidy_dagitty(seed = 2) %>%
+  ggdag_status(stylized = FALSE, node_size = 20)+theme_dag_blank()+theme(legend.position = "none")
+```
+
+
+:::
+:::
+
+## DAG Example II {.smaller}
+
+::: columns
+::: {.column width="50%"}
+
+- This is messy, but we have a causal model!
+
+- Makes our assumptions **explicit**, and many of them are **testable**
+
+- DAG suggests certain relationships that will *not* exist:
+  - all relationships between `laws` and `netw` go through `educ`
+  - so if we controlled for `educ`, then `cor(laws,netw)` should be zero!
+:::
+::: {.column width="50%"}
+
+
+```{r}
+dagify(wage~educ+netw+year+bckg+loc,
+       educ~bckg+year+loc+laws,
+       netw~educ,
+       bckg~u1,
+       loc~u1,
+       coords = edu_earn_coords,
+       outcome = "wage",
+       exposure = "educ") %>%
+  tidy_dagitty(seed = 2) %>%
+  ggdag_status(stylized = FALSE, node_size = 20)+theme_dag_blank()+theme(legend.position = "none")
+```
+
+
+:::
+:::
+
+
+## More on DAGS 
+
+Above exmaples came from: [Econometrics](https://metricsf22.classes.ryansafner.com/) by Ryan Safner
+
+Do it yourself: [Dagitty](https://www.dagitty.net/){target="_blank"}
+
+A very nice read by the "father of DAGs": @Pearl.2019.
+
+See also: [The Effect](https://theeffectbook.net/) by @Huntington-Klein.2021
+
+
+# Causal Treatment Effect
+
+## Potential outcomes, counterfactuals, and the road not taken {.smaller}
+
+![](figs/Metrics)
+
+## The potential outcome framework {.smaller}
+
+
+:::: {.columns}
+
+::: {.column width="60%"}
+::: {style="font-size: 75%;"}
+
+| Unit | Control | Treatment | Effect |
+|------|------|------|------|
+| $i$  | $Y_i^C$ | $Y_i^T$ | $\delta_i$ |
+| 1   | 8   | 9   |  1  |
+| 2   | 5   | 3   | -2  |
+| 3   | 6   | 4   | -2  |
+| 4   | 6   | 2   | -4  |
+| 5   |15   | 18  |  3  |
+| 6   | 13  | 16  |  3  |
+| 7   |8   | 9   |  1  |
+| 8   | 2   | 0   | -2  |
+| 9   | 4   | 3   | -1  |
+| 10  | 2   | 0   | -2  | 
+| Average |  6.9 | 6.4 | -0.5 |
+
+: Table 1
+
+:::
+:::
+
+::: {.column width="40%"}
+
+$D = T$: Treatment 
+
+$D = C$: Control 
+
+$Y = Y^T$ if $D = T$ 
+
+$Y = Y^C$ if $D = C$ 
+
+Average causal effect: 
+
+$\bar{\delta} = 6.4 - 6.9 = -0.5$
+
+:::
+
+
+::::
+
+
+
+## Potential vs. observed outcomes {.smaller}
+
+
+:::: {.columns}
+
+::: {.column width="60%"}
+::: {style="font-size: 75%;"}
+
+Unit |	Control | Treatment  | D | Observed |
+|------|------|------|------|------|
+$i$     | $Y_i^C$  | $Y_i^T$    |   | $Y_{obs}$ | 
+1 	    |	`r alert("?")`	  | 9	| T |9 |
+2 	    |	5	|`r alert("?")`	    | C |5  |
+3 	    |	6	|`r alert("?")`	    | C |6  |
+4 	    |	6	|`r alert("?")`	    | C |6  |
+5 	    | `r alert("?")`	  |18	| T |18 |
+6 	    |	`r alert("?")`	  |16	| T |16 |
+7 	    |	`r alert("?")`	  |9	| T |9  |
+8 	    |	2	|`r alert("?")`	    | C |2  |
+9 	    |	4	|`r alert("?")`	    | C |4  |
+10 	    |	2	|`r alert("?")`	    | C |2  |
+Average | 4.2 |	13              |   |   | 
+
+: Table 2
+
+:::
+:::
+
+::: {.column width="40%"}
+
+Observed effect: 
+
+13 - 4.2 = 8.8 !!
+	
+Wrong conclusions: 
+
+- Comparing the observed outcomes, we would assume a treatment effect of nearly 9...
+- Problem: even in the absence of treatment, those in the treatment group are different from those in the control group.
+
+:::
+
+
+::::
+
+
+## Fundamental Problem of Causal Inference {.smaller}
+
+
+For subject $i$, the `r alert("causal effect")` of the treatment is the difference between two potential outcomes: 
+
+-  $\delta_i = Y_i^T - Y_i^C$ 
+-  $Y_i^T$: $i$'s potential outcome in treatment 
+-  $Y_i^C$: $i$'s potential outcome in control
+
+But only one of the two potential outcomes is realized/observed!
+
+Group             | $Y_i^T$ | $Y_i^C$ | 
+|------|------|------|
+Treatment ($D=T$) | __Observable__ | `r alert("Counterfactual")` |
+Control ($D=C$)   | `r alert("Counterfactual")`     | __Observable__ | 
+
+
+
+## The problem of confounding {.smaller}
+
+
+Naive comparison of treated vs untreated is often biased
+
+::: {.incremental}
+-  Individuals select themselves into a treatment group, causing a bias.
+-  Some unobserved characteristics causes treatment and outcome, making the observed relationship spurious.
+<!-- -  The characteristics of those in the sample are different from the characteristics of those not in the sample -->
+:::
+
+. . .
+
+:::: {.columns}
+
+::: {.column width="20%"}
+:::
+
+::: {.column width="60%"}
+
+![](figs/eduwage.png)
+
+:::
+
+::: {.column width="20%"}
+:::
+
+::::
+
+
+<!-- ### Example -->
+
+<!-- -  __Healthy Immigrant Effect__: immigrants are on average healthier than native-born -->
+<!-- -  Is migration (X) causing better health (Y)?  -->
+
+<!-- . . . -->
+
+<!-- -  __Immigrant self-selection__: Migrants tend to be positively selected on ambition, education, health, wealth, etc: they are better off than those who do not migrate -->
+
+
+## The problem of confounding {.smaller}
+
+![John Snow and Cholera: [Youtube](https://www.youtube.com/watch?v=lNjrAXGRda4)](figs/snow.jpg){target="_blank"}
+
+
+
+## Randomised Control Trials  {.smaller}
+
+A randomized control trial (RCT) / experimental design randomly assigns individuals to different levels of treatment.
+
+Example: a drug trial with individuals randomly assigned to either receiving the drug (treatment) or a placebo (control or untreated).
+
+. . .
+
+-  a simple assignment mechanism is to toss a coin.
+-  ideally the trial is a double-blind trial where neither the patient nor doctors know who received the drug and who received the placebo.
+-  The estimated treatment effect is simply the difference in means: $E(Y^T) - E(Y^C)$.
+
+. . .
+
+__Given that "a coin-toss" determines treatment__, we completely rule out
+
+- self-selection into treatment,
+- confounding due to unobserved factors.
+
+
+
+
+
+## The beauty of randomisation  {.smaller}
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+![](figs/Random_dice.png)
+
+:::
+
+::: {.column width="40%"}
+
+Law of large numbers
+
+-  if we randomly assign treatment
+-  and $N$ is sufficiently large
+-  treatment and control group should be identical on average
+-  each group should have the same mean as the population
+-  that applies to all their characteristics (e.g. gender, age, motivation, political views...)
+
+:::
+
+::::
+
+
+
+## Randomised Control Trials  {.smaller}
+
+![](figs/eduwage2.png)
+
+
+
+## Pros and Cons of RCTs
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+### Pros
+
+-  Minimising bias
+-  Complete control
+-  Robust impact estimate
+-  "Gold standard"
+
+:::
+
+::: {.column width="50%"}
+
+### Cons
+
+-  Often small sample size
+-  Sometimes low external validity
+-  Spillovers / Hawthorn effect
+-  Feasibility?
+
+:::
+
+::::
+
+
+## Example: Peer-group intervention {.smaller}
+
+### @Carrell.2013
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+::: {.fragment fragment-index=1}
+-  United States Air Force Academy
+-  Students randomly assigned to peer groups
+-  Positive peer effect on academic performance
+
+New experiment of policy instrument
+:::
+
+::: {.fragment fragment-index=2}
+-  Assignment to “optimally” designed peer groups
+:::
+::: {.fragment fragment-index=3}
+-  "Optimal" policy has **negative** effect on performance
+:::
+
+:::
+
+
+::: {.column width="40%"}
+::: {.fragment fragment-index=2}
+![](figs/Carrell.png)
+:::
+:::
+::::
+
+::: {.fragment fragment-index=4}
+*"These results illustrate how policies that manipulate peer groups for a desired social outcome can be confounded by changes in the endogenous patterns of social interactions within the group."*
+:::
+
+
+
+<!-- ## Example: Peer-group intervention  {.smaller} -->
+
+<!-- ### @Carrell.2013 -->
+
+<!-- ![](figs/Carrell.png) -->
+
+
+
+
+# Impact evaluation using secondary data
+
+## Impact evaluation using secondary data {.smaller}
+
+::: {.fragment fragment-index=1}
+In impact evaluation (as in social sciences), we are interested in the **causal research questions**
+
+- we want to investigate questions of cause and effect.
+- RCTs provide a way to circumvent the problems of causal inference.
+:::
+::: {.fragment fragment-index=2}
+- However, randomly exposing some individuals to treatment and withholding treatment from others can be tricky (e.g. education, marriage).
+:::
+
+::: {.fragment fragment-index=3}
+A potential compromise: __Compare alike with alike__
+
+[The Effect](https://theeffectbook.net/) [@Huntington-Klein.2021] is a great online resource .
+:::
+
+
+# Instrumental Variables (IV)
+
+
+## IV: The problem {.smaller}
+
+
+
+```{r iv-dag-simple, echo=FALSE, fig.width=7, fig.height=3, out.width="70%", fig.align="center"}
+library(tidyverse)
+library(broom)
+library(kableExtra)
+
+status_colors <- c(exposure = "#0074D9", outcome = "#FF851B", latent = "grey50")
+status_colors_backdoor <- c(exposure = "#0074D9", outcome = "#FF851B", latent = "#FF4136")
+
+node_details <- tribble(
+  ~plot1, ~plot2, ~plot3, ~name, ~label, ~x, ~y, ~generic, ~mathy,
+  TRUE, TRUE, TRUE, "treatment", "Education", 1, 1, "Program/policy", "X",
+  TRUE, TRUE, TRUE, "outcome", "Earnings", 3, 1, "Outcome", "Y",
+  FALSE, TRUE, TRUE, "unmeasured", "Ability", 2, 2, "Unmeasured confounders", "U",
+  FALSE, FALSE, TRUE, "instrument", "Father's education", 0, 1, "Instrument", "Z"
+)
+
+node_labels <- node_details$label %>% 
+  set_names(node_details$name)
+
+node_labels_generic <- node_details$generic %>% 
+  set_names(node_details$name)
+
+iv_dag1 <- dagify(outcome ~ treatment,
+                  exposure = "treatment",
+                  outcome = "outcome",
+                  coords = filter(node_details, plot1),
+                  labels =  node_labels) %>% 
+  tidy_dagitty() %>% 
+  node_status()
+
+ggplot(iv_dag1, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges(start_cap = ggraph::circle(3, "lines"),
+                 end_cap = ggraph::circle(3, "lines"),
+                 edge_width = 1.5, 
+                 arrow_directed = grid::arrow(length = grid::unit(0.75, "lines"), type = "closed")) +
+  geom_dag_point(aes(color = status), size = 35) +
+  geom_dag_text(aes(label = label,  fill = label),
+                fontface = "bold", size = 5) +
+  scale_color_manual(values = status_colors, na.value = "grey20") +
+  scale_fill_manual(values = status_colors, na.value = "grey20") +
+  guides(color = FALSE, fill = FALSE) + 
+  theme_dag(base_size = 24)
+```
+
+
+
+
+$$\color{#FF851B}{\text{Earnings}_i} = \beta_0 + \beta_1 \color{#0074D9}{\text{Education}_i} + \varepsilon_i$$
+
+::: {.fragment fragment-index=1}
+If we ran this regression, would $\beta_1$ give us the causal effect of education?
+:::
+
+
+::: {.fragment fragment-index=2}
+**No!**
+
+- Omitted variable bias!
+- Endogeneity!
+:::
+
+
+## IV: The problem {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+**Exogenous** variables
+
+- Value is not determined by anything else in the model
+- In a DAG, a node that doesn't have arrows coming into it
+
+**Endogenous** variables
+
+- Value is determined by something else in the model
+- In a DAG, a node that has arrows coming into it
+
+:::
+
+::: {.column width="50%"}
+
+
+
+```{r iv-dag-endogenous, echo=FALSE, fig.height=5, out.width="100%", out.height="100%", fig.align="center"}
+iv_dag2 <- dagify(outcome ~ treatment + unmeasured,
+                  treatment ~ unmeasured,
+                  exposure = "treatment",
+                  outcome = "outcome",
+                  latent = "unmeasured",
+                  coords = filter(node_details, plot2),
+                  labels =  node_labels) %>% 
+  tidy_dagitty() %>% 
+  node_status() %>% 
+  node_exogenous() %>% 
+  node_dconnected() %>% 
+  control_for("unmeasured")
+
+ggplot(iv_dag2, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges(start_cap = ggraph::circle(3, "lines"),
+                 end_cap = ggraph::circle(3, "lines"),
+                 edge_width = 1.5, 
+                 arrow_directed = grid::arrow(length = grid::unit(0.75, "lines"), type = "closed")) +
+  geom_dag_point(aes(color = status), size = 40) +
+  geom_dag_text(aes(label = label,  fill = label),
+                fontface = "bold", size = 5) +
+  scale_color_manual(values = status_colors, na.value = "grey20") +
+  scale_fill_manual(values = status_colors, na.value = "grey20") +
+  guides(color = FALSE, fill = FALSE) + 
+  scale_y_continuous(expand = c(0.1, 0.1)) +
+  theme_dag(base_size = 24, 
+            # plot.margin = margin(0.5, 0.5, 0.5, 0.5, "cm")
+            ) 
+  
+
+
+
+```
+
+
+
+::: {.fragment fragment-index=1}
+::: {.callout-tip appearance="simple" icon=false}
+Parts of education is endogenous, parts of it is exogenous.
+
+Can we isolate the exogenous part?
+:::
+:::
+
+:::
+
+::::
+
+## What is an instrument? {.smaller}
+
+*"Instead of randomizing the variable ourselves, we hope that something has already randomized it for us. We look in the real world for a source of randomization of our treatment"* [@Huntington-Klein.2021]
+
+:::{.incremental}
+-  **Relevance**: Something that is correlated with the policy variable.
+-  **Exclusion**: Something that does not directly cause the outcome.
+-  **Exogeneity**: Something that is not correlated with the omitted variables.
+:::
+
+
+## What is an instrument? {.smaller}
+
+
+
+```{r iv-dag-general, echo=FALSE, fig.width=12, fig.height=6, out.width="100%"}
+iv_dag4 <- dagify(outcome ~ treatment + unmeasured,
+                  treatment ~ unmeasured + instrument,
+                  exposure = "treatment",
+                  outcome = "outcome",
+                  latent = "unmeasured",
+                  coords = filter(node_details, plot3),
+                  labels =  node_labels_generic) %>% 
+  tidy_dagitty() %>% 
+  node_status() %>% 
+  node_exogenous() %>% 
+  node_dconnected() %>% 
+  control_for("unmeasured")
+
+iv_dag4$data$label[iv_dag4$data$label == "Unmeasured confounders"] <- "Unmeasured \n confounders"
+
+ggplot(iv_dag4, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges(aes(edge_colour = adjusted),
+                 start_cap = ggraph::circle(4, "lines"),
+                 end_cap = ggraph::circle(4, "lines"),
+                 edge_width = 1.5, 
+                 arrow_directed = grid::arrow(length = grid::unit(0.75, "lines"), type = "closed")) +
+  geom_dag_point(aes(color = status), size = 50) +
+  geom_dag_text(aes(label = label,  fill = label),
+                fontface = "bold", size = 5) +
+  scale_color_manual(values = status_colors_backdoor, na.value = "grey20") +
+  scale_y_continuous(expand = c(0.1, 0.1)) +
+  ggraph::scale_edge_colour_manual(values = c(unadjusted = "black", adjusted = "#FF4136")) +
+  scale_fill_manual(values = status_colors_backdoor, na.value = "grey20") +
+  guides(color = FALSE, fill = FALSE, edge_colour = FALSE) +
+  theme_dag(base_size = 28)
+```
+
+
+
+
+## Example of instrument {.smaller}
+
+
+
+```{r iv-dag-example, echo=FALSE, fig.width=12, fig.height=6, out.width="100%"}
+iv_dag3 <- dagify(outcome ~ treatment + unmeasured,
+                  treatment ~ unmeasured + instrument,
+                  exposure = "treatment",
+                  outcome = "outcome",
+                  latent = "unmeasured",
+                  coords = filter(node_details, plot3),
+                  labels =  node_labels) %>% 
+  tidy_dagitty() %>% 
+  node_status() %>% 
+  node_exogenous() %>% 
+  node_dconnected() %>% 
+  control_for("unmeasured")
+
+iv_dag3$data$label[iv_dag3$data$label == "Father's education"] <- "Father's \n education"
+
+ggplot(iv_dag3, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges(aes(edge_colour = adjusted),
+                 start_cap = ggraph::circle(4, "lines"),
+                 end_cap = ggraph::circle(4, "lines"),
+                 edge_width = 1.5, 
+                 arrow_directed = grid::arrow(length = grid::unit(0.75, "lines"), type = "closed")) +
+  geom_dag_point(aes(color = status), size = 50) +
+  geom_dag_text(aes(label = label,  fill = label),
+                fontface = "bold", size = 5) +
+  scale_color_manual(values = status_colors_backdoor, na.value = "grey20") +
+  scale_y_continuous(expand = c(0.1, 0.1)) +
+  ggraph::scale_edge_colour_manual(values = c(unadjusted = "black", adjusted = "#FF4136")) +
+  scale_fill_manual(values = status_colors_backdoor, na.value = "grey20") +
+  guides(color = FALSE, fill = FALSE, edge_colour = FALSE) +
+  theme_dag(base_size = 28)
+```
+
+
+
+
+<!-- ## Instrumental Variables & 2SLS {.smaller} -->
+
+<!-- - Now we know how to use instruments (when there is **1** [endogenous $X$ variable]{.red}, and **1** [instrumental variable $I$]{.blue}): -->
+<!--   1. Estimate reduced form (regress [outcome]{.green} `~` [instrument]{.blue}) -->
+<!--   2. Estimate first stage (regress [endog. variable]{.red} `~` [instrument]{.blue}) -->
+<!--   3. Calculate IV-estimate of [outcome]{.green} `~` [endog. variable]{.red} using (1) and (2) -->
+
+<!-- . . . -->
+
+<!-- - [Instrument]{.blue} isolates only the exogenous variation in the [endogenous variable]{.red} -->
+
+<!-- . . . -->
+
+<!-- - We can also use **multiple** endogenous variables and/or **multiple** instruments. -->
+
+
+
+## Intuitions from Instruments & 2SLS {.smaller}
+
+- The 2 stage least squares (2SLS) estimators for IVs:
+
+$$
+\begin{align}
+  {\color{#c5c5c5}{\text{Endogenous model}}}& &\color{green}{\text{Outcome}_i} &= \beta_0 + \beta_1 \color{red}{\left( \text{Endog. var.} \right)_i} + u_i\\[0.5em]
+  {\text{First stage}}& &\color{red}{\left( \text{Endog. var.} \right)_i} &= \pi_0 + \pi_1 \color{blue}{\text{Instrument}_i} + v_i\\[0.25em]
+  {\text{Second stage}}& &\color{green}{\text{Outcome}_i} &= \delta_0 + \delta_1 \color{red}{\widehat{\left( \text{Endog. var.} \right)}_i} + \varepsilon_i\\[0.5em]
+  {\color{#c5c5c5}{\text{Reduced form}}}& &\color{green}{\text{Outcome}_i} &= \pi_0 + \pi_1 \color{blue}{\text{Instrument}_i} + w_i\\[0.25em]
+\end{align}
+$$
+
+where $\color{red}{\widehat{\left( \text{Endog. var.} \right)}_i}$ are the predicted values (*fitted values*) from the first-stage regression. They only contain the variance in $\color{red}{\left( \text{Endog. var.} \right)_i}$ that comes from $\color{blue}{\text{Instrument}_i}$.
+
+
+## Intuitions from Instruments & 2SLS {.smaller}
+
+- The 2 stage least squares (2SLS) estimators for IVs:
+
+$$
+\begin{align}
+  {\color{#c5c5c5}{\text{Endogenous model}}}& &\color{green}{\text{Wage}_i} &= \beta_0 + \beta_1 \color{red}{\left( \text{Education} \right)_i} + u_i\\[0.5em]
+  {\text{First stage}}& &\color{red}{\left( \text{Education} \right)_i} &= \pi_0 + \pi_1 \color{blue}{\text{Fathers Educ}_i} + v_i\\[0.25em]
+  {\text{Second stage}}& &\color{green}{\text{Wage}_i} &= \delta_0 + \delta_1 \color{red}{\widehat{\left( \text{Education} \right)}_i} + \varepsilon_i\\[0.5em]
+  {\color{#c5c5c5}{\text{Reduced form}}}& &\color{green}{\text{Wage}_i} &= \pi_0 + \pi_1 \color{blue}{\text{Fathers Educ}_i} + w_i\\[0.25em]
+\end{align} 
+$$
+
+where $\color{red}{\widehat{\left( \text{Education} \right)}_i}$ are the predicted values (*fitted values*) from the first-stage regression. They only contain the variance in $\color{red}{\left( \text{Education} \right)_i}$ that comes from $\color{blue}{\text{Fathers Educ}_i}$.
+
+## IV example: Family size and education {.smaller}
+
+### Child-quantity/child-qualitytrade-off [@Angrist.2010]
+
+- *How does family size affect education and economic situation of children?*
+    - Assumption A: Increase in family size reduces parental investment in each child
+    - Assumption B: Parents may compensate by additional "investments"
+- Problem: Family size depends on many other characteristics of the family
+
+
+::: {.fragment fragment-index=1}
+Two possible instruments:
+
+- Twins: After first-born, family receives twins
+- Same-sex: First children having same sex increases preferences for additional
+
+See also @Angrist.2015.
+:::
+
+## IV example: Family size and education {.smaller}
+
+### First stage: Instrument $\rightarrow$ Family size
+
+![](figs/angrist1.png)
+
+## IV example: Family size and education {.smaller}
+
+### Second stage: Predicted Family size $\rightarrow$ Educ
+
+![](figs/angrist2.png)
+
+
+## Examples of instruments {.smaller}
+
+
+
+```{r instrument-examples, echo=FALSE}
+instruments <- tribble(
+  ~`Outcome`, ~`Policy`, ~`Unobserved stuff`, ~`Instrument`,
+  "Income", "Education", "Ability", "Father's education",
+  "Income", "Education", "Ability", "Distance to college",
+  "Income", "Education", "Ability", "Military draft",
+  "Health", "Smoking cigarettes", "Other negative health behaviors", "Tobacco taxes",
+  "Crime rate", "Patrol hours", "# of criminals", "Election cycles",
+  "Crime", "Incarceration rate", "Simultaneous causality", "Overcrowding litigations",
+  "Labor market success", "Americanization", "Ability", "Scrabble score of name",
+  "Conflicts", "Economic growth", "Simultaneous causality", "Rainfall"
+)
+
+
+instruments %>% 
+  kbl(align = "l")
+```
+
+
+
+## Instruments are hard to find! {.smaller}
+
+### $\color{red}{\text{Exlusion restriction}}$
+
+- Instrument causes the outcome *only through* the policy
+- For instance, rainfall is not a good instrument instrument [@Mellon.2020]
+
+::: {.fragment fragment-index=1}
+![](figs/Rainfall.png)
+:::
+
+
+# Regression Discontinuity Designs (RDD)
+
+## RDD: The idea {.smaller}
+
+*"Whenever some treatment is assigned discontinuously - people just on one side of a line get it, and people just on the other side of the line don’t, might be a little different, but not that different."* [@Huntington-Klein.2021]
+
+### Quasi-experimental design
+
+::: {.fragment fragment-index=1}
+- Lots of policies and programs are based on arbitrary rules and thresholds.
+- If you're above the cutoff/threshold, you're in the program; if you're below, you're not (or vice versa).
+- Wether you are closely above or below the cutoff/threshold is **as good as random**.
+:::
+
+The following graphs come from Andrew Heiss ([Program Evaluation](https://evalf22.classes.andrewheiss.com/)).
+
+
+## RDD: The idea {.smaller}
+
+### Random variation around cutoff
+
+:::{.incremental}
+- Running variable: continuous variable that determines whether you’re treated or not (e.g. score, time, distance).
+- Cutoff: The cutoff is the value of the running variable that determines whether you get treatment.
+- Bandwidth: It’s reasonable to think that people just barely to either side of the cutoff are basically the same other than for the cutoff.
+:::
+
+
+## RDD: Hypothetical example {.smaller}
+
+Imagine: An entrance exam and those who score 70 or lower get additional training.
+
+
+
+```{r packages-data, include=FALSE}
+library(tidyverse)
+library(broom)
+library(ggdag)
+library(kableExtra)
+library(scales)
+library(patchwork)
+library(latex2exp)
+library(rdrobust)
+library(rddensity)
+
+# Fake program data
+set.seed(1234)
+num_students <- 1000
+tutoring <- tibble(
+  id = 1:num_students,
+  entrance_exam = rbeta(num_students, shape1 = 7, shape2 = 2),
+  exit_exam = rbeta(num_students, shape1 = 5, shape2 = 3)
+) %>% 
+  mutate(entrance_exam = entrance_exam * 100,
+         tutoring = entrance_exam <= 70) %>% 
+  mutate(exit_exam = exit_exam * 40 + 10 * tutoring + entrance_exam / 2) %>% 
+  mutate(tutoring_fuzzy = ifelse(entrance_exam > 60 & entrance_exam < 80,
+                                 sample(c(TRUE, FALSE), n(), replace = TRUE),
+                                 tutoring)) %>% 
+  mutate(tutoring_text = factor(tutoring, levels = c(FALSE, TRUE),
+                                labels = c("No additional training", "Additional training")),
+         tutoring_fuzzy_text = factor(tutoring_fuzzy, levels = c(FALSE, TRUE),
+                                      labels = c("No tutor", "Tutor"))) %>% 
+  mutate(entrance_centered = entrance_exam - 70)
+```
+
+```{r tutoring-running-threshold, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(tutoring, aes(x = entrance_exam, y = tutoring_text, fill = tutoring_text)) +
+  annotate(geom = "rect", fill = "grey50", alpha = 0.25, ymin = -Inf, ymax = Inf,
+           xmin = 70 - 5,  xmax = 70 + 5) +
+  annotate(geom = "rect", fill = "grey50", alpha = 0.5, ymin = -Inf, ymax = Inf,
+           xmin = 70 - 2,  xmax = 70 + 2) +
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  geom_point(size = 5, pch = 21, color = "white", alpha = 0.7,
+             position = position_jitter(width = 0, height = 0.2, seed = 1234)) + 
+  labs(x = "Entrance exam score", y = NULL) + 
+  guides(fill = FALSE) +
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed")
+```
+
+
+
+## RDD: Hypothetical example {.smaller}
+
+Imagine: A entrance exam and those who score 70 or lower get additional training.
+
+
+
+```{r tutoring-running-threshold-zoomed, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(tutoring, aes(x = entrance_exam, y = tutoring_text, fill = tutoring_text)) +
+  annotate(geom = "rect", fill = "grey50", alpha = 0.25, ymin = -Inf, ymax = Inf,
+           xmin = 70 - 5,  xmax = 70 + 5) +
+  annotate(geom = "rect", fill = "grey50", alpha = 0.5, ymin = -Inf, ymax = Inf,
+           xmin = 70 - 2,  xmax = 70 + 2) +
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  geom_point(size = 5, pch = 21, color = "white", alpha = 0.7,
+             position = position_jitter(width = 0, height = 0.2, seed = 1234)) + 
+  labs(x = "Entrance exam score", y = NULL) + 
+  guides(fill = FALSE) +
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  coord_cartesian(xlim = c(70 - 6, 70 + 6)) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed")
+```
+
+
+
+
+## RDD: Hypothetical example
+
+To asses the effect of the additional training
+
+- we compare those above and below the treatment cutoff
+- within the specified bandwidth
+- and assume that they are nearly identical otherwise (as good as random)
+
+Calculate the difference between treatment and control. 
+
+## RDD: Hypothetical example {.smaller}
+
+In a regression framework:
+
+$$
+y_{i} = \alpha + \delta D_{i} + \beta_1 [\text{Running - Cutoff}]_{i} + \beta_2 (D_{i} \times [\text{Running - Cutoff}]_{i}) + \varepsilon{i},
+$$
+
+-  $D_{i}$: Whether an observation is in treatment group (above cutoff)
+-  $[\text{Running - Cutoff}]_{t}$: running variable centered around the cutoff (positive after)
+-  $\alpha + \beta_1$ are intercept and slope for untreated (before cutoff)
+-  $(\alpha + \delta) + (\beta_1 + \beta_2)$ are intercept and slope for treated (after cutoff)
+-  $\delta$ is the RDD treatment effect
+
+$[\text{Running - Cutoff}]_{t}$ can be replace by any flexile function $f[\text{Running - Cutoff}]_{t}$.
+
+See @Huntington-Klein.2021.
+
+
+
+## RDD: Hypothetical estimate {.smaller}
+
+
+
+```{r tutoring-outcome, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(tutoring, aes(x = entrance_exam, y = exit_exam, fill = tutoring_text)) +
+  geom_point(size = 4, pch = 21, color = "white", alpha = 1) + 
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  labs(x = "Entrance exam score", y = "Exit exam score") + 
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed")
+```
+
+
+
+
+## RDD: Hypothetical estimate {.smaller}
+
+
+
+```{r tutoring-outcome-lines, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(tutoring, aes(x = entrance_exam, y = exit_exam, fill = tutoring_text, color = tutoring_text)) +
+  geom_point(size = 4, pch = 21, color = "white", alpha = 0.25) + 
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  geom_smooth(data = filter(tutoring, entrance_exam <= 70),
+              method = "lm", size = 2, show.legend = FALSE) +
+  geom_smooth(data = filter(tutoring, entrance_exam > 70),
+              method = "lm", size = 2, show.legend = FALSE) +
+  labs(x = "Entrance exam score", y = "Exit exam score") + 
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  scale_color_manual(values = c("#85144b", "#0074D9")) +
+  guides(fill = guide_legend(reverse = TRUE, override.aes = list(alpha = 1)), color = FALSE) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed")
+```
+
+
+
+
+## RDD: Hypothetical estimate {.smaller}
+
+
+
+```{r tutoring-outcome-delta, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+rdd_tutoring <- lm(exit_exam ~ entrance_centered + tutoring, data = tutoring) %>% 
+  tidy()
+
+effect_control <- filter(rdd_tutoring, term == "(Intercept)")$estimate
+late <- filter(rdd_tutoring, term == "tutoringTRUE")$estimate
+effect_treatment <- effect_control + late
+
+ggplot(tutoring, aes(x = entrance_exam, y = exit_exam, fill = tutoring_text, color = tutoring_text)) +
+  geom_point(size = 4, pch = 21, color = "white", alpha = 0.25) + 
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  geom_smooth(data = filter(tutoring, entrance_exam <= 70),
+              method = "lm", size = 2, show.legend = FALSE) +
+  geom_smooth(data = filter(tutoring, entrance_exam > 70),
+              method = "lm", size = 2, show.legend = FALSE) +
+  annotate(geom = "segment", x = 70, xend = 70, 
+           y = effect_control, yend = effect_treatment,
+           size = 4, color = "#FF4136") +
+  annotate(geom = "label", x = 82, y = effect_treatment - (late / 2),
+           label = "δ\n(causal effect)", family = "Fira Sans Condensed", fontface = "bold",
+           color = "white", fill = "#FF4136", size = 7, label.padding = unit(0.75, "lines")) +
+  labs(x = "Entrance exam score", y = "Exit exam score") + 
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  scale_color_manual(values = c("#85144b", "#0074D9")) +
+  guides(fill = guide_legend(reverse = TRUE, override.aes = list(alpha = 1)), color = FALSE) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed")
+```
+
+
+
+
+## RDD: Hypothetical estimate {.smaller}
+
+
+
+```{r tutoring-outcome-delta-zoomed, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(tutoring, aes(x = entrance_exam, y = exit_exam, fill = tutoring_text, color = tutoring_text)) +
+  geom_point(size = 4, pch = 21, color = "white", alpha = 0.25) + 
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  geom_smooth(data = filter(tutoring, entrance_exam <= 70),
+              method = "lm", size = 2, show.legend = FALSE) +
+  geom_smooth(data = filter(tutoring, entrance_exam > 70),
+              method = "lm", size = 2, show.legend = FALSE) +
+  annotate(geom = "segment", x = 70, xend = 70, 
+           y = effect_control, yend = effect_treatment,
+           size = 4, color = "#FF4136") +
+  labs(x = "Entrance exam score", y = "Exit exam score") + 
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  scale_color_manual(values = c("#85144b", "#0074D9")) +
+  guides(fill = guide_legend(reverse = TRUE, override.aes = list(alpha = 1)), color = FALSE) +
+  coord_cartesian(xlim = c(70 - 6, 70 + 6)) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed")
+```
+
+
+
+
+## RDD: There's no one right way
+
+- The size of the gap depends on how you draw the lines on each side of the cutoff
+- The type of lines you choose can change the estimate of $\delta$ - sometimes by a lot!
+
+::: {.fragment fragment-index=1}
+The researcher's degree of freedom
+:::
+
+::: {.fragment fragment-index=2}
+- Parametric vs. non-parametric lines
+- Bandwidths (common sense or algorithms?)
+- Kernels (weights by distance to cutoff?)
+:::
+
+::: {.fragment fragment-index=3}
+**It's important**: Lines should fit the data well!
+:::
+
+## RDD: Drawing lines
+
+Check higher order polynomials!
+
+
+
+```{r parameters-stuff, echo=FALSE}
+line_colors_df <- tribble(
+  ~name, ~color, ~formula,
+  "Linear", "#0074D9", "y = β_1 x",
+  "Squared", "#FF851B", "y = β_1 x + β_2 x^2",
+  "Cubed", "#FF4136", "y = β_1 x + β_2 x^2 + β_3 x^3",
+  "Trigonometric", "#2ECC40", "y = β_1 x + β_2 sin(x)",
+  "Loess", "#B10DC9", "Loess"
+)
+
+line_colors <- line_colors_df$color %>% 
+  set_names(line_colors_df$name)
+
+fun_linear <- function(x) 10 + 4 * x
+fun_squared <- function(x) 120 - 3 * x + 0.07 * x^2
+fun_cubic <- function(x) 300 - 25 * x + 0.65 * x^2 - 0.004 * x^3
+fun_trig <- function(x) 10 + 4 * x + 50 * sin(0.25 * x)
+fun_trig_effect <- function(x) ifelse(x >= 75, fun_trig(x) + 200, fun_trig(x))
+fun_loess <- function(x) 100 + 30 * sin(5 * x) + 0.2 * x^2 - 0.002 * x^3
+
+set.seed(1234)
+df_params <- tibble(id = 1:400) %>% 
+  mutate(x_uniform = runif(n(), min = 0, max = 100)) %>% 
+  mutate(y_linear = fun_linear(x_uniform) + rnorm(n(), 0, 50)) %>% 
+  mutate(y_squared = fun_squared(x_uniform) + rnorm(n(), 0, 50)) %>% 
+  mutate(y_cubed = fun_cubic(x_uniform) + rnorm(n(), 0, 50)) %>% 
+  mutate(y_trig = fun_trig(x_uniform) + rnorm(n(), 0, 50)) %>% 
+  mutate(y_loess = fun_loess(x_uniform) + rnorm(n(), 0, 50)) %>% 
+  mutate_at(vars(starts_with("y_")),
+            list(effect = ~ifelse(x_uniform >= 75, . + 200, .)))
+```
+
+```{r params-plot-linear-poly, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(df_params, aes(x = x_uniform, y = y_cubed)) +
+  geom_point(size = 5, pch = 21, color = "white", fill = "black", alpha = 0.5) +
+  geom_smooth(method = "lm", formula = y ~ x,
+              se = FALSE, size = 3, aes(color = "Linear")) +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 2),
+              se = FALSE, size = 3, aes(color = "Squared")) +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 3),
+              se = FALSE, size = 3, aes(color = "Cubed")) +
+  scale_color_manual(values = line_colors, breaks = names(line_colors), 
+                     labels = map(line_colors_df$formula, TeX), name = NULL) +
+  labs(x = NULL, y = NULL)  +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom") +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 0, b = 0))
+```
+
+
+
+
+## RDD: Drawing lines
+
+Non-parametric methods like LOESS (Locally estimated scatterplot smoothing)
+
+
+
+```{r params-plot-loess, echo=FALSE, fig.width=12, fig.height=5.5, out.width="100%"}
+ggplot(df_params, aes(x = x_uniform, y = y_loess)) +
+  geom_point(size = 5, pch = 21, color = "white", fill = "black", alpha = 0.5) +
+  geom_smooth(method = "loess", formula = y ~ x, aes(color = "Loess"), 
+              se = FALSE, size = 3) +
+  scale_color_manual(values = line_colors, breaks = names(line_colors), 
+                     labels = map(line_colors_df$formula, TeX), name = NULL) +
+  labs(x = NULL, y = NULL) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom") +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 0, b = 0))
+```
+
+
+
+
+## RDD: Naturalisation & Political integration {.smaller}
+
+@Hainmueller.2015: 
+
+- Switzerland, where some municipalities used referendums as the mechanism to decide naturalization requests
+
+![](figs/Hainmueller.png)
+
+## Heatwave exposure & pro-environmental behaviour
+
+@Ruttenauer.2023a
+
+![](figs/heat0.jpg)
+
+## Heatwave exposure & pro-environmental behaviour
+
+@Ruttenauer.2023a
+
+![](figs/heat1.jpg)
+
+
+## Paris terror attack and discrimination on AirBnB
+
+@Wagner.2019
+
+![](figs/wagner.png)
+
+
+
+# Difference-in-Differences (DiD) Methods
+
+## DiD: Problems  {.smaller}
+
+
+:::: columns
+
+::: {.column width="60%"}
+
+::: {.fragment fragment-index=1}
+Comparing only treatment/control
+
+- You're only looking at post-treatment values
+- Impossible to know if change happened because of natural growth
+:::
+
+
+::: {.fragment fragment-index=2}
+Comparing only before/after
+
+- You're only looking at the treatment group!
+- Impossible to know if change happened because of treatment or just naturally
+:::
+:::
+
+
+::: {.column width="40%"}
+
+::: {.fragment fragment-index=1}
+![](figs/heat0.jpg)
+:::
+
+::: {.fragment fragment-index=2}
+![](figs/heat1.jpg)
+:::
+
+:::
+::::
+
+## Simple DiD setup: Diff 1 {.smaller}
+
+
+
+
+```{r dd-table-growth, echo=FALSE}
+
+
+dd <- tribble(
+  ~` `, ~`Pre mean`, ~`Post mean`, ~`∆ <span class='smaller'>(post − pre)</span>`,
+  "Control", "<b>A</b><br><span class='small'>(never treated)</small>", "<b>B</b><br><span class='small'>(never treated)</small>", "<b>B − A</b>",
+  "Treatment", "<b>C</b><br><span class='small'>(not yet treated)</small>", "<b>D</b><br><span class='small'>(treated)</small>", "<b>D − C</b>",
+  "∆<br><span class='smaller'>(treatment − control)</span>", "<b>A − C</b>", "<b>B − D</b>", "<span class=''><b>(B − A) − (D − C)</b></span> <i>or</i><br><span class=''><b>(B − D) − (A − C)</b></span>"
+)
+
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  column_spec(4, background = "#DDDDDD") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  row_spec(3, background = "#FFFFFF", color = "#FFFFFF")
+```
+
+
+
+$\Delta$ (post − pre) = **within-unit difference**
+
+
+## Simple DiD setup: Diff 2  {.smaller}
+
+
+
+```{r dd-table-within, echo=FALSE}
+dd <- tribble(
+  ~` `, ~`Pre mean`, ~`Post mean`, ~`<span class='color-light-5'>∆ <span class='smaller'>(post − pre)</span></span>`,
+  "Control", "<b>A</b><br><span class='small'>(never treated)</small>", "<b>B</b><br><span class='small'>(never treated)</small>", "<b>B − A</b>",
+  "Treatment", "<b>C</b><br><span class='small'>(not yet treated)</small>", "<b>D</b><br><span class='small'>(treated)</small>", "<b>D − C</b>",
+  "∆<br><span class='smaller'>(treatment − control)</span>", "<b>C − A</b>", "<b>D − B</b>", "<span class=''><b>(B − A) − (D − C)</b></span> <i>or</i><br><span class=''><b>(B − D) − (A − C)</b></span>"
+)
+
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  row_spec(3, background = "#DDDDDD") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(4, background = "#FFFFFF", color = "#FFFFFF")
+```
+
+
+
+$\Delta$ (treatment − control) = **across-group difference**
+
+
+
+## Simple DiD setup: Diff in Diff {.smaller}
+
+
+
+```{r dd-table-full, echo=FALSE}
+dd <- tribble(
+  ~` `, ~`Pre mean`, ~`Post mean`, ~`∆ <span class='smaller'>(post − pre)</span>`,
+  "Control", "<b>A</b><br><span class='small'>(never treated)</small>", "<b>B</b><br><span class='small'>(never treated)</small>", "<b>B − A</b>",
+  "Treatment", "<b>C</b><br><span class='small'>(not yet treated)</small>", "<b>D</b><br><span class='small'>(treated)</small>", "<b>D − C</b>",
+  "∆<br><span class='smaller'>(treatment − control)</span>", "<b>C − A</b>", "<b>D − B</b>", "<span class='color-5'><b>(D − C) − (B − A)</b></span> <i>or</i><br><span class='color-5'><b>(D − B) − (C − A)</b></span>"
+)
+
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  row_spec(3, background = "#DDDDDD") %>% 
+  column_spec(4, background = "#DDDDDD") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446")
+```
+
+
+
+$\Delta$ within units − $\Delta$ within groups = **Difference-in-differences = causal effect**!
+
+
+## Simple DiD setup {.smaller}
+
+:::: columns
+
+::: {.column width="60%"}
+![](figs/dd-diagram-1.png)
+:::
+
+::: {.column width="40%"}
+
+Important:
+
+::: {.fragment fragment-index=1}
+::: {.callout-tip appearance="simple" icon=false}
+## Parallel trends assumption
+
+*"In the absence of treatment, the treatment group would have had the same trend over time than the control group"*
+:::
+:::
+
+::: {.fragment fragment-index=2}
+::: {.callout-tip appearance="simple" icon=false}
+## No anticipation
+
+*"The treatment only affects the treatment group from the treatment period onwards"*
+:::
+:::
+
+:::
+
+::::
+
+
+
+
+## Simple DiD as regression {.smaller}
+
+The 2 $\times$ 2 Diff-in-Diff as an interaction term:
+
+$$
+y_{it} = \alpha + \gamma D_{i} + \lambda Post_{t} + \delta_{DD} (D_{i} \times Post_{t}) + \upsilon_{it},
+$$
+
+-  $D_{i}$: Whether an observation is in treatment group
+-  $Post_{t}$: Whether an observation is after treatment
+-  $D_{i} \times Post_{t}$: Treatment group after treatment
+
+. . .
+
+$\delta_{DD}$ gives the Diff-in-Diff estimator:
+
+$$
+\hat{\delta}_{DD} = \E(\Delta y_{T}) - \E(\Delta y_{C}) = [\E(y_{T}^{post}) - \E(y_{T}^{pre})] - [\E(y_{C}^{post}) - \E(y_{C}^{pre})].
+$$
+
+
+
+## Two-ways Fixed Effects{.smaller}
+
+In settings with multiple periods, we rely on the two-ways FE estimator:
+
+$$
+y_{it} = \beta_{TWFE} D_{it} + \alpha_i + \zeta_t + \epsilon_{it}.
+$$
+
+. . .
+
+With only two periods, a binary treatment, and all observations untreated in $t=1$, 
+
+-  $\hat{\delta}_{DD} = \hat{\beta}_{TWFE}$,
+-  intuitively interpretable.
+
+With multiple treatment groups and periods, it is a little bit more complicated. However, in an ideal setting, the FE estimator is a weighted average of many $2 \times 2$ DiD estimators [@Goodman-Bacon.2021; @Roth.2023]
+
+## Monetary Intervention & Banking Panics
+
+@Richardson.2009
+
+![](figs/did1_2.jpg)
+
+## Monetary Intervention & Banking Panics
+
+Parallel trends?
+
+![](figs/did2_2.jpg)
+
+
+## Two-ways FE with multiple treatment periods {.smaller}
+
+![Figure from @Goodman-Bacon.2021](figs/goodman.jpg)
+
+
+
+## Dynamic Treatment Effects {.smaller}
+
+::: {.fragment fragment-index=1}
+Treatment timing
+
+- Units often receive treatment at different times.
+:::
+
+::: {.fragment fragment-index=2}
+Treatment dynamic
+
+- Treatment effects unfold over time.
+:::
+
+::: {.fragment fragment-index=3}
+Treatment heterogeneity
+
+- Some (treatment) groups may have different treatment effects than others.
+:::
+
+::: {.fragment fragment-index=4}
+This can (in some cases) be an issue for your estimate [@Goodman-Bacon.2020].
+
+Several new "dynamic" DiD estimators explicitly address the issue [@Roth.2023].
+:::
+
+
+## Event Study Design
+
+![](figs/Impact-function.png)
+
+## Dynamic Diff-in-Diff {.smaller}
+
+-  generalizes this $2 \times 2$ Diff-in-Diff to a multi-group and multi-timing setting by computing group-time average treatment effects
+-  for each treatment-group $g$ and time period $t$
+
+
+$$
+\delta_{g,t} = \E(\Delta y_{g}) - \E(\Delta y_{C}) = [\E(y_{g}^{t}) - \E(y_{g}^{g-1})] - [\E(y_{C}^{t}) - \E(y_{C}^{g-1})],
+$$
+
+where the control group can either be the never-treated or the not-yet-treated.
+
+. . .
+
+Summary measure / average  [@Callaway.2020]:
+
+$$
+  \theta_D(e) := \sum_{g=1}^G \mathbf{1} \{ g + e \leq T \} \delta(g,g+e) P(G=g | G+e \leq T),
+$$
+
+where $e$ specifies for how long a unit has been exposed to the treatment.
+
+
+## Dynamic Diff-in-Diff {.smaller}
+
+
+
+```{r, class.source = 'fold-hide'}
+#############################
+### Example: Callaway DID ###
+#############################
+
+library(ggplot2)
+library(gridExtra)
+library(dplyr)
+
+### Set up six individuals with age and happiness
+N <- 3
+T <- 12
+
+# id and wave
+df2 <- data.frame(matrix(NA, ncol = 2, nrow = N*T))
+names(df2) <- c("id", "wave")
+
+df2$id <- rep(1:N, each = T)
+df2$wave <- rep(1:T, times = N)
+df2$idname <- factor(df2$id, levels = c(1:N), labels = paste("Person", c(1:N)))
+
+# Treatment group
+df2$D <- 0 
+df2$D[(1*T + 1):(2*T)] <- 1
+df2$D[(2*T + 1):(3*T)] <- 2
+
+df2$Treatment <- ifelse(df2$wave >= 4 & df2$D == 1, 1, 0)
+oo <- which(df2$wave >= 8 & df2$D == 2)
+df2$Treatment[oo] <- 1
+
+# Starting wage
+stw <- c(2000, 3000, 4000)
+
+# wage equation
+df2$wage <- unname(rep(stw, each = T)) + (df2$wave - 1)*50 + df2$Treatment * 500
+df2$Treatment <- as.factor(df2$Treatment)
+
+# Add comparison groups
+df2$wage2 <- ave(df2$wage,
+                 df2$id,
+                 FUN = function(x) dplyr::lag(x))
+df2$wave2 <- ave(df2$wave,
+                 df2$id,
+                 FUN = function(x) dplyr::lag(x))
+oo <- which(df2$Treatment == 1)
+df2$wage2[oo] <- ave(df2$wage2[oo],
+                 df2$id[oo],
+                 FUN = function(x) x[1])
+df2$wave2[oo] <- ave(df2$wave2[oo],
+                 df2$id[oo],
+                 FUN = function(x) x[1])
+
+
+### Plot 
+zp1 <- ggplot(df2, aes(wave, wage)) +
+  geom_line(aes(x = wave, y = wage, group = id, alpha = as.factor(D)), lty = "solid", colour = "black", lwd = 1) + 
+  geom_point( aes(x = wave, y = wage, fill = Treatment, alpha = as.factor(D)), 
+              size = 4, stroke = 1.5, pch = 21, color = "white") +
+  scale_alpha_manual(values = c(1, 1, 0.2), guide = "none") +
+  theme_bw() +
+  scale_x_continuous( breaks = seq(1, 12, 2))  +
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  scale_color_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  ggtitle("Group 1: 11 2x2 DID estimates against never-treated") +
+  theme(legend.position = c(0.05,0.95), legend.justification = c("left", "top"),
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black")) +
+  geom_curve(aes(x = wave2, y = wage2, xend = wave, yend = wage, color = Treatment), 
+             curvature = 0.3, data = df2[df2$D == 1 & !is.na(df2$wage2), ])
+
+
+zp2 <- ggplot(df2, aes(wave, wage)) +
+  geom_line(aes(x = wave, y = wage, group = id, alpha = as.factor(D)), lty = "solid", colour = "black", lwd = 1) + 
+  geom_point( aes(x = wave, y = wage,  fill = Treatment, alpha = as.factor(D)), 
+              size = 4, stroke = 1.5, pch = 21, color = "white") +
+  scale_alpha_manual(values = c(0.2, 1, 0.2), guide = "none") +
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  scale_color_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  geom_line(aes(x = wave, y = wage, group = id, ), lty = "solid", colour = "black", lwd = 1,
+            data = df2[df2$D == 2 & df2$wave <= 7, ]) + 
+  geom_point( aes(x = wave, y = wage, fill = Treatment),
+              data = df2[df2$D == 2 & df2$wave <= 7, ],
+              size = 4, stroke = 1.5, pch = 21, color = "white") +
+  theme_bw() +
+  scale_x_continuous( breaks = seq(1, 12, 2))  +
+  ggtitle("Group 1: 6 2x2 DID estimates against not-yet-treated") +
+  theme(legend.position = c(0.05,0.95), legend.justification = c("left", "top"),
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black")) +
+  geom_curve(aes(x = wave2, y = wage2, xend = wave, yend = wage, color = Treatment), 
+             curvature = 0.3, data = df2[df2$D == 1 & !is.na(df2$wage2) & df2$wave <= 7, ])
+
+
+zp3 <- ggplot(df2, aes(wave, wage)) +
+  geom_line(aes(x = wave, y = wage, group = id, alpha = as.factor(D)), lty = "solid", colour = "black", lwd = 1) + 
+  geom_point(aes(x = wave, y = wage, fill = Treatment, alpha = as.factor(D)), 
+              size = 4, stroke =1.5, pch = 21, color = "white") +
+  scale_color_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  scale_alpha_manual(values = c(1, 0.2, 1), guide = "none") +
+  theme_bw() +
+  scale_x_continuous( breaks = seq(1, 12, 2))  +
+  ggtitle("Group 2: 11 2x2 DID estimates against never-treated") +
+  theme(legend.position = c(0.05,0.95), legend.justification = c("left", "top"),
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black")) +
+  geom_curve(aes(x = wave2, y = wage2, xend = wave, yend = wage, color = Treatment), 
+             curvature = 0.3, data = df2[df2$D == 2 & !is.na(df2$wage2), ])
+
+
+text <- paste("DOES NOT compare\n",
+                             "group 2 (late treatment) against\n",
+                             "the already treated periods of group 1")
+zp4 <- ggplot() + 
+  annotate("text", x = 4, y = 25, size=8, label = text, color = "red") + 
+  theme_void()
+
+```
+
+
+
+
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+
+```{r, class.source = 'fold-hide', figures-side, fig.show="hold"}
+zp1
+zp2
+```
+
+
+:::
+
+::: {.column width="50%"}
+
+
+```{r, class.source = 'fold-hide', figures-side2, fig.show="hold"}
+zp3
+```
+
+
+:::
+
+::::
+
+
+## Industrial plant openings & resident's income {.smaller}
+
+@Ruttenauer.2021b
+
+![](figs/Envir_sorting.PNG)
+
+
+## Life course events & Happiness{.smaller}
+
+@Clark.2013
+
+![](figs/lifecourse-events.PNG)
+
+
+
+## Synthetic Control {.smaller}
+
+@Mills.2022
+
+![](figs/Vaccinations_Synthetic_France.png)
+
+
+## References
+
