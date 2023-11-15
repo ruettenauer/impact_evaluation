@@ -1,18 +1,12 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/tabby.min.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="quarto-1.3.450" />
 
   <meta name="author" content="Tobias Rüttenauer">
   <meta name="dcterms.date" content="2023-11-15">
-  <title>Impact Evaluation - Impact evaluation using secondary data</title>
+  <title>Impact Evaluation – Impact evaluation using secondary data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -343,13 +337,13 @@
   </style>
   
   <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
-  <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+  <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 </head>
-<body class="quarto-light">
+<body>
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
+<section id="title-slide" class="quarto-title-block">
   <h1 class="title">Impact evaluation using secondary data</h1>
 
 <div class="quarto-title-authors">
@@ -363,7 +357,7 @@ Tobias Rüttenauer
   <p class="date">2023-11-15</p>
 </section>
 <section>
-<section id="measuring-impact" class="title-slide slide level1 center">
+<section id="measuring-impact" class="title-slide slide level1">
 <h1>Measuring Impact</h1>
 
 </section>
@@ -372,10 +366,10 @@ Tobias Rüttenauer
 <ul>
 <li><a href="https://metricsf22.classes.ryansafner.com/">Econometrics</a> by Ryan Safner</li>
 <li><a href="https://evalf22.classes.andrewheiss.com/">Program Evaluation</a> by Andrew Heiss</li>
-<li><a href="https://mru.org/mastering-econometrics-joshua-angrist">Mastering Metrics</a> by <span class="citation" data-cites="Angrist.2015">Angrist and Pischke (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span></li>
-<li><a href="https://theeffectbook.net/">The Effect</a> by <span class="citation" data-cites="Huntington-Klein.2021">Huntington-Klein (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></li>
+<li><a href="https://mru.org/mastering-econometrics-joshua-angrist">Mastering Metrics</a> by <span class="citation" data-cites="Angrist.2015">Angrist and Pischke (<a href="#/ref-Angrist.2015" role="doc-biblioref">2015</a>)</span></li>
+<li><a href="https://theeffectbook.net/">The Effect</a> by <span class="citation" data-cites="Huntington-Klein.2021">Huntington-Klein (<a href="#/ref-Huntington-Klein.2021" role="doc-biblioref">2021</a>)</span></li>
 </ul>
-<p>These slides use materials from the amazing course materials above.</p>
+<p>THis course frofitted a lot from the course materials by Safner and Heiss.</p>
 <!-- ## Definition of Impact Evaluation -->
 <!-- -  **Impact Evaluation** is a systematic process that assesses the outcomes and impacts of a program, project, or policy intervention. -->
 <!-- -  It links **cause** and **effect** -->
@@ -391,7 +385,7 @@ Tobias Rüttenauer
 <!-- ::: -->
 </section>
 <section id="objectives-of-impact-evaluation" class="slide level2 smaller">
-<h2>Objectives of Impact Evaluation</h2>
+<h2 class="smaller">Objectives of Impact Evaluation</h2>
 <p><strong>Impact Evaluation</strong> is a systematic process that assesses the outcomes and impacts of a program, project, or policy intervention.</p>
 <div class="fragment" data-fragment-index="1">
 <!-- -->
@@ -407,10 +401,8 @@ Tobias Rüttenauer
 </div>
 </section>
 <section id="types-of-impact-evaluation" class="slide level2 smaller">
-<h2>Types of Impact Evaluation</h2>
-<ul>
-<li>Impact evaluation can take various forms, depending on the context and objectives.</li>
-</ul>
+<h2 class="smaller">Types of Impact Evaluation</h2>
+<p>Impact evaluation can take various forms, depending on the context and objectives.</p>
 <div class="fragment">
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -428,7 +420,7 @@ Tobias Rüttenauer
 <li>Randomized Controlled Trials (RCTs)</li>
 <li>Instrumental Variable (IV)</li>
 <li>Regression Discontinuity Design (RDD)</li>
-<li>Difference-in-Difference (DiD)</li>
+<li>Difference-in-Differences (DiD)</li>
 </ul>
 </div>
 </div>
@@ -436,7 +428,7 @@ Tobias Rüttenauer
 </div>
 </section></section>
 <section>
-<section id="defining-a-causal-model" class="title-slide slide level1 center">
+<section id="defining-a-causal-model" class="title-slide slide level1">
 <h1>Defining a causal model</h1>
 <!-- ## Causal Chain of Impact {.smaller} -->
 <!-- - A causal chain outlines the sequence of events leading from a program or intervention to its desired impact. -->
@@ -464,7 +456,7 @@ Tobias Rüttenauer
 <!-- ::: -->
 </section>
 <section id="what-is-causation" class="slide level2 smaller">
-<h2>What IS Causation?</h2>
+<h2 class="smaller">What IS Causation?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -475,12 +467,12 @@ Tobias Rüttenauer
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<p><img data-src="figs/lightswitch.jpg"></p>
+<p><img data-src="figs/lightswitch.jpg" /></p>
 </div>
 </div>
 </section>
 <section id="what-is-causation-1" class="slide level2 smaller">
-<h2>What IS Causation?</h2>
+<h2 class="smaller">What IS Causation?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -506,17 +498,17 @@ Tobias Rüttenauer
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<p><img data-src="figs/lightswitch.jpg"></p>
+<p><img data-src="figs/lightswitch.jpg" /></p>
 </div>
 </div>
 </section>
 <section id="directed-acyclical-graphs-dags" class="slide level2 smaller">
-<h2>Directed Acyclical Graphs (DAGs)</h2>
+<h2 class="smaller">Directed Acyclical Graphs (DAGs)</h2>
 <ul>
 <li>Directed Acyclic Graphs (DAGs) are a graphical representation of causal relationships in impact evaluation.</li>
-<li>Nodes are factors/variables</li>
+<li>Nodes are factors/variables.</li>
 <li>Directed arrows describe cause-effect relationships.</li>
-<li>No feedback loops allowed</li>
+<li>No feedback loops allowed.</li>
 </ul>
 <div class="fragment">
 <h3 id="using-dags-in-impact-evaluation">Using DAGs in Impact Evaluation</h3>
@@ -535,46 +527,49 @@ Tobias Rüttenauer
 </div>
 </section>
 <section id="causal-diagramsdags" class="slide level2 smaller">
-<h2>Causal Diagrams/DAGs</h2>
+<h2 class="smaller">Causal Diagrams/DAGs</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<ul>
-<li>A surprisingly simple, yet rigorous and powerful method of modeling is using a <span class="hi">causal diagram</span> or <span class="hi">DAG</span>:
 <ul>
 <li><span class="hi">Directed</span>: Each node has arrows that points only one direction</li>
 <li><span class="hi">Acyclic</span>: Arrows only have one direction, and cannot loop back</li>
 <li><span class="hi">Graph</span></li>
-</ul></li>
 </ul>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="Impact_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="causal-diagramsdags-1" class="slide level2 smaller">
-<h2>Causal Diagrams/DAGs</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
+<div class="fragment" data-fragment-index="1">
 <ul>
-<li><p>A visual model of the data-generating process, encodes our understanding of the causal relationships</p></li>
-<li><p>Requires some common sense/economic intuition</p></li>
-<li><p>Remember, all models are wrong, we just need them to be <em>useful</em>!</p></li>
+<li>A visual model of the data-generating process, encodes our understanding of the causal relationships</li>
+<li>Requires some common sense/economic intuition</li>
 </ul>
+</div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="Impact_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+<p><img data-src="Impact_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" /></p>
+</div>
+</div>
+<div class="fragment" data-fragment-index="2">
+<ul>
+<li>Remember, all models are wrong, we just need them to be <em>useful</em>!</li>
+</ul>
 </div>
 </div>
 </div>
-</div>
+<!-- ## Causal Diagrams/DAGs  {.smaller} -->
+<!-- ::: columns -->
+<!-- ::: {.column width="50%"} -->
+<!-- - A visual model of the data-generating process, encodes our understanding of the causal relationships -->
+<!-- - Requires some common sense/economic intuition -->
+<!-- - Remember, all models are wrong, we just need them to be *useful*! -->
+<!-- ::: -->
+<!-- ::: {.column width="50%"} -->
+<!-- ```{r} -->
+<!-- dag -->
+<!-- ``` -->
+<!-- ::: -->
+<!-- ::: -->
 </section>
 <section id="drawing-a-dag" class="slide level2 smaller">
-<h2>Drawing a DAG</h2>
+<h2 class="smaller">Drawing a DAG</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
@@ -586,14 +581,14 @@ Tobias Rüttenauer
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figs/causality.jpg" width="600"></p>
+<p><img data-src="figs/causality.jpg" width="600" /></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
 <section id="drawing-a-dag-1" class="slide level2 smaller">
-<h2>Drawing a DAG</h2>
+<h2 class="smaller">Drawing a DAG</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -608,14 +603,14 @@ Tobias Rüttenauer
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figs/causality.jpg" width="600"></p>
+<p><img data-src="figs/causality.jpg" width="600" /></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
 <section id="dag-example-i" class="slide level2 smaller">
-<h2>DAG Example I</h2>
+<h2 class="smaller">DAG Example I</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="callout callout-tip no-icon callout-titled callout-style-simple">
@@ -635,14 +630,14 @@ Tobias Rüttenauer
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="Impact_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+<p><img data-src="Impact_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" /></p>
 </div>
 </div>
 </div>
 </div>
 </section>
 <section id="dag-example-i-1" class="slide level2 smaller">
-<h2>DAG Example I</h2>
+<h2 class="smaller">DAG Example I</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -651,81 +646,81 @@ Tobias Rüttenauer
 <li>Ability</li>
 <li>Socioeconomic status</li>
 <li>Demographics</li>
-<li>Phys. Ed. requirements</li>
+<li>Gravity</li>
 <li>Year of birth</li>
 <li>Location</li>
 <li>Schooling laws</li>
-<li>Job connections</li>
+<li>Job network</li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="Impact_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+<p><img data-src="Impact_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" /></p>
 </div>
 </div>
 </div>
 </div>
 </section>
 <section id="dag-example-i-2" class="slide level2 smaller">
-<h2>DAG Example I</h2>
+<h2 class="smaller">DAG Example I</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li><p>In social science and complex systems, 1000s of variables could plausibly be in DAG!</p></li>
+<li><p>In social science and complex systems, 1000s of variables could plausibly be in the DAG!</p></li>
 <li><p>So simplify:</p>
 <ul>
-<li>Ignore trivial things (Phys. Ed. requirement)</li>
-<li>Combine similar variables (Socioeconomic status, Demographics, Location) <span class="math inline">\(\rightarrow\)</span> Background</li>
+<li>Ignore trivial things (like gravity)</li>
+<li>Combine similar variables (Socioeconomic status, Demographics, Location) if not interesting per se <span class="math inline">\(\rightarrow\)</span> Background</li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="Impact_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+<p><img data-src="Impact_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" /></p>
 </div>
 </div>
 </div>
 </div>
 </section>
 <section id="dag-example-ii" class="slide level2 smaller">
-<h2>DAG Example II</h2>
+<h2 class="smaller">DAG Example II</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li><p>Background, Year of birth, Location, Compulsory schooling, all cause education</p></li>
-<li><p>Background, year of birth, location, job connections probably cause wages</p></li>
+<li><p>Background, year of birth, location, job networks probably cause wages</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="Impact_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+<p><img data-src="Impact_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" /></p>
 </div>
 </div>
 </div>
 </div>
 </section>
 <section id="dag-example-ii-1" class="slide level2 smaller">
-<h2>DAG Example II</h2>
+<h2 class="smaller">DAG Example II</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li><p>Background, Year of birth, Location, Compulsory schooling, all cause education</p></li>
-<li><p>Background, year of birth, location, job connections probably cause wages</p></li>
-<li><p>Job connections in fact is probably caused by education!</p></li>
+<li><p>Background, year of birth, location, job networks probably cause wages</p></li>
+<li><p>Job networks in fact is probably caused by education!</p></li>
 <li><p>Location and background probably both caused by unobserved factor (<code>u1</code>)</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="Impact_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+<p><img data-src="Impact_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" /></p>
 </div>
 </div>
 </div>
 </div>
 </section>
 <section id="dag-example-ii-2" class="slide level2 smaller">
-<h2>DAG Example II</h2>
+<h2 class="smaller">DAG Example II</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -733,14 +728,14 @@ Tobias Rüttenauer
 <li><p>Makes our assumptions <strong>explicit</strong>, and many of them are <strong>testable</strong></p></li>
 <li><p>DAG suggests certain relationships that will <em>not</em> exist:</p>
 <ul>
-<li>all relationships between <code>laws</code> and <code>conx</code> go through <code>educ</code></li>
-<li>so if we controlled for <code>educ</code>, then <code>cor(laws,conx)</code> should be zero!</li>
+<li>all relationships between <code>laws</code> and <code>netw</code> go through <code>educ</code></li>
+<li>so if we controlled for <code>educ</code>, then <code>cor(laws,netw)</code> should be zero!</li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="Impact_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+<p><img data-src="Impact_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" /></p>
 </div>
 </div>
 </div>
@@ -749,21 +744,21 @@ Tobias Rüttenauer
 <section id="more-on-dags" class="slide level2">
 <h2>More on DAGS</h2>
 <p>Above exmaples came from: <a href="https://metricsf22.classes.ryansafner.com/">Econometrics</a> by Ryan Safner</p>
-<p>Do it yourself: <a href="https://www.dagitty.net/">Dagitty</a></p>
-<p>A very nice read by the “father of DAGs”: <span class="citation" data-cites="Pearl.2019">Pearl and Mackenzie (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span>.</p>
-<p>See also: <a href="https://theeffectbook.net/">The Effect</a> by <span class="citation" data-cites="Huntington-Klein.2021">Huntington-Klein (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p>
+<p>Do it yourself: <a href="https://www.dagitty.net/" target="_blank">Dagitty</a></p>
+<p>A very nice read by the “father of DAGs”: <span class="citation" data-cites="Pearl.2019">Pearl and Mackenzie (<a href="#/ref-Pearl.2019" role="doc-biblioref">2019</a>)</span>.</p>
+<p>See also: <a href="https://theeffectbook.net/">The Effect</a> by <span class="citation" data-cites="Huntington-Klein.2021">Huntington-Klein (<a href="#/ref-Huntington-Klein.2021" role="doc-biblioref">2021</a>)</span></p>
 </section></section>
 <section>
-<section id="causal-treatment-effect" class="title-slide slide level1 center">
+<section id="causal-treatment-effect" class="title-slide slide level1">
 <h1>Causal Treatment Effect</h1>
 
 </section>
 <section id="potential-outcomes-counterfactuals-and-the-road-not-taken" class="slide level2 smaller">
-<h2>Potential outcomes, counterfactuals, and the road not taken</h2>
-
-<img data-src="figs/Metrics.png" class="r-stretch"></section>
+<h2 class="smaller">Potential outcomes, counterfactuals, and the road not taken</h2>
+<p><img data-src="figs/Metrics.png" /></p>
+</section>
 <section id="the-potential-outcome-framework" class="slide level2 smaller">
-<h2>The potential outcome framework</h2>
+<h2 class="smaller">The potential outcome framework</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div style="font-size: 75%;">
@@ -864,7 +859,7 @@ Tobias Rüttenauer
 </div>
 </section>
 <section id="potential-vs.-observed-outcomes" class="slide level2 smaller">
-<h2>Potential vs.&nbsp;observed outcomes</h2>
+<h2 class="smaller">Potential vs. observed outcomes</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div style="font-size: 75%;">
@@ -979,7 +974,7 @@ Tobias Rüttenauer
 </div>
 </section>
 <section id="fundamental-problem-of-causal-inference" class="slide level2 smaller">
-<h2>Fundamental Problem of Causal Inference</h2>
+<h2 class="smaller">Fundamental Problem of Causal Inference</h2>
 <p>For subject <span class="math inline">\(i\)</span>, the <span style="color:red;">causal effect</span> of the treatment is the difference between two potential outcomes:</p>
 <ul>
 <li><span class="math inline">\(\delta_i = Y_i^T - Y_i^C\)</span></li>
@@ -989,9 +984,9 @@ Tobias Rüttenauer
 <p>But only one of the two potential outcomes is realized/observed!</p>
 <table>
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1015,7 +1010,7 @@ Tobias Rüttenauer
 </table>
 </section>
 <section id="the-problem-of-confounding" class="slide level2 smaller">
-<h2>The problem of confounding</h2>
+<h2 class="smaller">The problem of confounding</h2>
 <p>Naive comparison of treated vs untreated is often biased</p>
 <div>
 <ul>
@@ -1028,7 +1023,7 @@ Tobias Rüttenauer
 <div class="column" style="width:20%;">
 
 </div><div class="column" style="width:60%;">
-<p><img data-src="figs/eduwage.png"></p>
+<p><img data-src="figs/eduwage.png" /></p>
 </div><div class="column" style="width:20%;">
 
 </div>
@@ -1041,11 +1036,16 @@ Tobias Rüttenauer
 </div>
 </section>
 <section id="the-problem-of-confounding-1" class="slide level2 smaller">
-<h2>The problem of confounding</h2>
-
-<img data-src="figs/snow.jpg" class="r-stretch quarto-figure-center"><p class="caption">John Snow and Cholera: <a href="https://www.youtube.com/watch?v=lNjrAXGRda4">Youtube</a></p></section>
+<h2 class="smaller">The problem of confounding</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/snow.jpg" target="_blank" /></p>
+<figcaption>John Snow and Cholera: <a href="https://www.youtube.com/watch?v=lNjrAXGRda4">Youtube</a></figcaption>
+</figure>
+</div>
+</section>
 <section id="randomised-control-trials" class="slide level2 smaller">
-<h2>Randomised Control Trials</h2>
+<h2 class="smaller">Randomised Control Trials</h2>
 <p>A randomized control trial (RCT) / experimental design randomly assigns individuals to different levels of treatment.</p>
 <p>Example: a drug trial with individuals randomly assigned to either receiving the drug (treatment) or a placebo (control or untreated).</p>
 <div class="fragment">
@@ -1064,25 +1064,26 @@ Tobias Rüttenauer
 </div>
 </section>
 <section id="the-beauty-of-randomisation" class="slide level2 smaller">
-<h2>The beauty of randomisation</h2>
+<h2 class="smaller">The beauty of randomisation</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p><img data-src="figs/Random_dice.png"></p>
+<p><img data-src="figs/Random_dice.png" /></p>
 </div><div class="column" style="width:40%;">
 <p>Law of large numbers</p>
 <ul>
 <li>if we randomly assign treatment</li>
 <li>and <span class="math inline">\(N\)</span> is sufficiently large</li>
 <li>treatment and control group should be identical on average</li>
-<li>that applies to all their characteristics (e.g.&nbsp;gender, age, motivation, political views…)</li>
+<li>each group should have the same mean as the population</li>
+<li>that applies to all their characteristics (e.g. gender, age, motivation, political views…)</li>
 </ul>
 </div>
 </div>
 </section>
 <section id="randomised-control-trials-1" class="slide level2 smaller">
-<h2>Randomised Control Trials</h2>
-
-<img data-src="figs/eduwage2.png" class="r-stretch"></section>
+<h2 class="smaller">Randomised Control Trials</h2>
+<p><img data-src="figs/eduwage2.png" /></p>
+</section>
 <section id="pros-and-cons-of-rcts" class="slide level2">
 <h2>Pros and Cons of RCTs</h2>
 <div class="columns">
@@ -1106,38 +1107,48 @@ Tobias Rüttenauer
 </div>
 </section>
 <section id="example-peer-group-intervention" class="slide level2 smaller">
-<h2>Example: Peer-group intervention</h2>
-<h3 id="carrell.2013"><span class="citation" data-cites="Carrell.2013">Carrell, Sacerdote, and West (<a href="#/references" role="doc-biblioref" onclick="">2013</a>)</span></h3>
+<h2 class="smaller">Example: Peer-group intervention</h2>
+<h3 id="carrell.2013"><span class="citation" data-cites="Carrell.2013">Carrell, Sacerdote, and West (<a href="#/ref-Carrell.2013" role="doc-biblioref">2013</a>)</span></h3>
+<div class="columns">
+<div class="column" style="width:60%;">
 <div class="fragment" data-fragment-index="1">
 <ul>
 <li>United States Air Force Academy</li>
-<li>Students were randomly assigned to peer groups</li>
-<li>RCTs show positive peer effect on academic performance</li>
+<li>Students randomly assigned to peer groups</li>
+<li>Positive peer effect on academic performance</li>
 </ul>
 <p>New experiment of policy instrument</p>
 </div>
 <div class="fragment" data-fragment-index="2">
 <ul>
 <li>Assignment to “optimally” designed peer groups</li>
-<li>“Optimal” policy has <strong>negative</strong> effect on performance</li>
 </ul>
 </div>
 <div class="fragment" data-fragment-index="3">
+<ul>
+<li>“Optimal” policy has <strong>negative</strong> effect on performance</li>
+</ul>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="fragment" data-fragment-index="2">
+<p><img data-src="figs/Carrell.png" /></p>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="4">
 <p><em>“These results illustrate how policies that manipulate peer groups for a desired social outcome can be confounded by changes in the endogenous patterns of social interactions within the group.”</em></p>
 </div>
-</section>
-<section id="example-peer-group-intervention-1" class="slide level2">
-<h2>Example: Peer-group intervention</h2>
-<h3 id="carrell.2013-1"><span class="citation" data-cites="Carrell.2013">Carrell, Sacerdote, and West (<a href="#/references" role="doc-biblioref" onclick="">2013</a>)</span></h3>
-
-<img data-src="figs/Carrell.png" class="r-stretch"></section></section>
+<!-- ## Example: Peer-group intervention  {.smaller} -->
+<!-- ### @Carrell.2013 -->
+<!-- ![](figs/Carrell.png) -->
+</section></section>
 <section>
-<section id="impact-evaluation-using-secondary-data" class="title-slide slide level1 center">
+<section id="impact-evaluation-using-secondary-data" class="title-slide slide level1">
 <h1>Impact evaluation using secondary data</h1>
 
 </section>
 <section id="impact-evaluation-using-secondary-data-1" class="slide level2 smaller">
-<h2>Impact evaluation using secondary data</h2>
+<h2 class="smaller">Impact evaluation using secondary data</h2>
 <div class="fragment" data-fragment-index="1">
 <p>In impact evaluation (as in social sciences), we are interested in the <strong>causal research questions</strong></p>
 <ul>
@@ -1147,23 +1158,31 @@ Tobias Rüttenauer
 </div>
 <div class="fragment" data-fragment-index="2">
 <ul>
-<li>However, randomly exposing some individuals to treatment and withholding treatment from others can be tricky (e.g.&nbsp;education, marriage).</li>
+<li>However, randomly exposing some individuals to treatment and withholding treatment from others can be tricky (e.g. education, marriage).</li>
 </ul>
 </div>
 <div class="fragment" data-fragment-index="3">
 <p>A potential compromise: <strong>Compare alike with alike</strong></p>
-<p><a href="https://theeffectbook.net/">The Effect</a> <span class="citation" data-cites="Huntington-Klein.2021">(<a href="#/references" role="doc-biblioref" onclick="">Huntington-Klein 2021</a>)</span> is a great online resource .</p>
+<p><a href="https://theeffectbook.net/">The Effect</a> <span class="citation" data-cites="Huntington-Klein.2021">(<a href="#/ref-Huntington-Klein.2021" role="doc-biblioref">Huntington-Klein 2021</a>)</span> is a great online resource .</p>
 </div>
 </section></section>
 <section>
-<section id="instrumental-variables-iv" class="title-slide slide level1 center">
+<section id="instrumental-variables-iv" class="title-slide slide level1">
 <h1>Instrumental Variables (IV)</h1>
 
 </section>
 <section id="iv-the-problem" class="slide level2 smaller">
-<h2>IV: The problem</h2>
-
-<img data-src="Impact_files/figure-revealjs/iv-dag-simple-1.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p><span class="math display">\[\color{#FF851B}{\text{Earnings}_i} = \beta_0 + \beta_1 \color{#0074D9}{\text{Education}_i} + \varepsilon_i\]</span></p>
+<h2 class="smaller">IV: The problem</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Impact_files/figure-revealjs/iv-dag-simple-1.png" style="width:70.0%" /></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">\[\color{#FF851B}{\text{Earnings}_i} = \beta_0 + \beta_1 \color{#0074D9}{\text{Education}_i} + \varepsilon_i\]</span></p>
 <div class="fragment" data-fragment-index="1">
 <p>If we ran this regression, would <span class="math inline">\(\beta_1\)</span> give us the causal effect of education?</p>
 </div>
@@ -1176,7 +1195,7 @@ Tobias Rüttenauer
 </div>
 </section>
 <section id="iv-the-problem-1" class="slide level2 smaller">
-<h2>IV: The problem</h2>
+<h2 class="smaller">IV: The problem</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Exogenous</strong> variables</p>
@@ -1194,7 +1213,7 @@ Tobias Rüttenauer
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Impact_files/figure-revealjs/iv-dag-endogenous-1.png" style="width:100.0%;height:100.0%"></p>
+<p><img data-src="Impact_files/figure-revealjs/iv-dag-endogenous-1.png" style="width:100.0%;height:100.0%" /></p>
 </figure>
 </div>
 </div>
@@ -1213,8 +1232,8 @@ Tobias Rüttenauer
 </div>
 </section>
 <section id="what-is-an-instrument" class="slide level2 smaller">
-<h2>What is an instrument?</h2>
-<p><em>“Instead of randomizing the variable ourselves, we hope that something has already randomized it for us. We look in the real world for a source of randomization of our treatment”</em> <span class="citation" data-cites="Huntington-Klein.2021">(<a href="#/references" role="doc-biblioref" onclick="">Huntington-Klein 2021</a>)</span></p>
+<h2 class="smaller">What is an instrument?</h2>
+<p><em>“Instead of randomizing the variable ourselves, we hope that something has already randomized it for us. We look in the real world for a source of randomization of our treatment”</em> <span class="citation" data-cites="Huntington-Klein.2021">(<a href="#/ref-Huntington-Klein.2021" role="doc-biblioref">Huntington-Klein 2021</a>)</span></p>
 <div>
 <ul>
 <li class="fragment"><strong>Relevance</strong>: Something that is correlated with the policy variable.</li>
@@ -1224,12 +1243,20 @@ Tobias Rüttenauer
 </div>
 </section>
 <section id="what-is-an-instrument-1" class="slide level2 smaller">
-<h2>What is an instrument?</h2>
-
-<img data-src="Impact_files/figure-revealjs/iv-dag-general-1.png" style="width:100.0%" class="r-stretch"></section>
+<h2 class="smaller">What is an instrument?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Impact_files/figure-revealjs/iv-dag-general-1.png" style="width:100.0%" /></p>
+</div>
+</div>
+</section>
 <section id="example-of-instrument" class="slide level2 smaller">
-<h2>Example of instrument</h2>
-
+<h2 class="smaller">Example of instrument</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Impact_files/figure-revealjs/iv-dag-example-1.png" style="width:100.0%" /></p>
+</div>
+</div>
 <!-- ## Instrumental Variables & 2SLS {.smaller} -->
 <!-- - Now we know how to use instruments (when there is **1** [endogenous $X$ variable]{.red}, and **1** [instrumental variable $I$]{.blue}): -->
 <!--   1. Estimate reduced form (regress [outcome]{.green} `~` [instrument]{.blue}) -->
@@ -1239,9 +1266,9 @@ Tobias Rüttenauer
 <!-- - [Instrument]{.blue} isolates only the exogenous variation in the [endogenous variable]{.red} -->
 <!-- . . . -->
 <!-- - We can also use **multiple** endogenous variables and/or **multiple** instruments. -->
-<img data-src="Impact_files/figure-revealjs/iv-dag-example-1.png" style="width:100.0%" class="r-stretch"></section>
+</section>
 <section id="intuitions-from-instruments-2sls" class="slide level2 smaller">
-<h2>Intuitions from Instruments &amp; 2SLS</h2>
+<h2 class="smaller">Intuitions from Instruments &amp; 2SLS</h2>
 <ul>
 <li>The 2 stage least squares (2SLS) estimators for IVs:</li>
 </ul>
@@ -1255,9 +1282,24 @@ Tobias Rüttenauer
 \]</span></p>
 <p>where <span class="math inline">\(\color{red}{\widehat{\left( \text{Endog. var.} \right)}_i}\)</span> are the predicted values (<em>fitted values</em>) from the first-stage regression. They only contain the variance in <span class="math inline">\(\color{red}{\left( \text{Endog. var.} \right)_i}\)</span> that comes from <span class="math inline">\(\color{blue}{\text{Instrument}_i}\)</span>.</p>
 </section>
+<section id="intuitions-from-instruments-2sls-1" class="slide level2 smaller">
+<h2 class="smaller">Intuitions from Instruments &amp; 2SLS</h2>
+<ul>
+<li>The 2 stage least squares (2SLS) estimators for IVs:</li>
+</ul>
+<p><span class="math display">\[
+\begin{align}
+  {\color{#c5c5c5}{\text{Endogenous model}}}&amp; &amp;\color{green}{\text{Wage}_i} &amp;= \beta_0 + \beta_1 \color{red}{\left( \text{Education} \right)_i} + u_i\\[0.5em]
+  {\text{First stage}}&amp; &amp;\color{red}{\left( \text{Education} \right)_i} &amp;= \pi_0 + \pi_1 \color{blue}{\text{Fathers Educ}_i} + v_i\\[0.25em]
+  {\text{Second stage}}&amp; &amp;\color{green}{\text{Wage}_i} &amp;= \delta_0 + \delta_1 \color{red}{\widehat{\left( \text{Education} \right)}_i} + \varepsilon_i\\[0.5em]
+  {\color{#c5c5c5}{\text{Reduced form}}}&amp; &amp;\color{green}{\text{Wage}_i} &amp;= \pi_0 + \pi_1 \color{blue}{\text{Fathers Educ}_i} + w_i\\[0.25em]
+\end{align}
+\]</span></p>
+<p>where <span class="math inline">\(\color{red}{\widehat{\left( \text{Education} \right)}_i}\)</span> are the predicted values (<em>fitted values</em>) from the first-stage regression. They only contain the variance in <span class="math inline">\(\color{red}{\left( \text{Education} \right)_i}\)</span> that comes from <span class="math inline">\(\color{blue}{\text{Fathers Educ}_i}\)</span>.</p>
+</section>
 <section id="iv-example-family-size-and-education" class="slide level2 smaller">
-<h2>IV example: Family size and education</h2>
-<h3 id="child-quantitychild-qualitytrade-off-angrist.2010">Child-quantity/child-qualitytrade-off <span class="citation" data-cites="Angrist.2010">(<a href="#/references" role="doc-biblioref" onclick="">Angrist, Lavy, and Schlosser 2010</a>)</span></h3>
+<h2 class="smaller">IV example: Family size and education</h2>
+<h3 id="child-quantitychild-qualitytrade-off-angrist.2010">Child-quantity/child-qualitytrade-off <span class="citation" data-cites="Angrist.2010">(<a href="#/ref-Angrist.2010" role="doc-biblioref">Angrist, Lavy, and Schlosser 2010</a>)</span></h3>
 <ul>
 <li><em>How does family size affect education and economic situation of children?</em>
 <ul>
@@ -1272,21 +1314,21 @@ Tobias Rüttenauer
 <li>Twins: After first-born, family receives twins</li>
 <li>Same-sex: First children having same sex increases preferences for additional</li>
 </ul>
-<p>See also <span class="citation" data-cites="Angrist.2015">Angrist and Pischke (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span>.</p>
+<p>See also <span class="citation" data-cites="Angrist.2015">Angrist and Pischke (<a href="#/ref-Angrist.2015" role="doc-biblioref">2015</a>)</span>.</p>
 </div>
 </section>
 <section id="iv-example-family-size-and-education-1" class="slide level2 smaller">
-<h2>IV example: Family size and education</h2>
-<h3 id="first-stage-family-size">First stage: Family size</h3>
-
-<img data-src="figs/angrist1.png" class="r-stretch"></section>
+<h2 class="smaller">IV example: Family size and education</h2>
+<h3 id="first-stage-instrument-rightarrow-family-size">First stage: Instrument <span class="math inline">\(\rightarrow\)</span> Family size</h3>
+<p><img data-src="figs/angrist1.png" /></p>
+</section>
 <section id="iv-example-family-size-and-education-2" class="slide level2 smaller">
-<h2>IV example: Family size and education</h2>
-<h3 id="first-stage-family-size-1">First stage: Family size</h3>
-
-<img data-src="figs/angrist2.png" class="r-stretch"></section>
+<h2 class="smaller">IV example: Family size and education</h2>
+<h3 id="second-stage-predicted-family-size-rightarrow-educ">Second stage: Predicted Family size <span class="math inline">\(\rightarrow\)</span> Educ</h3>
+<p><img data-src="figs/angrist2.png" /></p>
+</section>
 <section id="examples-of-instruments" class="slide level2 smaller">
-<h2>Examples of instruments</h2>
+<h2 class="smaller">Examples of instruments</h2>
 <div class="cell">
 <div class="cell-output-display">
 <table data-quarto-postprocess="true">
@@ -1355,24 +1397,24 @@ Tobias Rüttenauer
 </div>
 </section>
 <section id="instruments-are-hard-to-find" class="slide level2 smaller">
-<h2>Instruments are hard to find!</h2>
+<h2 class="smaller">Instruments are hard to find!</h2>
 <h3 id="colorredtextexlusion-restriction"><span class="math inline">\(\color{red}{\text{Exlusion restriction}}\)</span></h3>
 <ul>
 <li>Instrument causes the outcome <em>only through</em> the policy</li>
-<li>For instance, rainfall is not a good instrument instrument <span class="citation" data-cites="Mellon.2020">(<a href="#/references" role="doc-biblioref" onclick="">Mellon 2020</a>)</span></li>
+<li>For instance, rainfall is not a good instrument instrument <span class="citation" data-cites="Mellon.2020">(<a href="#/ref-Mellon.2020" role="doc-biblioref">Mellon 2020</a>)</span></li>
 </ul>
 <div class="fragment" data-fragment-index="1">
-<p><img data-src="figs/Rainfall.png"></p>
+<p><img data-src="figs/Rainfall.png" /></p>
 </div>
 </section></section>
 <section>
-<section id="regression-discontinuity-designs-rdd" class="title-slide slide level1 center">
+<section id="regression-discontinuity-designs-rdd" class="title-slide slide level1">
 <h1>Regression Discontinuity Designs (RDD)</h1>
 
 </section>
 <section id="rdd-the-idea" class="slide level2 smaller">
-<h2>RDD: The idea</h2>
-<p><em>“Whenever some treatment is assigned discontinuously - people just on one side of a line get it, and people just on the other side of the line don’t, might be a little different, but not that different.”</em> <span class="citation" data-cites="Huntington-Klein.2021">(<a href="#/references" role="doc-biblioref" onclick="">Huntington-Klein 2021</a>)</span></p>
+<h2 class="smaller">RDD: The idea</h2>
+<p><em>“Whenever some treatment is assigned discontinuously - people just on one side of a line get it, and people just on the other side of the line don’t, might be a little different, but not that different.”</em> <span class="citation" data-cites="Huntington-Klein.2021">(<a href="#/ref-Huntington-Klein.2021" role="doc-biblioref">Huntington-Klein 2021</a>)</span></p>
 <h3 id="quasi-experimental-design">Quasi-experimental design</h3>
 <div class="fragment" data-fragment-index="1">
 <ul>
@@ -1380,30 +1422,38 @@ Tobias Rüttenauer
 <li>If you’re above the cutoff/threshold, you’re in the program; if you’re below, you’re not (or vice versa).</li>
 <li>Wether you are closely above or below the cutoff/threshold is <strong>as good as random</strong>.</li>
 </ul>
-<p>The nice examples come from <a href="https://evalf22.classes.andrewheiss.com/">Program Evaluation</a> by Andrew Heiss.</p>
 </div>
+<p>The following graphs come from Andrew Heiss (<a href="https://evalf22.classes.andrewheiss.com/">Program Evaluation</a>).</p>
 </section>
 <section id="rdd-the-idea-1" class="slide level2 smaller">
-<h2>RDD: The idea</h2>
+<h2 class="smaller">RDD: The idea</h2>
 <h3 id="random-variation-around-cutoff">Random variation around cutoff</h3>
 <div>
 <ul>
-<li class="fragment">Running variable: continuous variable that determines whether you’re treated or not (e.g.&nbsp;score, time, distance).</li>
+<li class="fragment">Running variable: continuous variable that determines whether you’re treated or not (e.g. score, time, distance).</li>
 <li class="fragment">Cutoff: The cutoff is the value of the running variable that determines whether you get treatment.</li>
 <li class="fragment">Bandwidth: It’s reasonable to think that people just barely to either side of the cutoff are basically the same other than for the cutoff.</li>
 </ul>
 </div>
 </section>
 <section id="rdd-hypothetical-example" class="slide level2 smaller">
-<h2>RDD: Hypothetical example</h2>
-<p>Imagine: A entrance exam and those who score 70 or lower get additional training.</p>
-
-<img data-src="Impact_files/figure-revealjs/tutoring-running-threshold-1.png" style="width:100.0%" class="r-stretch"></section>
+<h2 class="smaller">RDD: Hypothetical example</h2>
+<p>Imagine: An entrance exam and those who score 70 or lower get additional training.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Impact_files/figure-revealjs/tutoring-running-threshold-1.png" style="width:100.0%" /></p>
+</div>
+</div>
+</section>
 <section id="rdd-hypothetical-example-1" class="slide level2 smaller">
-<h2>RDD: Hypothetical example</h2>
+<h2 class="smaller">RDD: Hypothetical example</h2>
 <p>Imagine: A entrance exam and those who score 70 or lower get additional training.</p>
-
-<img data-src="Impact_files/figure-revealjs/tutoring-running-threshold-zoomed-1.png" style="width:100.0%" class="r-stretch"></section>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Impact_files/figure-revealjs/tutoring-running-threshold-zoomed-1.png" style="width:100.0%" /></p>
+</div>
+</div>
+</section>
 <section id="rdd-hypothetical-example-2" class="slide level2">
 <h2>RDD: Hypothetical example</h2>
 <p>To asses the effect of the additional training</p>
@@ -1415,36 +1465,53 @@ Tobias Rüttenauer
 <p>Calculate the difference between treatment and control.</p>
 </section>
 <section id="rdd-hypothetical-example-3" class="slide level2 smaller">
-<h2>RDD: Hypothetical example</h2>
+<h2 class="smaller">RDD: Hypothetical example</h2>
 <p>In a regression framework:</p>
 <p><span class="math display">\[
-y_{i} = \alpha + \beta_1 D_{i} + \beta_2 [\text{Running - Cutoff}]_{i} + \beta_3 (D_{i} \times [\text{Running - Cutoff}]_{i}) + \varepsilon{i},
+y_{i} = \alpha + \delta D_{i} + \beta_1 [\text{Running - Cutoff}]_{i} + \beta_2 (D_{i} \times [\text{Running - Cutoff}]_{i}) + \varepsilon{i},
 \]</span></p>
 <ul>
 <li><span class="math inline">\(D_{i}\)</span>: Whether an observation is in treatment group (above cutoff)</li>
 <li><span class="math inline">\([\text{Running - Cutoff}]_{t}\)</span>: running variable centered around the cutoff (positive after)</li>
-<li><span class="math inline">\(\alpha + \beta_2\)</span> are intercept and slope for untreated (before cutoff)</li>
-<li><span class="math inline">\((\alpha + \beta_1) + (\beta_2 + \beta_3)\)</span> are intercept and slope for treated (after cutoff)</li>
+<li><span class="math inline">\(\alpha + \beta_1\)</span> are intercept and slope for untreated (before cutoff)</li>
+<li><span class="math inline">\((\alpha + \delta) + (\beta_1 + \beta_2)\)</span> are intercept and slope for treated (after cutoff)</li>
+<li><span class="math inline">\(\delta\)</span> is the RDD treatment effect</li>
 </ul>
 <p><span class="math inline">\([\text{Running - Cutoff}]_{t}\)</span> can be replace by any flexile function <span class="math inline">\(f[\text{Running - Cutoff}]_{t}\)</span>.</p>
-<p>See <span class="citation" data-cites="Huntington-Klein.2021">Huntington-Klein (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span>.</p>
+<p>See <span class="citation" data-cites="Huntington-Klein.2021">Huntington-Klein (<a href="#/ref-Huntington-Klein.2021" role="doc-biblioref">2021</a>)</span>.</p>
 </section>
 <section id="rdd-hypothetical-estimate" class="slide level2 smaller">
-<h2>RDD: Hypothetical estimate</h2>
-
-<img data-src="Impact_files/figure-revealjs/tutoring-outcome-1.png" style="width:100.0%" class="r-stretch"></section>
+<h2 class="smaller">RDD: Hypothetical estimate</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Impact_files/figure-revealjs/tutoring-outcome-1.png" style="width:100.0%" /></p>
+</div>
+</div>
+</section>
 <section id="rdd-hypothetical-estimate-1" class="slide level2 smaller">
-<h2>RDD: Hypothetical estimate</h2>
-
-<img data-src="Impact_files/figure-revealjs/tutoring-outcome-lines-1.png" style="width:100.0%" class="r-stretch"></section>
+<h2 class="smaller">RDD: Hypothetical estimate</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Impact_files/figure-revealjs/tutoring-outcome-lines-1.png" style="width:100.0%" /></p>
+</div>
+</div>
+</section>
 <section id="rdd-hypothetical-estimate-2" class="slide level2 smaller">
-<h2>RDD: Hypothetical estimate</h2>
-
-<img data-src="Impact_files/figure-revealjs/tutoring-outcome-delta-1.png" style="width:100.0%" class="r-stretch"></section>
+<h2 class="smaller">RDD: Hypothetical estimate</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Impact_files/figure-revealjs/tutoring-outcome-delta-1.png" style="width:100.0%" /></p>
+</div>
+</div>
+</section>
 <section id="rdd-hypothetical-estimate-3" class="slide level2 smaller">
-<h2>RDD: Hypothetical estimate</h2>
-
-<img data-src="Impact_files/figure-revealjs/tutoring-outcome-delta-zoomed-1.png" style="width:100.0%" class="r-stretch"></section>
+<h2 class="smaller">RDD: Hypothetical estimate</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Impact_files/figure-revealjs/tutoring-outcome-delta-zoomed-1.png" style="width:100.0%" /></p>
+</div>
+</div>
+</section>
 <section id="rdd-theres-no-one-right-way" class="slide level2">
 <h2>RDD: There’s no one right way</h2>
 <ul>
@@ -1456,7 +1523,7 @@ y_{i} = \alpha + \beta_1 D_{i} + \beta_2 [\text{Running - Cutoff}]_{i} + \beta_3
 </div>
 <div class="fragment" data-fragment-index="2">
 <ul>
-<li>Parametric vs.&nbsp;non-parametric lines</li>
+<li>Parametric vs. non-parametric lines</li>
 <li>Bandwidths (common sense or algorithms?)</li>
 <li>Kernels (weights by distance to cutoff?)</li>
 </ul>
@@ -1468,68 +1535,87 @@ y_{i} = \alpha + \beta_1 D_{i} + \beta_2 [\text{Running - Cutoff}]_{i} + \beta_3
 <section id="rdd-drawing-lines" class="slide level2">
 <h2>RDD: Drawing lines</h2>
 <p>Check higher order polynomials!</p>
-
-<img data-src="Impact_files/figure-revealjs/params-plot-linear-poly-1.png" style="width:100.0%" class="r-stretch"></section>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Impact_files/figure-revealjs/params-plot-linear-poly-1.png" style="width:100.0%" /></p>
+</div>
+</div>
+</section>
 <section id="rdd-drawing-lines-1" class="slide level2">
 <h2>RDD: Drawing lines</h2>
 <p>Non-parametric methods like LOESS (Locally estimated scatterplot smoothing)</p>
-
-<img data-src="Impact_files/figure-revealjs/params-plot-loess-1.png" style="width:100.0%" class="r-stretch"></section>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Impact_files/figure-revealjs/params-plot-loess-1.png" style="width:100.0%" /></p>
+</div>
+</div>
+</section>
 <section id="rdd-naturalisation-political-integration" class="slide level2 smaller">
-<h2>RDD: Naturalisation &amp; Political integration</h2>
-<p><span class="citation" data-cites="Hainmueller.2015">Hainmueller, Hangartner, and Pietrantuono (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span>:</p>
+<h2 class="smaller">RDD: Naturalisation &amp; Political integration</h2>
+<p><span class="citation" data-cites="Hainmueller.2015">Hainmueller, Hangartner, and Pietrantuono (<a href="#/ref-Hainmueller.2015" role="doc-biblioref">2015</a>)</span>:</p>
 <ul>
 <li>Switzerland, where some municipalities used referendums as the mechanism to decide naturalization requests</li>
 </ul>
-
-<img data-src="figs/Hainmueller.png" class="r-stretch"></section>
+<p><img data-src="figs/Hainmueller.png" /></p>
+</section>
 <section id="heatwave-exposure-pro-environmental-behaviour" class="slide level2">
 <h2>Heatwave exposure &amp; pro-environmental behaviour</h2>
-<p><span class="citation" data-cites="Ruttenauer.2023a">Rüttenauer (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span></p>
-
-<img data-src="figs/heat0.jpg" class="r-stretch"></section>
+<p><span class="citation" data-cites="Ruttenauer.2023a">Rüttenauer (<a href="#/ref-Ruttenauer.2023a" role="doc-biblioref">2023</a>)</span></p>
+<p><img data-src="figs/heat0.jpg" /></p>
+</section>
 <section id="heatwave-exposure-pro-environmental-behaviour-1" class="slide level2">
 <h2>Heatwave exposure &amp; pro-environmental behaviour</h2>
-<p><span class="citation" data-cites="Ruttenauer.2023a">Rüttenauer (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span></p>
-
-<img data-src="figs/heat1.jpg" class="r-stretch"></section>
+<p><span class="citation" data-cites="Ruttenauer.2023a">Rüttenauer (<a href="#/ref-Ruttenauer.2023a" role="doc-biblioref">2023</a>)</span></p>
+<p><img data-src="figs/heat1.jpg" /></p>
+</section>
 <section id="paris-terror-attack-and-discrimination-on-airbnb" class="slide level2">
 <h2>Paris terror attack and discrimination on AirBnB</h2>
-<p><span class="citation" data-cites="Wagner.2019">Wagner and Petev (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span></p>
-
-<img data-src="figs/wagner.png" class="r-stretch"></section></section>
+<p><span class="citation" data-cites="Wagner.2019">Wagner and Petev (<a href="#/ref-Wagner.2019" role="doc-biblioref">2019</a>)</span></p>
+<p><img data-src="figs/wagner.png" /></p>
+</section></section>
 <section>
-<section id="difference-in-difference-did-methods" class="title-slide slide level1 center">
-<h1>Difference-in-Difference (DiD) Methods</h1>
+<section id="difference-in-differences-did-methods" class="title-slide slide level1">
+<h1>Difference-in-Differences (DiD) Methods</h1>
 
 </section>
-<section id="did-problems" class="slide level2">
-<h2>DiD: Problems</h2>
-<p>Comparing only before/after</p>
+<section id="did-problems" class="slide level2 smaller">
+<h2 class="smaller">DiD: Problems</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
 <div class="fragment" data-fragment-index="1">
-<ul>
-<li>You’re only looking at the treatment group!</li>
-<li>Impossible to know if change happened because of treatment or just naturally</li>
-</ul>
-</div>
 <p>Comparing only treatment/control</p>
-<div class="fragment" data-fragment-index="2">
 <ul>
 <li>You’re only looking at post-treatment values</li>
 <li>Impossible to know if change happened because of natural growth</li>
 </ul>
 </div>
+<div class="fragment" data-fragment-index="2">
+<p>Comparing only before/after</p>
+<ul>
+<li>You’re only looking at the treatment group!</li>
+<li>Impossible to know if change happened because of treatment or just naturally</li>
+</ul>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="fragment" data-fragment-index="1">
+<p><img data-src="figs/heat0.jpg" /></p>
+</div>
+<div class="fragment" data-fragment-index="2">
+<p><img data-src="figs/heat1.jpg" /></p>
+</div>
+</div>
+</div>
 </section>
 <section id="simple-did-setup-diff-1" class="slide level2 smaller">
-<h2>Simple DiD setup: Diff 1</h2>
+<h2 class="smaller">Simple DiD setup: Diff 1</h2>
 <div class="cell">
 <div class="cell-output-display">
 <table data-quarto-postprocess="true" style="margin-left: auto; margin-right: auto;">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1542,26 +1628,26 @@ y_{i} = \alpha + \beta_1 D_{i} + \beta_2 [\text{Running - Cutoff}]_{i} + \beta_3
 <tbody>
 <tr class="odd">
 <td style="text-align: center; background-color: #FFFFFF !important; font-weight: bold; color: #CF4446 !important; background-color: #FFC6C6 !important;">Control</td>
-<td style="text-align: center; background-color: #FFFFFF !important;"><strong>A</strong><br>
+<td style="text-align: center; background-color: #FFFFFF !important;"><strong>A</strong><br />
 <span class="small">(never treated) </span></td>
-<td style="text-align: center; background-color: #FFFFFF !important;"><strong>B</strong><br>
+<td style="text-align: center; background-color: #FFFFFF !important;"><strong>B</strong><br />
 <span class="small">(never treated) </span></td>
 <td style="text-align: center; background-color: #FFFFFF !important; background-color: #DDDDDD !important;"><strong>B − A</strong></td>
 </tr>
 <tr class="even">
 <td style="text-align: center; background-color: #FFFFFF !important; font-weight: bold; color: #CF4446 !important; background-color: #FFC6C6 !important;">Treatment</td>
-<td style="text-align: center; background-color: #FFFFFF !important;"><strong>C</strong><br>
+<td style="text-align: center; background-color: #FFFFFF !important;"><strong>C</strong><br />
 <span class="small">(not yet treated) </span></td>
-<td style="text-align: center; background-color: #FFFFFF !important;"><strong>D</strong><br>
+<td style="text-align: center; background-color: #FFFFFF !important;"><strong>D</strong><br />
 <span class="small">(treated) </span></td>
 <td style="text-align: center; background-color: #FFFFFF !important; background-color: #DDDDDD !important;"><strong>D − C</strong></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center; font-weight: bold; color: #CF4446 !important; background-color: #FFC6C6 !important; color: #FFFFFF !important; background-color: #FFFFFF !important;">∆<br>
+<td style="text-align: center; font-weight: bold; color: #CF4446 !important; background-color: #FFC6C6 !important; color: #FFFFFF !important; background-color: #FFFFFF !important;">∆<br />
 <span class="smaller">(treatment − control)</span></td>
 <td style="text-align: center; color: #FFFFFF !important; background-color: #FFFFFF !important;"><strong>A − C</strong></td>
 <td style="text-align: center; color: #FFFFFF !important; background-color: #FFFFFF !important;"><strong>B − D</strong></td>
-<td style="text-align: center; background-color: #DDDDDD !important; color: #FFFFFF !important; background-color: #FFFFFF !important;"><span><strong>(B − A) − (D − C)</strong></span> <em>or</em><br>
+<td style="text-align: center; background-color: #DDDDDD !important; color: #FFFFFF !important; background-color: #FFFFFF !important;"><span><strong>(B − A) − (D − C)</strong></span> <em>or</em><br />
 <span><strong>(B − D) − (A − C)</strong></span></td>
 </tr>
 </tbody>
@@ -1573,15 +1659,15 @@ y_{i} = \alpha + \beta_1 D_{i} + \beta_2 [\text{Running - Cutoff}]_{i} + \beta_3
 <p><span class="math inline">\(\Delta\)</span> (post − pre) = <strong>within-unit difference</strong></p>
 </section>
 <section id="simple-did-setup-diff-2" class="slide level2 smaller">
-<h2>Simple DiD setup: Diff 2</h2>
+<h2 class="smaller">Simple DiD setup: Diff 2</h2>
 <div class="cell">
 <div class="cell-output-display">
 <table data-quarto-postprocess="true" style="margin-left: auto; margin-right: auto;">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1594,26 +1680,26 @@ y_{i} = \alpha + \beta_1 D_{i} + \beta_2 [\text{Running - Cutoff}]_{i} + \beta_3
 <tbody>
 <tr class="odd">
 <td style="text-align: center; background-color: #FFFFFF !important; font-weight: bold; color: #CF4446 !important; background-color: #FFC6C6 !important;">Control</td>
-<td style="text-align: center; background-color: #FFFFFF !important;"><strong>A</strong><br>
+<td style="text-align: center; background-color: #FFFFFF !important;"><strong>A</strong><br />
 <span class="small">(never treated) </span></td>
-<td style="text-align: center; background-color: #FFFFFF !important;"><strong>B</strong><br>
+<td style="text-align: center; background-color: #FFFFFF !important;"><strong>B</strong><br />
 <span class="small">(never treated) </span></td>
 <td style="text-align: center; background-color: #FFFFFF !important; color: #FFFFFF !important; background-color: #FFFFFF !important;"><strong>B − A</strong></td>
 </tr>
 <tr class="even">
 <td style="text-align: center; background-color: #FFFFFF !important; font-weight: bold; color: #CF4446 !important; background-color: #FFC6C6 !important;">Treatment</td>
-<td style="text-align: center; background-color: #FFFFFF !important;"><strong>C</strong><br>
+<td style="text-align: center; background-color: #FFFFFF !important;"><strong>C</strong><br />
 <span class="small">(not yet treated) </span></td>
-<td style="text-align: center; background-color: #FFFFFF !important;"><strong>D</strong><br>
+<td style="text-align: center; background-color: #FFFFFF !important;"><strong>D</strong><br />
 <span class="small">(treated) </span></td>
 <td style="text-align: center; background-color: #FFFFFF !important; color: #FFFFFF !important; background-color: #FFFFFF !important;"><strong>D − C</strong></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center; background-color: #DDDDDD !important; font-weight: bold; color: #CF4446 !important; background-color: #FFC6C6 !important;">∆<br>
+<td style="text-align: center; background-color: #DDDDDD !important; font-weight: bold; color: #CF4446 !important; background-color: #FFC6C6 !important;">∆<br />
 <span class="smaller">(treatment − control)</span></td>
 <td style="text-align: center; background-color: #DDDDDD !important;"><strong>C − A</strong></td>
 <td style="text-align: center; background-color: #DDDDDD !important;"><strong>D − B</strong></td>
-<td style="text-align: center; background-color: #DDDDDD !important; color: #FFFFFF !important; background-color: #FFFFFF !important;"><span><strong>(B − A) − (D − C)</strong></span> <em>or</em><br>
+<td style="text-align: center; background-color: #DDDDDD !important; color: #FFFFFF !important; background-color: #FFFFFF !important;"><span><strong>(B − A) − (D − C)</strong></span> <em>or</em><br />
 <span><strong>(B − D) − (A − C)</strong></span></td>
 </tr>
 </tbody>
@@ -1625,15 +1711,15 @@ y_{i} = \alpha + \beta_1 D_{i} + \beta_2 [\text{Running - Cutoff}]_{i} + \beta_3
 <p><span class="math inline">\(\Delta\)</span> (treatment − control) = <strong>across-group difference</strong></p>
 </section>
 <section id="simple-did-setup-diff-in-diff" class="slide level2 smaller">
-<h2>Simple DiD setup: Diff in Diff</h2>
+<h2 class="smaller">Simple DiD setup: Diff in Diff</h2>
 <div class="cell">
 <div class="cell-output-display">
 <table data-quarto-postprocess="true" style="margin-left: auto; margin-right: auto;">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1646,26 +1732,26 @@ y_{i} = \alpha + \beta_1 D_{i} + \beta_2 [\text{Running - Cutoff}]_{i} + \beta_3
 <tbody>
 <tr class="odd">
 <td style="text-align: center; background-color: #FFFFFF !important; font-weight: bold; color: #CF4446 !important; background-color: #FFC6C6 !important;">Control</td>
-<td style="text-align: center; background-color: #FFFFFF !important;"><strong>A</strong><br>
+<td style="text-align: center; background-color: #FFFFFF !important;"><strong>A</strong><br />
 <span class="small">(never treated) </span></td>
-<td style="text-align: center; background-color: #FFFFFF !important;"><strong>B</strong><br>
+<td style="text-align: center; background-color: #FFFFFF !important;"><strong>B</strong><br />
 <span class="small">(never treated) </span></td>
 <td style="text-align: center; background-color: #FFFFFF !important; background-color: #DDDDDD !important;"><strong>B − A</strong></td>
 </tr>
 <tr class="even">
 <td style="text-align: center; background-color: #FFFFFF !important; font-weight: bold; color: #CF4446 !important; background-color: #FFC6C6 !important;">Treatment</td>
-<td style="text-align: center; background-color: #FFFFFF !important;"><strong>C</strong><br>
+<td style="text-align: center; background-color: #FFFFFF !important;"><strong>C</strong><br />
 <span class="small">(not yet treated) </span></td>
-<td style="text-align: center; background-color: #FFFFFF !important;"><strong>D</strong><br>
+<td style="text-align: center; background-color: #FFFFFF !important;"><strong>D</strong><br />
 <span class="small">(treated) </span></td>
 <td style="text-align: center; background-color: #FFFFFF !important; background-color: #DDDDDD !important;"><strong>D − C</strong></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center; background-color: #DDDDDD !important; font-weight: bold; color: #CF4446 !important; background-color: #FFC6C6 !important;">∆<br>
+<td style="text-align: center; background-color: #DDDDDD !important; font-weight: bold; color: #CF4446 !important; background-color: #FFC6C6 !important;">∆<br />
 <span class="smaller">(treatment − control)</span></td>
 <td style="text-align: center; background-color: #DDDDDD !important;"><strong>C − A</strong></td>
 <td style="text-align: center; background-color: #DDDDDD !important;"><strong>D − B</strong></td>
-<td style="text-align: center; background-color: #DDDDDD !important; background-color: #DDDDDD !important;"><span class="color-5"><strong>(D − C) − (B − A)</strong></span> <em>or</em><br>
+<td style="text-align: center; background-color: #DDDDDD !important; background-color: #DDDDDD !important;"><span class="color-5"><strong>(D − C) − (B − A)</strong></span> <em>or</em><br />
 <span class="color-5"><strong>(D − B) − (C − A)</strong></span></td>
 </tr>
 </tbody>
@@ -1674,13 +1760,13 @@ y_{i} = \alpha + \beta_1 D_{i} + \beta_2 [\text{Running - Cutoff}]_{i} + \beta_3
 
 </div>
 </div>
-<p><span class="math inline">\(\Delta\)</span> within units − <span class="math inline">\(\Delta\)</span> within groups = <strong>Differences-in-differences = causal effect</strong>!</p>
+<p><span class="math inline">\(\Delta\)</span> within units − <span class="math inline">\(\Delta\)</span> within groups = <strong>Difference-in-differences = causal effect</strong>!</p>
 </section>
 <section id="simple-did-setup" class="slide level2 smaller">
-<h2>Simple DiD setup</h2>
+<h2 class="smaller">Simple DiD setup</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p><img data-src="figs/dd-diagram-1.png"></p>
+<p><img data-src="figs/dd-diagram-1.png" /></p>
 </div><div class="column" style="width:40%;">
 <p>Important:</p>
 <div class="fragment" data-fragment-index="1">
@@ -1711,7 +1797,7 @@ y_{i} = \alpha + \beta_1 D_{i} + \beta_2 [\text{Running - Cutoff}]_{i} + \beta_3
 </div>
 </section>
 <section id="simple-did-as-regression" class="slide level2 smaller">
-<h2>Simple DiD as regression</h2>
+<h2 class="smaller">Simple DiD as regression</h2>
 <p>The 2 <span class="math inline">\(\times\)</span> 2 Diff-in-Diff as an interaction term:</p>
 <p><span class="math display">\[
 y_{it} = \alpha + \gamma D_{i} + \lambda Post_{t} + \delta_{DD} (D_{i} \times Post_{t}) + \upsilon_{it},
@@ -1729,7 +1815,7 @@ y_{it} = \alpha + \gamma D_{i} + \lambda Post_{t} + \delta_{DD} (D_{i} \times Po
 </div>
 </section>
 <section id="two-ways-fixed-effects" class="slide level2 smaller">
-<h2>Two-ways Fixed Effects</h2>
+<h2 class="smaller">Two-ways Fixed Effects</h2>
 <p>In settings with multiple periods, we rely on the two-ways FE estimator:</p>
 <p><span class="math display">\[
 y_{it} = \beta_{TWFE} D_{it} + \alpha_i + \zeta_t + \epsilon_{it}.
@@ -1740,25 +1826,30 @@ y_{it} = \beta_{TWFE} D_{it} + \alpha_i + \zeta_t + \epsilon_{it}.
 <li><span class="math inline">\(\hat{\delta}_{DD} = \hat{\beta}_{TWFE}\)</span>,</li>
 <li>intuitively interpretable.</li>
 </ul>
-<p>With multiple treatment groups and periods, it is a little bit more complicated. However, in an ideal setting, the FE estimator is a weighted average of many <span class="math inline">\(2 \times 2\)</span> DiD estimators <span class="citation" data-cites="Goodman-Bacon.2021 Roth.2023">(<a href="#/references" role="doc-biblioref" onclick="">Goodman-Bacon 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Roth et al. 2023</a>)</span></p>
+<p>With multiple treatment groups and periods, it is a little bit more complicated. However, in an ideal setting, the FE estimator is a weighted average of many <span class="math inline">\(2 \times 2\)</span> DiD estimators <span class="citation" data-cites="Goodman-Bacon.2021 Roth.2023">(<a href="#/ref-Goodman-Bacon.2021" role="doc-biblioref">Goodman-Bacon 2021</a>; <a href="#/ref-Roth.2023" role="doc-biblioref">Roth et al. 2023</a>)</span></p>
 </div>
 </section>
 <section id="monetary-intervention-banking-panics" class="slide level2">
 <h2>Monetary Intervention &amp; Banking Panics</h2>
-<p><span class="citation" data-cites="Richardson.2009">Richardson and Troost (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span></p>
-
-<img data-src="figs/did1_2.jpg" class="r-stretch"></section>
+<p><span class="citation" data-cites="Richardson.2009">Richardson and Troost (<a href="#/ref-Richardson.2009" role="doc-biblioref">2009</a>)</span></p>
+<p><img data-src="figs/did1_2.jpg" /></p>
+</section>
 <section id="monetary-intervention-banking-panics-1" class="slide level2">
 <h2>Monetary Intervention &amp; Banking Panics</h2>
 <p>Parallel trends?</p>
-
-<img data-src="figs/did2_2.jpg" class="r-stretch"></section>
+<p><img data-src="figs/did2_2.jpg" /></p>
+</section>
 <section id="two-ways-fe-with-multiple-treatment-periods" class="slide level2 smaller">
-<h2>Two-ways Fe with multiple treatment periods</h2>
-
-<img data-src="figs/goodman.jpg" class="r-stretch quarto-figure-center"><p class="caption">Figure from <span class="citation" data-cites="Goodman-Bacon.2021">Goodman-Bacon (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p></section>
+<h2 class="smaller">Two-ways FE with multiple treatment periods</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/goodman.jpg" /></p>
+<figcaption>Figure from <span class="citation" data-cites="Goodman-Bacon.2021">Goodman-Bacon (<a href="#/ref-Goodman-Bacon.2021" role="doc-biblioref">2021</a>)</span></figcaption>
+</figure>
+</div>
+</section>
 <section id="dynamic-treatment-effects" class="slide level2 smaller">
-<h2>Dynamic Treatment Effects</h2>
+<h2 class="smaller">Dynamic Treatment Effects</h2>
 <div class="fragment" data-fragment-index="1">
 <p>Treatment timing</p>
 <ul>
@@ -1778,16 +1869,16 @@ y_{it} = \beta_{TWFE} D_{it} + \alpha_i + \zeta_t + \epsilon_{it}.
 </ul>
 </div>
 <div class="fragment" data-fragment-index="4">
-<p>This can (in some cases) be an issue for your estimate <span class="citation" data-cites="Goodman-Bacon.2020">(<a href="#/references" role="doc-biblioref" onclick="">Goodman-Bacon and Marcus 2020</a>)</span>.</p>
-<p>Several new “dynamic” DiD estimators explicitly address the issue <span class="citation" data-cites="Roth.2023">(<a href="#/references" role="doc-biblioref" onclick="">Roth et al. 2023</a>)</span>.</p>
+<p>This can (in some cases) be an issue for your estimate <span class="citation" data-cites="Goodman-Bacon.2020">(<a href="#/ref-Goodman-Bacon.2020" role="doc-biblioref">Goodman-Bacon and Marcus 2020</a>)</span>.</p>
+<p>Several new “dynamic” DiD estimators explicitly address the issue <span class="citation" data-cites="Roth.2023">(<a href="#/ref-Roth.2023" role="doc-biblioref">Roth et al. 2023</a>)</span>.</p>
 </div>
 </section>
 <section id="event-study-design" class="slide level2">
 <h2>Event Study Design</h2>
-
-<img data-src="figs/Impact-function.png" class="r-stretch"></section>
+<p><img data-src="figs/Impact-function.png" /></p>
+</section>
 <section id="dynamic-diff-in-diff" class="slide level2 smaller">
-<h2>Dynamic Diff-in-Diff</h2>
+<h2 class="smaller">Dynamic Diff-in-Diff</h2>
 <ul>
 <li>generalizes this <span class="math inline">\(2 \times 2\)</span> Diff-in-Diff to a multi-group and multi-timing setting by computing group-time average treatment effects</li>
 <li>for each treatment-group <span class="math inline">\(g\)</span> and time period <span class="math inline">\(t\)</span></li>
@@ -1797,7 +1888,7 @@ y_{it} = \beta_{TWFE} D_{it} + \alpha_i + \zeta_t + \epsilon_{it}.
 \]</span></p>
 <p>where the control group can either be the never-treated or the not-yet-treated.</p>
 <div class="fragment">
-<p>Summary measure / average <span class="citation" data-cites="Callaway.2020">(<a href="#/references" role="doc-biblioref" onclick="">Callaway and Sant’Anna 2020</a>)</span>:</p>
+<p>Summary measure / average <span class="citation" data-cites="Callaway.2020">(<a href="#/ref-Callaway.2020" role="doc-biblioref">Callaway and Sant’Anna 2020</a>)</span>:</p>
 <p><span class="math display">\[
   \theta_D(e) := \sum_{g=1}^G \mathbf{1} \{ g + e \leq T \} \delta(g,g+e) P(G=g | G+e \leq T),
 \]</span></p>
@@ -1805,41 +1896,48 @@ y_{it} = \beta_{TWFE} D_{it} + \alpha_i + \zeta_t + \epsilon_{it}.
 </div>
 </section>
 <section id="dynamic-diff-in-diff-1" class="slide level2 smaller">
-<h2>Dynamic Diff-in-Diff</h2>
+<h2 class="smaller">Dynamic Diff-in-Diff</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="Impact_files/figure-revealjs/figures-side-1.png" width="960"></p>
+<p><img data-src="Impact_files/figure-revealjs/figures-side-1.png" width="960" /></p>
 </div>
 <div class="cell-output-display">
-<p><img data-src="Impact_files/figure-revealjs/figures-side-2.png" width="960"></p>
+<p><img data-src="Impact_files/figure-revealjs/figures-side-2.png" width="960" /></p>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="Impact_files/figure-revealjs/figures-side2-1.png" width="960"></p>
+<p><img data-src="Impact_files/figure-revealjs/figures-side2-1.png" width="960" /></p>
 </div>
 </div>
 </div>
 </div>
 </section>
 <section id="industrial-plant-openings-residents-income" class="slide level2 smaller">
-<h2>Industrial plant openings &amp; resident’s income</h2>
-<p><span class="citation" data-cites="Ruttenauer.2021b">Rüttenauer and Best (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p>
-
-<img data-src="figs/Envir_sorting.PNG" class="r-stretch"></section>
+<h2 class="smaller">Industrial plant openings &amp; resident’s income</h2>
+<p><span class="citation" data-cites="Ruttenauer.2021b">Rüttenauer and Best (<a href="#/ref-Ruttenauer.2021b" role="doc-biblioref">2021</a>)</span></p>
+<p><img data-src="figs/Envir_sorting.PNG" /></p>
+</section>
 <section id="life-course-events-happiness" class="slide level2 smaller">
-<h2>Life course events &amp; Happiness</h2>
-<p><span class="citation" data-cites="Clark.2013">Clark and Georgellis (<a href="#/references" role="doc-biblioref" onclick="">2013</a>)</span></p>
-
-<img data-src="figs/lifecourse-events.PNG" class="r-stretch"></section>
-<section id="references" class="slide level2 smaller scrollable">
+<h2 class="smaller">Life course events &amp; Happiness</h2>
+<p><span class="citation" data-cites="Clark.2013">Clark and Georgellis (<a href="#/ref-Clark.2013" role="doc-biblioref">2013</a>)</span></p>
+<p><img data-src="figs/lifecourse-events.PNG" /></p>
+</section>
+<section id="synthetic-control" class="slide level2 smaller">
+<h2 class="smaller">Synthetic Control</h2>
+<p><span class="citation" data-cites="Mills.2022">Mills and Rüttenauer (<a href="#/ref-Mills.2022" role="doc-biblioref">2022</a>)</span></p>
+<p><img data-src="figs/Vaccinations_Synthetic_France.png" /></p>
+</section>
+<section id="references" class="slide level2">
 <h2>References</h2>
-
+<div id="quarto-meta-markdown" class="hidden">
+<p><span class="hidden" data-render-id="quarto-metatitle">Impact Evaluation - Impact evaluation using secondary data</span> <span class="hidden" data-render-id="quarto-twittercardtitle">Impact Evaluation - Impact evaluation using secondary data</span> <span class="hidden" data-render-id="quarto-ogcardtitle">Impact Evaluation - Impact evaluation using secondary data</span> <span class="hidden" data-render-id="quarto-metasitename">Impact Evaluation</span> <span class="hidden" data-render-id="quarto-twittercarddesc"></span> <span class="hidden" data-render-id="quarto-ogcardddesc"></span></p>
+</div>
 <div class="footer footer-default">
-<p>&lt;<a href="./index.html">Impact Evaluation</a>&gt;</p>
+<p>&lt;<a href="/index.html">Impact Evaluation</a>&gt;</p>
 </div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Angrist.2010" class="csl-entry" role="listitem">
@@ -1872,6 +1970,9 @@ Huntington-Klein, Nick. 2021. <em>The <span>Effect</span>: <span>An Introduction
 <div id="ref-Mellon.2020" class="csl-entry" role="listitem">
 Mellon, Jonathan. 2020. <span>“Rain, <span>Rain</span>, <span>Go Away</span>: 137 <span>Potential Exclusion-Restriction Violations</span> for <span>Studies Using Weather</span> as an <span>Instrumental Variable</span>.”</span> <em>SSRN Electronic Journal</em>. <a href="https://doi.org/10.2139/ssrn.3715610">https://doi.org/10.2139/ssrn.3715610</a>.
 </div>
+<div id="ref-Mills.2022" class="csl-entry" role="listitem">
+Mills, Melinda C., and Tobias Rüttenauer. 2022. <span>“The <span>Effect</span> of <span>Mandatory COVID-19 Certificates</span> on <span>Vaccine Uptake</span>: <span>Synthetic-Control Modelling</span> of <span>Six Countries</span>.”</span> <em>The Lancet Public Health</em> 7 (1): e15–22. <a href="https://doi.org/10.1016/S2468-2667(21)00273-5">https://doi.org/10.1016/S2468-2667(21)00273-5</a>.
+</div>
 <div id="ref-Pearl.2019" class="csl-entry" role="listitem">
 Pearl, Judea, and Dana Mackenzie. 2019. <em>The <span>Book</span> of <span>Why</span>: <span>The New Science</span> of <span>Cause</span> and <span>Effect</span></em>. <span>UK</span>: <span>Penguin Books</span>.
 </div>
@@ -1882,7 +1983,7 @@ Richardson, Gary, and William Troost. 2009. <span>“Monetary <span>Intervention
 Roth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. <span>“What’s Trending in Difference-in-Differences? <span>A</span> Synthesis of the Recent Econometrics Literature.”</span> <em>Journal of Econometrics</em> 235 (2): 2218–44. <a href="https://doi.org/10.1016/j.jeconom.2023.03.008">https://doi.org/10.1016/j.jeconom.2023.03.008</a>.
 </div>
 <div id="ref-Ruttenauer.2023a" class="csl-entry" role="listitem">
-Rüttenauer, Tobias. 2023. <span>“More <span>Talk</span>, <span>No Action</span>? <span>The Effect</span> of <span>Exposure</span> to <span>Extreme Weather Events</span> on <span>Climate Change Concern</span> and <span>Pro-Environmental Behaviour</span>.”</span> <em>European Societies</em> Forthcoming. <a href="https://doi.org/10.31235/osf.io/574uf">https://doi.org/10.31235/osf.io/574uf</a>.
+Rüttenauer, Tobias. 2023. <span>“More Talk, No Action? <span>The</span> Link Between Exposure to Extreme Weather Events, Climate Change Belief and Pro-Environmental Behaviour.”</span> <em>European Societies</em>, November, 1–25. <a href="https://doi.org/10.1080/14616696.2023.2277281">https://doi.org/10.1080/14616696.2023.2277281</a>.
 </div>
 <div id="ref-Ruttenauer.2021b" class="csl-entry" role="listitem">
 Rüttenauer, Tobias, and Henning Best. 2021. <span>“Environmental <span>Inequality</span> and <span>Residential Sorting</span> in <span>Germany</span>: <span>A Spatial Time-Series Analysis</span> of the <span>Demographic Consequences</span> of <span>Industrial Sites</span>.”</span> <em>Demography</em> 58 (6): 2243–63. <a href="https://doi.org/10.1215/00703370-9563077">https://doi.org/10.1215/00703370-9563077</a>.
@@ -1916,18 +2017,7 @@ Wagner, Sander, and Ivaylo Petev. 2019. <span>“The <span>Economic Penalty</spa
 
       // Full list of configuration options available at:
       // https://revealjs.com/config/
-      Reveal.initialize({
-'controlsAuto': true,
-'previewLinksAuto': false,
-'smaller': false,
-'pdfSeparateFragments': false,
-'autoAnimateEasing': "ease",
-'autoAnimateDuration': 1,
-'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'chalkboard': {"buttons":false},
-'smaller': false,
- 
+      Reveal.initialize({ 
         // Display controls in the bottom right corner
         controls: false,
 
@@ -1946,7 +2036,7 @@ Wagner, Sander, and Ivaylo Petev. 2019. <span>“The <span>Economic Penalty</spa
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: 'c/t',
+        slideNumber: c/t,
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -2096,8 +2186,7 @@ Wagner, Sander, and Ivaylo Petev. 2019. <span>“The <span>Economic Penalty</spa
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
-
+        plugins: [
           RevealMath,
           RevealNotes,
           RevealSearch,
@@ -2143,7 +2232,7 @@ Wagner, Sander, and Ivaylo Petev. 2019. <span>“The <span>Economic Penalty</spa
       })();
     </script>
 
-    <script id="quarto-html-after-body" type="application/javascript">
+    <script id = "quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
         const mode = bsSheetEl.getAttribute("data-mode");
@@ -2289,6 +2378,5 @@ Wagner, Sander, and Ivaylo Petev. 2019. <span>“The <span>Economic Penalty</spa
       }
     });
     </script>
-    
-
-</body></html>
+    </body>
+</html>

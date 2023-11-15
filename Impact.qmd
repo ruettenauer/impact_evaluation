@@ -38,7 +38,7 @@ alert <- function(text) {
  - [Mastering Metrics](https://mru.org/mastering-econometrics-joshua-angrist) by @Angrist.2015
  - [The Effect](https://theeffectbook.net/) by @Huntington-Klein.2021
  
-These slides use materials from the amazing course materials above.
+THis course frofitted a lot from the course materials by Safner and Heiss.
 
 <!-- ## Definition of Impact Evaluation -->
 
@@ -78,7 +78,7 @@ These slides use materials from the amazing course materials above.
 
 ## Types of Impact Evaluation {.smaller}
 
--  Impact evaluation can take various forms, depending on the context and objectives.
+Impact evaluation can take various forms, depending on the context and objectives.
 
 . . .
 
@@ -103,7 +103,7 @@ These slides use materials from the amazing course materials above.
 -  Randomized Controlled Trials (RCTs)
 -  Instrumental Variable (IV)
 -  Regression Discontinuity Design (RDD)
--  Difference-in-Difference (DiD)
+-  Difference-in-Differences (DiD)
 :::
 :::
 
@@ -203,9 +203,9 @@ If $X$ is a light switch, and $Y$ is a light:
 ## Directed Acyclical Graphs (DAGs) {.smaller}
 
 -  Directed Acyclic Graphs (DAGs) are a graphical representation of causal relationships in impact evaluation.
--  Nodes are factors/variables
+-  Nodes are factors/variables.
 -  Directed arrows describe cause-effect relationships.
--  No feedback loops allowed
+-  No feedback loops allowed.
 
 . . .
 
@@ -232,10 +232,14 @@ If $X$ is a light switch, and $Y$ is a light:
 ## Causal Diagrams/DAGs  {.smaller}
 ::: columns
 ::: {.column width="50%"}
-- A surprisingly simple, yet rigorous and powerful method of modeling is using a [causal diagram]{.hi} or [DAG]{.hi}:
-  - [Directed]{.hi}: Each node has arrows that points only one direction
-  - [Acyclic]{.hi}: Arrows only have one direction, and cannot loop back
-  - [Graph]{.hi}
+- [Directed]{.hi}: Each node has arrows that points only one direction
+- [Acyclic]{.hi}: Arrows only have one direction, and cannot loop back
+- [Graph]{.hi}
+
+::: {.fragment fragment-index=1}
+- A visual model of the data-generating process, encodes our understanding of the causal relationships
+- Requires some common sense/economic intuition
+:::
 
 :::
 ::: {.column width="50%"}
@@ -269,28 +273,33 @@ dag<-dagify(y ~ x,
   theme_dag()
 dag
 ```
-:::
-:::
 
-
-
-## Causal Diagrams/DAGs  {.smaller}
-
-::: columns
-::: {.column width="50%"}
-- A visual model of the data-generating process, encodes our understanding of the causal relationships
-
-- Requires some common sense/economic intuition
-
+::: {.fragment fragment-index=2}
 - Remember, all models are wrong, we just need them to be *useful*!
+:::
 
 :::
-::: {.column width="50%"}
-```{r}
-dag
-```
 :::
-:::
+
+
+
+<!-- ## Causal Diagrams/DAGs  {.smaller} -->
+
+<!-- ::: columns -->
+<!-- ::: {.column width="50%"} -->
+<!-- - A visual model of the data-generating process, encodes our understanding of the causal relationships -->
+
+<!-- - Requires some common sense/economic intuition -->
+
+<!-- - Remember, all models are wrong, we just need them to be *useful*! -->
+
+<!-- ::: -->
+<!-- ::: {.column width="50%"} -->
+<!-- ```{r} -->
+<!-- dag -->
+<!-- ``` -->
+<!-- ::: -->
+<!-- ::: -->
 
 
 
@@ -349,9 +358,9 @@ what is the effect of education on wages?
 ::: {.column width="50%"}
 ```{r}
 edu_earn_coords <- list(x = c(educ = 2, wage = 4, year = 2, bckg = 4, 
-                              loc = 3, conx = 3, laws = 1, u1 = 3),
+                              loc = 3, netw = 3, laws = 1, u1 = 3),
                         y = c(educ = 2, wage = 2, year = 3, bckg = 3, 
-                              loc = 3, conx = 1, laws = 2, u1 = 4))
+                              loc = 3, netw = 1, laws = 2, u1 = 4))
 dagify(wage~educ,
        coords = edu_earn_coords) %>% 
   tidy_dagitty(seed = 2) %>%
@@ -370,11 +379,11 @@ dagify(wage~educ,
   - Ability
   - Socioeconomic status
   - Demographics
-  - Phys. Ed. requirements
+  - Gravity
   - Year of birth
   - Location
   - Schooling laws
-  - Job connections
+  - Job network
 :::
 ::: {.column width="50%"}
 ```{r}
@@ -391,11 +400,11 @@ dagify(wage~educ,
 ::: columns
 ::: {.column width="50%"}
 
-- In social science and complex systems, 1000s of variables could plausibly be in DAG!
+- In social science and complex systems, 1000s of variables could plausibly be in the DAG!
 
 - So simplify:
-  - Ignore trivial things (Phys. Ed. requirement)
-  - Combine similar variables (Socioeconomic status, Demographics, Location) $\rightarrow$ Background
+  - Ignore trivial things (like gravity)
+  - Combine similar variables (Socioeconomic status, Demographics, Location) if not interesting per se $\rightarrow$ Background
 :::
 ::: {.column width="50%"}
 ```{r}
@@ -416,11 +425,11 @@ dagify(wage~educ,
 
 - Background, Year of birth, Location, Compulsory schooling, all cause education
 
-- Background, year of birth, location, job connections probably cause wages
+- Background, year of birth, location, job networks probably cause wages
 :::
 ::: {.column width="50%"}
 ```{r}
-dagify(wage~educ+conx+year+bckg+loc,
+dagify(wage~educ+netw+year+bckg+loc,
        educ~bckg+year+loc+laws,
        coords = edu_earn_coords,
        outcome = "wage",
@@ -438,17 +447,17 @@ dagify(wage~educ+conx+year+bckg+loc,
 
 - Background, Year of birth, Location, Compulsory schooling, all cause education
 
-- Background, year of birth, location, job connections probably cause wages
+- Background, year of birth, location, job networks probably cause wages
 
-- Job connections in fact is probably caused by education!
+- Job networks in fact is probably caused by education!
 
 - Location and background probably both caused by unobserved factor (`u1`)
 :::
 ::: {.column width="50%"}
 ```{r}
-dagify(wage~educ+conx+year+bckg+loc,
+dagify(wage~educ+netw+year+bckg+loc,
        educ~bckg+year+loc+laws,
-       conx~educ,
+       netw~educ,
        bckg~u1,
        loc~u1,
        coords = edu_earn_coords,
@@ -470,14 +479,14 @@ dagify(wage~educ+conx+year+bckg+loc,
 - Makes our assumptions **explicit**, and many of them are **testable**
 
 - DAG suggests certain relationships that will *not* exist:
-  - all relationships between `laws` and `conx` go through `educ`
-  - so if we controlled for `educ`, then `cor(laws,conx)` should be zero!
+  - all relationships between `laws` and `netw` go through `educ`
+  - so if we controlled for `educ`, then `cor(laws,netw)` should be zero!
 :::
 ::: {.column width="50%"}
 ```{r}
-dagify(wage~educ+conx+year+bckg+loc,
+dagify(wage~educ+netw+year+bckg+loc,
        educ~bckg+year+loc+laws,
-       conx~educ,
+       netw~educ,
        bckg~u1,
        loc~u1,
        coords = edu_earn_coords,
@@ -494,7 +503,7 @@ dagify(wage~educ+conx+year+bckg+loc,
 
 Above exmaples came from: [Econometrics](https://metricsf22.classes.ryansafner.com/) by Ryan Safner
 
-Do it yourself: [Dagitty](https://www.dagitty.net/)
+Do it yourself: [Dagitty](https://www.dagitty.net/){target="_blank"}
 
 A very nice read by the "father of DAGs": @Pearl.2019.
 
@@ -661,7 +670,7 @@ Naive comparison of treated vs untreated is often biased
 
 ## The problem of confounding {.smaller}
 
-![John Snow and Cholera: [Youtube](https://www.youtube.com/watch?v=lNjrAXGRda4)](figs/snow.jpg)
+![John Snow and Cholera: [Youtube](https://www.youtube.com/watch?v=lNjrAXGRda4)](figs/snow.jpg){target="_blank"}
 
 
 
@@ -705,6 +714,7 @@ Law of large numbers
 -  if we randomly assign treatment
 -  and $N$ is sufficiently large
 -  treatment and control group should be identical on average
+-  each group should have the same mean as the population
 -  that applies to all their characteristics (e.g. gender, age, motivation, political views...)
 
 :::
@@ -752,30 +762,46 @@ Law of large numbers
 
 ### @Carrell.2013
 
+:::: {.columns}
+
+::: {.column width="60%"}
+
 ::: {.fragment fragment-index=1}
 -  United States Air Force Academy
--  Students were randomly assigned to peer groups
--  RCTs show positive peer effect on academic performance
+-  Students randomly assigned to peer groups
+-  Positive peer effect on academic performance
 
 New experiment of policy instrument
 :::
 
 ::: {.fragment fragment-index=2}
 -  Assignment to “optimally” designed peer groups
+:::
+::: {.fragment fragment-index=3}
 -  "Optimal" policy has **negative** effect on performance
 :::
 
-::: {.fragment fragment-index=3}
+:::
+
+
+::: {.column width="40%"}
+::: {.fragment fragment-index=2}
+![](figs/Carrell.png)
+:::
+:::
+::::
+
+::: {.fragment fragment-index=4}
 *"These results illustrate how policies that manipulate peer groups for a desired social outcome can be confounded by changes in the endogenous patterns of social interactions within the group."*
 :::
 
 
 
-## Example: Peer-group intervention
+<!-- ## Example: Peer-group intervention  {.smaller} -->
 
-### @Carrell.2013
+<!-- ### @Carrell.2013 -->
 
-![](figs/Carrell.png)
+<!-- ![](figs/Carrell.png) -->
 
 
 
@@ -1048,6 +1074,22 @@ $$
 
 where $\color{red}{\widehat{\left( \text{Endog. var.} \right)}_i}$ are the predicted values (*fitted values*) from the first-stage regression. They only contain the variance in $\color{red}{\left( \text{Endog. var.} \right)_i}$ that comes from $\color{blue}{\text{Instrument}_i}$.
 
+
+## Intuitions from Instruments & 2SLS {.smaller}
+
+- The 2 stage least squares (2SLS) estimators for IVs:
+
+$$
+\begin{align}
+  {\color{#c5c5c5}{\text{Endogenous model}}}& &\color{green}{\text{Wage}_i} &= \beta_0 + \beta_1 \color{red}{\left( \text{Education} \right)_i} + u_i\\[0.5em]
+  {\text{First stage}}& &\color{red}{\left( \text{Education} \right)_i} &= \pi_0 + \pi_1 \color{blue}{\text{Fathers Educ}_i} + v_i\\[0.25em]
+  {\text{Second stage}}& &\color{green}{\text{Wage}_i} &= \delta_0 + \delta_1 \color{red}{\widehat{\left( \text{Education} \right)}_i} + \varepsilon_i\\[0.5em]
+  {\color{#c5c5c5}{\text{Reduced form}}}& &\color{green}{\text{Wage}_i} &= \pi_0 + \pi_1 \color{blue}{\text{Fathers Educ}_i} + w_i\\[0.25em]
+\end{align} 
+$$
+
+where $\color{red}{\widehat{\left( \text{Education} \right)}_i}$ are the predicted values (*fitted values*) from the first-stage regression. They only contain the variance in $\color{red}{\left( \text{Education} \right)_i}$ that comes from $\color{blue}{\text{Fathers Educ}_i}$.
+
 ## IV example: Family size and education {.smaller}
 
 ### Child-quantity/child-qualitytrade-off [@Angrist.2010]
@@ -1069,13 +1111,13 @@ See also @Angrist.2015.
 
 ## IV example: Family size and education {.smaller}
 
-### First stage: Family size
+### First stage: Instrument $\rightarrow$ Family size
 
 ![](figs/angrist1.png)
 
 ## IV example: Family size and education {.smaller}
 
-### First stage: Family size
+### Second stage: Predicted Family size $\rightarrow$ Educ
 
 ![](figs/angrist2.png)
 
@@ -1124,9 +1166,10 @@ instruments %>%
 - Lots of policies and programs are based on arbitrary rules and thresholds.
 - If you're above the cutoff/threshold, you're in the program; if you're below, you're not (or vice versa).
 - Wether you are closely above or below the cutoff/threshold is **as good as random**.
-
-The nice examples come from [Program Evaluation](https://evalf22.classes.andrewheiss.com/) by Andrew Heiss.
 :::
+
+The following graphs come from Andrew Heiss ([Program Evaluation](https://evalf22.classes.andrewheiss.com/)).
+
 
 ## RDD: The idea {.smaller}
 
@@ -1141,7 +1184,7 @@ The nice examples come from [Program Evaluation](https://evalf22.classes.andrewh
 
 ## RDD: Hypothetical example {.smaller}
 
-Imagine: A entrance exam and those who score 70 or lower get additional training.
+Imagine: An entrance exam and those who score 70 or lower get additional training.
 
 ```{r packages-data, include=FALSE}
 library(tidyverse)
@@ -1227,13 +1270,14 @@ Calculate the difference between treatment and control.
 In a regression framework:
 
 $$
-y_{i} = \alpha + \beta_1 D_{i} + \beta_2 [\text{Running - Cutoff}]_{i} + \beta_3 (D_{i} \times [\text{Running - Cutoff}]_{i}) + \varepsilon{i},
+y_{i} = \alpha + \delta D_{i} + \beta_1 [\text{Running - Cutoff}]_{i} + \beta_2 (D_{i} \times [\text{Running - Cutoff}]_{i}) + \varepsilon{i},
 $$
 
 -  $D_{i}$: Whether an observation is in treatment group (above cutoff)
 -  $[\text{Running - Cutoff}]_{t}$: running variable centered around the cutoff (positive after)
--  $\alpha + \beta_2$ are intercept and slope for untreated (before cutoff)
--  $(\alpha + \beta_1) + (\beta_2 + \beta_3)$ are intercept and slope for treated (after cutoff)
+-  $\alpha + \beta_1$ are intercept and slope for untreated (before cutoff)
+-  $(\alpha + \delta) + (\beta_1 + \beta_2)$ are intercept and slope for treated (after cutoff)
+-  $\delta$ is the RDD treatment effect
 
 $[\text{Running - Cutoff}]_{t}$ can be replace by any flexile function $f[\text{Running - Cutoff}]_{t}$.
 
@@ -1447,24 +1491,44 @@ ggplot(df_params, aes(x = x_uniform, y = y_loess)) +
 
 
 
-# Difference-in-Difference (DiD) Methods
+# Difference-in-Differences (DiD) Methods
 
-## DiD: Problems
+## DiD: Problems  {.smaller}
 
-Comparing only before/after
+
+:::: columns
+
+::: {.column width="60%"}
 
 ::: {.fragment fragment-index=1}
-- You're only looking at the treatment group!
-- Impossible to know if change happened because of treatment or just naturally
-:::
-
 Comparing only treatment/control
 
-::: {.fragment fragment-index=2}
 - You're only looking at post-treatment values
 - Impossible to know if change happened because of natural growth
 :::
 
+
+::: {.fragment fragment-index=2}
+Comparing only before/after
+
+- You're only looking at the treatment group!
+- Impossible to know if change happened because of treatment or just naturally
+:::
+:::
+
+
+::: {.column width="40%"}
+
+::: {.fragment fragment-index=1}
+![](figs/heat0.jpg)
+:::
+
+::: {.fragment fragment-index=2}
+![](figs/heat1.jpg)
+:::
+
+:::
+::::
 
 ## Simple DiD setup: Diff 1 {.smaller}
 
@@ -1536,7 +1600,7 @@ dd %>%
   column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446")
 ```
 
-$\Delta$ within units − $\Delta$ within groups = **Differences-in-differences = causal effect**!
+$\Delta$ within units − $\Delta$ within groups = **Difference-in-differences = causal effect**!
 
 
 ## Simple DiD setup {.smaller}
@@ -1626,7 +1690,7 @@ Parallel trends?
 ![](figs/did2_2.jpg)
 
 
-## Two-ways Fe with multiple treatment periods {.smaller}
+## Two-ways FE with multiple treatment periods {.smaller}
 
 ![Figure from @Goodman-Bacon.2021](figs/goodman.jpg)
 
@@ -1839,6 +1903,14 @@ zp3
 @Clark.2013
 
 ![](figs/lifecourse-events.PNG)
+
+
+
+## Synthetic Control {.smaller}
+
+@Mills.2022
+
+![](figs/Vaccinations_Synthetic_France.png)
 
 
 ## References

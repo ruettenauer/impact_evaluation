@@ -6,8 +6,15 @@ output:
     toc_float: true
     toc_depth: 2
     number_sections: true
-author:   
-  - Tobias Rüttenauer    
+author:
+  - name: Tobias Rüttenauer
+    orcid: 	0000-0001-5747-9735
+    email: t.ruttenauer@ucl.ac.uk
+    url: https://ruettenauer.github.io/
+    affiliations:
+      - name: UCL Social Research Institute
+        address: University College London
+        city: London WC1H 0AL
 ---
 
 
